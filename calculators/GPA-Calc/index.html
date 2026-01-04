@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>College GPA Calculator | Professional Grade Point Solver 2026</title>
+    <meta name="description" content="Calculate your semester GPA or cumulative CGPA instantly. Professional grade solver with weighted credit hours support and real-time analysis.">
+    <meta name="keywords" content="GPA calculator, college grade solver, semester GPA, CGPA calculator, academic grade point, credit hour calculator">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f0f4f8; color: #1e293b; scroll-behavior: smooth; overflow-x: hidden; }
+        .grade-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .input-box { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 1rem; transition: all 0.3s ease; }
+        .input-box:focus { background: white; border-color: #4f46e5; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); outline: none; }
+        .solve-btn { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .solve-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px -10px rgba(79, 70, 229, 0.5); }
+        .row-animate { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 h-20 flex items-center px-4 md:px-6">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-graduation-cap text-2xl text-indigo-600"></i>
+                <span class="text-xl md:text-2xl font-black tracking-tighter italic uppercase">GPA<span class="text-indigo-600">SOLVER</span></span>
+            </div>
+            <a href="/index.html" class="text-[10px] font-black uppercase tracking-widest text-indigo-400 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-100">Academic Suite</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-12">
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+                <div class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest">Advanced Grading Engine</div>
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 italic uppercase leading-[0.85]">Academic <br><span class="text-indigo-600">Success.</span></h1>
+                <p class="text-slate-500 text-lg font-bold italic">Calculate your GPA with precision. Add courses, assign credit hours, and see your performance instantly.</p>
+            </div>
+            <div class="rounded-[3rem] overflow-hidden shadow-2xl h-[250px] md:h-[400px] bg-indigo-100">
+                <img src="/images/gpa-hero.png" alt="Academic Performance" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 mb-24">
+            <div class="lg:col-span-8 grade-card p-6 md:p-12">
+                <div class="flex justify-between items-center mb-10">
+                    <h3 class="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600 flex items-center">
+                        <span class="w-8 h-[2px] bg-indigo-100 mr-4"></span> Course Enrollment
+                    </h3>
+                    <button onclick="addRow()" class="text-[10px] font-black uppercase bg-indigo-50 text-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-100 transition">+ Add Course</button>
+                </div>
+
+                <div id="course-container" class="space-y-4">
+                    <div class="grid grid-cols-12 gap-3 md:gap-4 row-animate items-center">
+                        <div class="col-span-6 md:col-span-7"><input type="text" placeholder="Course Name" class="input-box w-full p-4 text-sm font-bold"></div>
+                        <div class="col-span-3 md:col-span-2">
+                            <select class="input-box w-full p-4 text-sm font-bold grade-val">
+                                <option value="4.0">A</option><option value="3.7">A-</option>
+                                <option value="3.3">B+</option><option value="3.0">B</option>
+                                <option value="2.7">B-</option><option value="2.3">C+</option>
+                                <option value="2.0">C</option><option value="1.0">D</option>
+                                <option value="0.0">F</option>
+                            </select>
+                        </div>
+                        <div class="col-span-3"><input type="number" placeholder="Credits" class="input-box w-full p-4 text-sm font-bold credit-val"></div>
+                    </div>
+                </div>
+
+                <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-8">
+                    <button onclick="calculateGPA()" class="solve-btn text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl">Calculate GPA</button>
+                    <button onclick="resetGPA()" class="bg-slate-100 text-slate-500 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-200 transition">Reset All</button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4">
+                <div id="result-box" class="bg-slate-900 rounded-[3rem] p-10 text-white min-h-[400px] flex flex-col justify-center text-center border border-white/5 relative">
+                    <div id="waiting-state">
+                        <i class="fas fa-chart-pie text-4xl text-indigo-500 mb-6 opacity-20"></i>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-slate-500">Calculate to see GPA</p>
+                    </div>
+
+                    <div id="result-state" class="hidden animate-in fade-in zoom-in duration-500">
+                        <span class="text-indigo-500 text-[10px] font-black uppercase tracking-[0.4em]">Semester GPA</span>
+                        <div id="gpa-display" class="text-7xl md:text-8xl font-black my-6 italic text-indigo-400">0.00</div>
+                        <div class="pt-8 border-t border-white/10 space-y-3">
+                            <div class="flex justify-between text-[10px] font-black uppercase tracking-widest text-slate-500"><span>Total Credits:</span> <span id="total-credits" class="text-white">0</span></div>
+                            <div class="flex justify-between text-[10px] font-black uppercase tracking-widest text-slate-500"><span>Grade Points:</span> <span id="total-points" class="text-white">0</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="grid lg:grid-cols-2 gap-12 mb-24">
+            <div class="grade-card p-10 md:p-12">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-8 border-l-4 border-indigo-600 pl-4">How it's Calculated</h4>
+                <p class="text-slate-500 text-sm font-bold leading-relaxed mb-6">Our GPA Solver uses the standard weighted average formula used by top universities globally.</p>
+                <div class="bg-indigo-50 p-6 rounded-2xl">
+                    <img src="/images/gpa-formula.png" alt="GPA Calculation Formula" class="mx-auto max-h-16">
+                </div>
+            </div>
+            <div class="grade-card p-10 md:p-12 bg-slate-950 text-white border-none">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-8 text-indigo-400">Example Case</h4>
+                <div class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span>Math (4 Credits) - Grade A:</span> <span>16 Points</span></div>
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span>English (3 Credits) - Grade B:</span> <span>9 Points</span></div>
+                    <div class="flex justify-between pt-4 text-indigo-400 text-lg italic"><span>Resulting GPA:</span> <span>3.57</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+
+     <footer class="bg-slate-950 text-slate-600 pt-24 pb-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-20">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-graduation-cap text-2xl text-indigo-600"></i>
+                <span class="text-2xl font-black tracking-tighter italic uppercase">GPA<span class="text-indigo-600">SOLVER</span></span>
+                    </div>
+                    <p class="text-sm font-bold leading-relaxed text-slate-500 mb-8 italic">World-class mathematical engine providing 100% precision for global educational standards.</p>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer"><i class="fab fa-github"></i></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Math Suite</h4>
+                        <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                            <li class="hover:text-white transition cursor-pointer">Matrix Ops</li>
+                            <li class="hover:text-white transition cursor-pointer">Algebra Pro</li>
+                            <li class="hover:text-white transition cursor-pointer">Unit Conv</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Legal</h4>
+                        <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                            <li class="hover:text-white transition cursor-pointer">Privacy</li>
+                            <li class="hover:text-white transition cursor-pointer">Terms</li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Tech Infrastructure</h4>
+                        <div class="flex gap-6 text-2xl opacity-10">
+                            <i class="fab fa-aws"></i><i class="fab fa-google-cloud"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-black uppercase tracking-[0.5em]">
+                <p>© 2026 FractionPro | Engineered by ALi Developer</p>
+                <p class="text-slate-800">Deployment v5.2.0-Production</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function addRow() {
+            const container = document.getElementById('course-container');
+            const row = document.createElement('div');
+            row.className = 'grid grid-cols-12 gap-3 md:gap-4 row-animate items-center';
+            row.innerHTML = `
+                <div class="col-span-6 md:col-span-7"><input type="text" placeholder="Course Name" class="input-box w-full p-4 text-sm font-bold"></div>
+                <div class="col-span-3 md:col-span-2">
+                    <select class="input-box w-full p-4 text-sm font-bold grade-val">
+                        <option value="4.0">A</option><option value="3.7">A-</option>
+                        <option value="3.3">B+</option><option value="3.0">B</option>
+                        <option value="2.7">B-</option><option value="2.3">C+</option>
+                        <option value="2.0">C</option><option value="1.0">D</option>
+                        <option value="0.0">F</option>
+                    </select>
+                </div>
+                <div class="col-span-3"><input type="number" placeholder="Credits" class="input-box w-full p-4 text-sm font-bold credit-val"></div>
+            `;
+            container.appendChild(row);
+        }
+
+        function calculateGPA() {
+            const grades = document.querySelectorAll('.grade-val');
+            const credits = document.querySelectorAll('.credit-val');
+            let totalPoints = 0;
+            let totalCredits = 0;
+
+            grades.forEach((grade, index) => {
+                const creditValue = parseFloat(credits[index].value);
+                if (!isNaN(creditValue)) {
+                    totalPoints += parseFloat(grade.value) * creditValue;
+                    totalCredits += creditValue;
+                }
+            });
+
+            if (totalCredits === 0) { alert("Please enter credit hours."); return; }
+
+            const gpa = totalPoints / totalCredits;
+            document.getElementById('waiting-state').classList.add('hidden');
+            document.getElementById('result-state').classList.remove('hidden');
+            document.getElementById('gpa-display').innerText = gpa.toFixed(2);
+            document.getElementById('total-credits').innerText = totalCredits;
+            document.getElementById('total-points').innerText = totalPoints.toFixed(1);
+
+            if (window.innerWidth < 768) {
+                document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function resetGPA() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>

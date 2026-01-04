@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <title>Matrix Ops | Linear Algebra Solver | Math Suite 2026</title>
+    <meta name="description" content="Professional 3x3 Matrix Calculator. Calculate Determinants, Transpose, and Inverse with step-by-step logic. Part of the Math Suite for Linear Algebra students.">
+    <meta name="keywords" content="Matrix Calculator, Linear Algebra Solver, 3x3 Matrix Determinant, Math Suite, Matrix Transpose, Professional Math Tools">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background-color: #020617;
+            color: #f8fafc;
+        }
+        .math-input {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            transition: all 0.3s ease;
+        }
+        .math-input:focus {
+            border-color: #8b5cf6;
+            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+            outline: none;
+        }
+        .neo-card {
+            background: linear-gradient(145deg, #0f172a 0%, #020617 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #a78bfa 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #mobile-menu {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-20px);
+        }
+        #mobile-menu.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center rotate-45">
+                    <i class="fas fa-th-large -rotate-45 text-white"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight uppercase">MATH <span class="text-indigo-500">SUITE</span></span>
+            </div>
+            
+            <div class="hidden md:flex space-x-10 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                <a href="#" class="hover:text-indigo-400 transition">Matrix Ops</a>
+                <a href="#footer" class="hover:text-indigo-400 transition">Footer</a>
+                <a href="/index.html" class="hover:text-indigo-400 transition">Exit</a>
+                
+            </div>
+
+            <button onclick="toggleMenu()" class="md:hidden text-white text-2xl">
+                <i id="menu-icon" class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-slate-950 z-40 md:hidden flex flex-col justify-center items-center space-y-10 p-6">
+        <a href="#" onclick="toggleMenu()" class="text-4xl font-bold italic">Matrix Ops</a>
+        <a href="#footer" onclick="toggleMenu()" class="text-4xl font-bold italic text-slate-600">Calculus</a>
+        <a href="/index.html" onclick="toggleMenu()" class="text-4xl font-bold italic text-slate-600">Exit</a>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20">
+        
+        <!-- Header -->
+        <div class="text-center mb-16 space-y-6">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter">
+                Matrix <span class="gradient-text">Operations</span>
+            </h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto font-medium">
+                Professional grade linear algebra solver. Compute determinants, transpose matrices, and analyze vectors with sub-second latency.
+            </p>
+        </div>
+
+        <!-- Tool Grid -->
+        <div class="grid lg:grid-cols-12 gap-10">
+            
+            <!-- Matrix Input Area -->
+            <div id="calculater" class="lg:col-span-7 neo-card p-8 md:p-12">
+                <div class="flex items-center justify-between mb-10">
+                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-indigo-400 italic">Matrix [A] 3x3</h3>
+                    <button onclick="resetMatrix()" class="text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition">Clear Grid</button>
+                </div>
+
+                <!-- Matrix Grid -->
+                <div class="grid grid-cols-3 gap-4 md:gap-6 mb-12">
+                    <input type="number" id="m00" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                    <input type="number" id="m01" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                    <input type="number" id="m02" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                    
+                    <input type="number" id="m10" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                    <input type="number" id="m11" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                    <input type="number" id="m12" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                    
+                    <input type="number" id="m20" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                    <input type="number" id="m21" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                    <input type="number" id="m22" placeholder="0" class="math-input h-20 md:h-24 rounded-2xl text-center text-2xl font-bold">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button onclick="solveDeterminant()" class="bg-indigo-600 hover:bg-indigo-500 text-white py-5 rounded-xl font-bold uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20">Solve Determinant</button>
+                    <button onclick="solveTranspose()" class="border border-slate-700 hover:bg-slate-800 text-white py-5 rounded-xl font-bold uppercase tracking-widest transition-all">Transpose [A]</button>
+                </div>
+            </div>
+
+            <!-- Result Dashboard -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="neo-card p-10 h-full flex flex-col justify-between border-indigo-500/20 bg-indigo-500/5">
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-indigo-400">Computational Result</span>
+                        <div id="result-label" class="text-sm font-bold mt-4 text-slate-300">Determinant |A|</div>
+                        <div id="main-result" class="text-7xl font-bold my-6 tracking-tighter">0</div>
+                    </div>
+
+                    <div id="step-display" class="space-y-4 pt-8 border-t border-white/5">
+                        <div class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4 italic">Operation Insights</div>
+                        <div id="details" class="text-sm font-medium text-slate-400 leading-relaxed">
+                            Enter values to compute linear properties.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Professional Footer -->
+    <footer id="footer" class="bg-slate-950 border-t border-white/5 pt-32 pb-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-2 text-white mb-6">
+                        <div class="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center">
+                            <i class="fas fa-infinity text-sm"></i>
+                        </div>
+                        <span class="text-2xl font-bold tracking-tighter">MATH SUITE</span>
+                    </div>
+                    <p class="text-slate-500 font-medium max-w-sm mb-8">
+                        The world's most comprehensive math engine for engineers and students. Verified algorithms for precise results.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white text-xs font-black uppercase tracking-widest mb-6">Suites</h4>
+                    <ul class="text-slate-500 space-y-3 text-sm font-bold">
+                        <li><a href="#" class="hover:text-indigo-400 transition">Vector Space</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition">Geometry Pro</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition">Statistics Hub</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-xs font-black uppercase tracking-widest mb-6">Resources</h4>
+                    <ul class="text-slate-500 space-y-3 text-sm font-bold">
+                        <li><a href="#" class="hover:text-indigo-400 transition">API Docs</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition">Formula Library</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col md:row justify-between items-center pt-10 border-t border-white/5 gap-6">
+                <p class="text-[10px] text-slate-600 font-black uppercase tracking-widest">© 2026 Math Suite Inc. Pakistan Edition.</p>
+                <div class="flex space-x-8 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                    <span>Server Status: Online</span>
+                    <span>Version 4.2.0-LP</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('active');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
+
+        function getMatrix() {
+            const m = [];
+            for(let i=0; i<3; i++) {
+                m[i] = [];
+                for(let j=0; j<3; j++) {
+                    const val = document.getElementById(`m${i}${j}`).value;
+                    m[i][j] = val === "" ? 0 : parseFloat(val);
+                }
+            }
+            return m;
+        }
+
+        function solveDeterminant() {
+            const m = getMatrix();
+            const det = m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
+                        m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
+                        m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
+            
+            document.getElementById('result-label').innerText = "Determinant |A|";
+            document.getElementById('main-result').innerText = det.toFixed(2).replace(/\.00$/, '');
+            document.getElementById('details').innerHTML = `
+                The determinant is a scalar value that describes properties of the matrix. 
+                ${det === 0 ? "Since |A| = 0, this is a <b>Singular Matrix</b> (not invertible)." : "Since |A| ≠ 0, this matrix is <b>Non-Singular</b>."}
+            `;
+        }
+
+        function solveTranspose() {
+            const m = getMatrix();
+            const transpose = [
+                [m[0][0], m[1][0], m[2][0]],
+                [m[0][1], m[1][1], m[2][1]],
+                [m[0][2], m[1][2], m[2][2]]
+            ];
+
+            // Display transpose in a clean format
+            document.getElementById('result-label').innerText = "Transpose [A]ᵀ";
+            document.getElementById('main-result').innerHTML = `<span class="text-3xl">Matrix Output</span>`;
+            
+            let html = `<div class="grid grid-cols-3 gap-2 mt-4 font-mono text-indigo-300">`;
+            transpose.forEach(row => {
+                row.forEach(val => {
+                    html += `<div class="bg-white/5 p-2 rounded text-center">${val}</div>`;
+                });
+            });
+            html += `</div>`;
+            
+            document.getElementById('details').innerHTML = `
+                Rows have been swapped with columns.
+                ${html}
+            `;
+        }
+
+        function resetMatrix() {
+            for(let i=0; i<3; i++) {
+                for(let j=0; j<3; j++) {
+                    document.getElementById(`m${i}${j}`).value = "";
+                }
+            }
+            document.getElementById('main-result').innerText = "0";
+            document.getElementById('result-label').innerText = "Determinant |A|";
+            document.getElementById('details').innerText = "Enter values to compute linear properties.";
+        }
+    </script>
+</body>
+</html>

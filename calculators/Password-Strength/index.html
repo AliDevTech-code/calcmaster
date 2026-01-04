@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Secure Password Strength Checker | Professional Security Tool 2026</title>
+    <meta name="description" content="Check your password security and strength instantly. Professional analyzer with entropy score, complexity metrics, and real-time security suggestions.">
+    <meta name="keywords" content="password checker, password strength, secure password, entropy analyzer, cyber security tool, password complexity">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; scroll-behavior: smooth; overflow-x: hidden; }
+        .security-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2.5rem; }
+        .input-auth { background: #f1f5f9; border: 2px solid transparent; border-radius: 1.5rem; transition: all 0.3s ease; width: 100%; }
+        .input-auth:focus { background: white; border-color: #6366f1; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); outline: none; }
+        .shield-icon { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        /* Mobile Spacing */
+        @media (max-width: 640px) {
+            h1 { font-size: 3.5rem !important; }
+            .security-card { border-radius: 2rem; padding: 1.5rem !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50 h-20 flex items-center px-4 md:px-6">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-shield-halved text-2xl text-indigo-600"></i>
+                <span class="text-xl md:text-2xl font-black tracking-tighter italic uppercase">SAFE<span class="text-indigo-600">GUARD</span></span>
+            </div>
+            <a href="/index.html" class="text-[10px] font-black uppercase tracking-widest text-indigo-400 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-100">Security Suite</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-12">
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+                <div class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest italic">Encrypted Analysis Engine</div>
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 italic uppercase leading-[0.85]">Strength <br><span class="text-indigo-600">Checker.</span></h1>
+                <p class="text-slate-500 text-lg font-bold italic">Verify your password resilience. We analyze entropy and complexity to ensure your digital safety.</p>
+            </div>
+            <div class="rounded-[3rem] overflow-hidden shadow-2xl h-[250px] md:h-[400px] bg-indigo-900 relative">
+                <img src="/images/security-hero.png" alt="Cyber Security Shield" class="w-full h-full object-cover opacity-60">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i class="fas fa-lock text-white text-9xl opacity-20"></i>
+                </div>
+            </div>
+        </div>
+
+        <section class="grid lg:grid-cols-12 gap-8 mb-24">
+            <div class="lg:col-span-7 security-card p-8 md:p-16">
+                <h3 class="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600 mb-10 flex items-center">
+                    <span class="w-8 h-[2px] bg-indigo-100 mr-4"></span> Real-time Analysis
+                </h3>
+
+                <div class="space-y-6">
+                    <div class="relative">
+                        <input type="password" id="passInput" placeholder="Enter password to check..." class="input-auth p-6 text-xl font-bold text-slate-700" oninput="analyzeStrength()">
+                        <button onclick="togglePass()" class="absolute right-6 top-6 text-slate-400 hover:text-indigo-600">
+                            <i id="toggleIcon" class="fas fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-2 h-2 mt-4" id="meter">
+                        <div class="bg-slate-200 rounded-full transition-all duration-500" id="bar1"></div>
+                        <div class="bg-slate-200 rounded-full transition-all duration-500" id="bar2"></div>
+                        <div class="bg-slate-200 rounded-full transition-all duration-500" id="bar3"></div>
+                        <div class="bg-slate-200 rounded-full transition-all duration-500" id="bar4"></div>
+                    </div>
+                </div>
+
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center p-4 rounded-2xl bg-slate-50" id="check-len">
+                        <i class="fas fa-circle-check text-slate-300 text-xs"></i>
+                        <p class="text-[9px] font-black uppercase mt-2">8+ Chars</p>
+                    </div>
+                    <div class="text-center p-4 rounded-2xl bg-slate-50" id="check-upper">
+                        <i class="fas fa-circle-check text-slate-300 text-xs"></i>
+                        <p class="text-[9px] font-black uppercase mt-2">Uppercase</p>
+                    </div>
+                    <div class="text-center p-4 rounded-2xl bg-slate-50" id="check-num">
+                        <i class="fas fa-circle-check text-slate-300 text-xs"></i>
+                        <p class="text-[9px] font-black uppercase mt-2">Numbers</p>
+                    </div>
+                    <div class="text-center p-4 rounded-2xl bg-slate-50" id="check-sym">
+                        <i class="fas fa-circle-check text-slate-300 text-xs"></i>
+                        <p class="text-[9px] font-black uppercase mt-2">Symbols</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5">
+                <div id="status-pane" class="bg-slate-900 rounded-[2.5rem] p-10 text-white h-full flex flex-col justify-center border border-white/5 relative overflow-hidden transition-all duration-500">
+                    <div class="text-center relative z-10">
+                        <i id="shield-main" class="fas fa-shield-virus text-7xl text-slate-700 mb-8 shield-icon"></i>
+                        <h4 id="strength-text" class="text-4xl font-black italic uppercase tracking-tighter mb-2">No Input</h4>
+                        <p id="score-text" class="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">Score: 0%</p>
+                    </div>
+                    
+                    <div class="mt-10 space-y-4 relative z-10">
+                        <div class="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-500">
+                            <span>Crack Time:</span>
+                            <span id="crack-time" class="text-white italic">Instant</span>
+                        </div>
+                        <div class="w-full h-[1px] bg-white/5"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid lg:grid-cols-2 gap-12 mb-24">
+            <div class="security-card p-10 md:p-12">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-8 border-l-4 border-indigo-600 pl-4">Security Guide</h4>
+                <p class="text-slate-500 text-sm font-bold leading-relaxed mb-6 italic">A strong password is your first line of defense. Our algorithm checks for entropy—the measure of randomness in your character selection.</p>
+                <img src="/images/security-logic.png" alt="Security Guide" class="rounded-3xl border border-indigo-50">
+            </div>
+            <div class="security-card p-10 md:p-12 bg-slate-950 text-white border-none">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-8 text-indigo-400">Best Practices</h4>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <i class="fas fa-check-circle text-indigo-500 mt-1"></i>
+                        <p class="text-sm font-bold italic text-slate-400">Avoid using personal dates or names.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-check-circle text-indigo-500 mt-1"></i>
+                        <p class="text-sm font-bold italic text-slate-400">Use a mix of special characters (e.g., !, @, #).</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-check-circle text-indigo-500 mt-1"></i>
+                        <p class="text-sm font-bold italic text-slate-400">Passwords should be at least 12 characters for maximum safety.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+
+   <footer class="bg-slate-950 text-slate-600 pt-24 pb-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-20">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                         <i class="fas fa-shield-halved text-2xl text-indigo-600"></i>
+                <span class="text-2xl font-black tracking-tighter italic uppercase">SAFE<span class="text-indigo-600">GUARD</span></span>
+                    </div>
+                    <p class="text-sm font-bold leading-relaxed text-slate-500 mb-8 italic">World-class mathematical engine providing 100% precision for global educational standards.</p>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer"><i class="fab fa-github"></i></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Math Suite</h4>
+                        <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                            <li class="hover:text-white transition cursor-pointer">Matrix Ops</li>
+                            <li class="hover:text-white transition cursor-pointer">Algebra Pro</li>
+                            <li class="hover:text-white transition cursor-pointer">Unit Conv</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Legal</h4>
+                        <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                            <li class="hover:text-white transition cursor-pointer">Privacy</li>
+                            <li class="hover:text-white transition cursor-pointer">Terms</li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Tech Infrastructure</h4>
+                        <div class="flex gap-6 text-2xl opacity-10">
+                            <i class="fab fa-aws"></i><i class="fab fa-google-cloud"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-black uppercase tracking-[0.5em]">
+                <p>© 2026 FractionPro | Engineered by ALi Developer</p>
+                <p class="text-slate-800">Deployment v5.2.0-Production</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function togglePass() {
+            const input = document.getElementById('passInput');
+            const icon = document.getElementById('toggleIcon');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        function analyzeStrength() {
+            const pass = document.getElementById('passInput').value;
+            const checks = {
+                length: pass.length >= 8,
+                upper: /[A-Z]/.test(pass),
+                num: /[0-9]/.test(pass),
+                sym: /[^A-Za-z0-9]/.test(pass)
+            };
+
+            let score = 0;
+            if (checks.length) score++;
+            if (checks.upper) score++;
+            if (checks.num) score++;
+            if (checks.sym) score++;
+
+            // Update Icons
+            updateIcon('check-len', checks.length);
+            updateIcon('check-upper', checks.upper);
+            updateIcon('check-num', checks.num);
+            updateIcon('check-sym', checks.sym);
+
+            // Update Bars & Status
+            const bars = ['bar1', 'bar2', 'bar3', 'bar4'];
+            const colors = ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'];
+            const statusText = ['Weak', 'Fair', 'Strong', 'Secure'];
+            const crackTimes = ['Instant', 'Minutes', 'Months', 'Centuries'];
+            const icons = ['fa-shield-virus', 'fa-shield-heart', 'fa-shield-halved', 'fa-shield-check'];
+
+            bars.forEach((bar, i) => {
+                const element = document.getElementById(bar);
+                if (i < score) {
+                    element.style.backgroundColor = colors[score - 1];
+                } else {
+                    element.style.backgroundColor = '#e2e8f0';
+                }
+            });
+
+            if (pass.length === 0) {
+                document.getElementById('strength-text').innerText = "No Input";
+                document.getElementById('strength-text').style.color = "white";
+                document.getElementById('score-text').innerText = "Score: 0%";
+                document.getElementById('shield-main').className = "fas fa-shield-virus text-7xl text-slate-700 mb-8 shield-icon";
+                document.getElementById('crack-time').innerText = "Instant";
+            } else {
+                document.getElementById('strength-text').innerText = statusText[score - 1] || "Weak";
+                document.getElementById('strength-text').style.color = colors[score - 1];
+                document.getElementById('score-text').innerText = `Score: ${score * 25}%`;
+                document.getElementById('shield-main').className = `fas ${icons[score - 1]} text-7xl mb-8 shield-icon`;
+                document.getElementById('shield-main').style.color = colors[score - 1];
+                document.getElementById('crack-time').innerText = crackTimes[score - 1];
+            }
+        }
+
+        function updateIcon(id, active) {
+            const el = document.getElementById(id);
+            const icon = el.querySelector('i');
+            if (active) {
+                el.classList.add('bg-indigo-50');
+                icon.classList.replace('text-slate-300', 'text-indigo-600');
+            } else {
+                el.classList.remove('bg-indigo-50');
+                icon.classList.replace('text-indigo-600', 'text-slate-300');
+            }
+        }
+    </script>
+</body>
+</html>

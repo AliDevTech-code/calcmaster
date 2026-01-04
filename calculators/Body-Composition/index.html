@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <title>Body Fat & Lean Mass Calculator 2026 | Precision Fitness Tool</title>
+    <meta name="description" content="Calculate your Body Fat Percentage and Lean Body Mass using the U.S. Navy method. Professional grade fitness tracking for athletes and health enthusiasts.">
+    <meta name="keywords" content="Body Fat Calculator, Lean Body Mass, Body Fat Percentage, US Navy Method, Fitness Calculator, Muscle Mass Tracker">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #0f172a;
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc;
+            color: #1e293b;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+        .input-box {
+            background: #f1f5f9;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s ease;
+        }
+        .input-box:focus-within {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+        .btn-toggle.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+        }
+        .progress-ring {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-tighter uppercase italic">Fit<span class="text-indigo-600">Metric.</span></span>
+            </div>
+            
+            <a href="/index.html" class="flex items-center space-x-2 bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-800 transition-all shadow-md">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="hidden sm:inline">Exit Tool</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-12 flex-grow">
+        <!-- Header -->
+        <div class="mb-12 text-center md:text-left">
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">Body Composition <span class="text-indigo-600">Analysis.</span></h1>
+            <p class="text-slate-500 max-w-xl">U.S. Navy Method - Professional grade tracking for body fat and lean muscle mass.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+            <!-- Inputs Section -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="glass-card p-6 md:p-8">
+                    <!-- Gender & Units -->
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <div class="flex p-1 bg-slate-100 rounded-xl w-full sm:w-auto">
+                            <button onclick="setGender('male')" id="m-btn" class="btn-toggle active px-6 py-2 rounded-lg text-sm font-bold flex-1 transition-all">Male</button>
+                            <button onclick="setGender('female')" id="f-btn" class="btn-toggle px-6 py-2 rounded-lg text-sm font-bold flex-1 transition-all">Female</button>
+                        </div>
+                        <div class="flex p-1 bg-slate-100 rounded-xl w-full sm:w-auto">
+                            <button onclick="setUnits('metric')" id="u-metric" class="btn-toggle active px-6 py-2 rounded-lg text-sm font-bold flex-1 transition-all">Metric</button>
+                            <button onclick="setUnits('us')" id="u-us" class="btn-toggle px-6 py-2 rounded-lg text-sm font-bold flex-1 transition-all">US/Imp</button>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Weight -->
+                        <div class="input-box">
+                            <label class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Weight (<span class="unit-w">kg</span>)</label>
+                            <input type="number" id="weight" value="75" class="w-full bg-transparent text-lg font-bold outline-none" oninput="calculate()">
+                        </div>
+                        <!-- Height -->
+                        <div class="input-box">
+                            <label class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Height (<span class="unit-h">cm</span>)</label>
+                            <input type="number" id="height" value="175" class="w-full bg-transparent text-lg font-bold outline-none" oninput="calculate()">
+                        </div>
+                        <!-- Neck -->
+                        <div class="input-box">
+                            <label class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Neck (<span class="unit-h">cm</span>)</label>
+                            <input type="number" id="neck" value="38" class="w-full bg-transparent text-lg font-bold outline-none" oninput="calculate()">
+                        </div>
+                        <!-- Waist -->
+                        <div class="input-box">
+                            <label class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Waist (<span class="unit-h">cm</span>)</label>
+                            <input type="number" id="waist" value="85" class="w-full bg-transparent text-lg font-bold outline-none" oninput="calculate()">
+                        </div>
+                        <!-- Hips (Visible only for female) -->
+                        <div id="hips-container" class="input-box hidden">
+                            <label class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Hips (<span class="unit-h">cm</span>)</label>
+                            <input type="number" id="hips" value="95" class="w-full bg-transparent text-lg font-bold outline-none" oninput="calculate()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-indigo-50 border border-indigo-100 rounded-[24px] flex items-start gap-4">
+                    <div class="w-10 h-10 bg-indigo-600 rounded-full flex-shrink-0 flex items-center justify-center text-white">
+                        <i class="fas fa-info text-xs"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-indigo-900">Expert Instruction</h4>
+                        <p class="text-sm text-indigo-700 opacity-80">Measure your waist at the narrowest point (for males, at navel). Neck should be measured just below the larynx.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="lg:col-span-5">
+                <div class="glass-card p-8 bg-slate-900 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-center text-[10px] font-black uppercase tracking-[0.2em] text-indigo-400 mb-8">Composition Result</h3>
+                        
+                        <!-- Visual Circle -->
+                        <div class="flex justify-center mb-8 relative">
+                            <svg width="200" height="200" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" stroke="#1e293b" stroke-width="8" fill="transparent" />
+                                <circle id="progress" cx="50" cy="50" r="45" stroke="#6366f1" stroke-width="8" fill="transparent" 
+                                        stroke-dasharray="282.7" stroke-dashoffset="200" class="progress-ring" stroke-linecap="round" />
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span id="bf-val" class="text-4xl font-black italic">18.5%</span>
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Body Fat</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 border-t border-white/10 pt-8 mt-4">
+                            <div class="text-center border-r border-white/5">
+                                <div id="lean-mass" class="text-2xl font-bold">61.2 kg</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-black tracking-widest mt-1">Lean Mass</div>
+                            </div>
+                            <div class="text-center">
+                                <div id="fat-mass" class="text-2xl font-bold">13.8 kg</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-black tracking-widest mt-1">Fat Mass</div>
+                            </div>
+                        </div>
+
+                        <!-- Status Badge -->
+                        <div id="status-box" class="mt-8 py-3 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 text-center text-indigo-300 font-bold text-sm uppercase tracking-widest">
+                            Athletic Range
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Professional Footer -->
+  <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-16 mb-24">
+            
+            <div class="lg:col-span-4">
+                <div class="flex items-center space-x-2 text-white mb-8">
+                    <i class="fas fa-calculator text-3xl text-blue-600"></i>
+                    <span class="text-3xl font-black tracking-tighter italic uppercase">CALCMASTER<span class="text-blue-600">.</span></span>
+                </div>
+                <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                    The gold standard for high-fidelity calculations. Verified for 2026 compliance across international standards.
+                </p>
+                <div class="flex space-x-5">
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Financials</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/mortgage-calculator/index.html" class="hover:text-white transition">Mortgage Calc</a></li>
+                    <li><a href="/calculators/emi-calculator/index.html" class="hover:text-white transition">Loan Repayment</a></li>
+                    <li><a href="/calculators/tax-calculator/index.html" class="hover:text-white transition">Tax Estimator</a></li>
+                    <li><a href="/calculators/investment-return-planner/index.html" class="hover:text-white transition">ROI Engine</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Health & Math</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/health/index.html" class="hover:text-white transition">BMI & Weight</a></li>
+                    <li><a href="/calculators/Body-Composition/index.html" class="hover:text-white transition">Body Fat</a></li>
+                    <li><a href="/matrix-calculator.html" class="hover:text-white transition">Matrix Ops</a></li>
+                    <li><a href="/unit-converter.html" class="hover:text-white transition">Unit Conv.</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-4">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Compliance</h5>
+                <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                    <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <a href="/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <a href="/cookie-policy.html" class="hover:text-white">Cookie Policy</a>
+                    <a href="/contact.html" class="hover:text-white">Contact Us</a>
+                </div>
+                <div class="flex space-x-6 text-2xl opacity-30">
+                    <i class="fab fa-google"></i>
+                    <i class="fab fa-aws"></i>
+                    <i class="fab fa-stripe"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+            <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster. Engineered with Precision.</p>
+            <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Version 4.2.0-Stable</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let gender = 'male';
+        let units = 'metric';
+
+        function setGender(g) {
+            gender = g;
+            document.getElementById('m-btn').classList.toggle('active', g === 'male');
+            document.getElementById('f-btn').classList.toggle('active', g === 'female');
+            document.getElementById('hips-container').classList.toggle('hidden', g === 'male');
+            calculate();
+        }
+
+        function setUnits(u) {
+            units = u;
+            document.getElementById('u-metric').classList.toggle('active', u === 'metric');
+            document.getElementById('u-us').classList.toggle('active', u === 'us');
+            
+            document.querySelectorAll('.unit-w').forEach(e => e.innerText = u === 'metric' ? 'kg' : 'lbs');
+            document.querySelectorAll('.unit-h').forEach(e => e.innerText = u === 'metric' ? 'cm' : 'in');
+            
+            const w = document.getElementById('weight');
+            const h = document.getElementById('height');
+            const n = document.getElementById('neck');
+            const wa = document.getElementById('waist');
+            const hi = document.getElementById('hips');
+
+            if (u === 'us') {
+                w.value = (w.value * 2.20462).toFixed(1);
+                h.value = (h.value / 2.54).toFixed(1);
+                n.value = (n.value / 2.54).toFixed(1);
+                wa.value = (wa.value / 2.54).toFixed(1);
+                hi.value = (hi.value / 2.54).toFixed(1);
+            } else {
+                w.value = (w.value / 2.20462).toFixed(1);
+                h.value = (h.value * 2.54).toFixed(1);
+                n.value = (n.value * 2.54).toFixed(1);
+                wa.value = (wa.value * 2.54).toFixed(1);
+                hi.value = (hi.value * 2.54).toFixed(1);
+            }
+            calculate();
+        }
+
+        function calculate() {
+            let weight = parseFloat(document.getElementById('weight').value) || 0;
+            let height = parseFloat(document.getElementById('height').value) || 0;
+            let neck = parseFloat(document.getElementById('neck').value) || 0;
+            let waist = parseFloat(document.getElementById('waist').value) || 0;
+            let hips = parseFloat(document.getElementById('hips').value) || 0;
+
+            if (weight === 0 || height === 0) return;
+
+            let h_in, w_in, n_in, hi_in;
+            if (units === 'metric') {
+                h_in = height / 2.54;
+                w_in = waist / 2.54;
+                n_in = neck / 2.54;
+                hi_in = hips / 2.54;
+            } else {
+                h_in = height;
+                w_in = waist;
+                n_in = neck;
+                hi_in = hips;
+            }
+
+            let bodyFat = 0;
+            if (gender === 'male') {
+                bodyFat = 86.010 * Math.log10(w_in - n_in) - 70.041 * Math.log10(h_in) + 36.76;
+            } else {
+                bodyFat = 163.205 * Math.log10(w_in + hi_in - n_in) - 97.684 * Math.log10(h_in) - 78.387;
+            }
+
+            if (bodyFat < 2) bodyFat = 2;
+            if (bodyFat > 60) bodyFat = 60;
+
+            const weight_kg = units === 'metric' ? weight : weight * 0.453592;
+            const fatMass = (bodyFat / 100) * weight_kg;
+            const leanMass = weight_kg - fatMass;
+
+            document.getElementById('bf-val').innerText = bodyFat.toFixed(1) + "%";
+            
+            const massUnit = units === 'metric' ? ' kg' : ' lbs';
+            const multiplier = units === 'metric' ? 1 : 2.20462;
+            
+            document.getElementById('lean-mass').innerText = (leanMass * multiplier).toFixed(1) + massUnit;
+            document.getElementById('fat-mass').innerText = (fatMass * multiplier).toFixed(1) + massUnit;
+
+            const circle = document.getElementById('progress');
+            const circumference = 2 * Math.PI * 45;
+            const offset = circumference - (bodyFat / 50) * circumference;
+            circle.style.strokeDashoffset = Math.max(0, offset);
+
+            const statusBox = document.getElementById('status-box');
+            let category = "";
+            if (gender === 'male') {
+                if (bodyFat < 6) category = "Essential Fat";
+                else if (bodyFat < 14) category = "Athletic Range";
+                else if (bodyFat < 18) category = "Fitness Range";
+                else if (bodyFat < 25) category = "Average";
+                else category = "Overweight";
+            } else {
+                if (bodyFat < 14) category = "Essential Fat";
+                else if (bodyFat < 21) category = "Athletic Range";
+                else if (bodyFat < 25) category = "Fitness Range";
+                else if (bodyFat < 32) category = "Average";
+                else category = "Overweight";
+            }
+            statusBox.innerText = category;
+        }
+
+        calculate();
+    </script>
+</body>
+</html>

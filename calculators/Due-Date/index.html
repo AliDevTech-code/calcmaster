@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Due Date Calculator | Pregnancy Tracker & Progress Solver 2026</title>
+    <meta name="description" content="Calculate your pregnancy due date and track weekly progress instantly. Professional tracker for expecting parents with trimester breakdown.">
+    <meta name="keywords" content="due date calculator, pregnancy tracker, conception date, pregnancy week by week, baby due date solver">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fffafb; color: #4a3a3a; scroll-behavior: smooth; overflow-x: hidden; }
+        .pink-glass { background: #ffffff; border: 1px solid #fee2e2; border-radius: 2.5rem; }
+        .input-soft { background: #fff1f2; border: 2px solid transparent; border-radius: 1.5rem; transition: all 0.3s ease; width: 100%; }
+        .input-soft:focus { background: white; border-color: #fb7185; box-shadow: 0 0 0 4px rgba(251, 113, 133, 0.1); outline: none; }
+        .btn-grad { background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-grad:hover { transform: translateY(-2px); box-shadow: 0 15px 30px -10px rgba(251, 113, 133, 0.5); }
+        
+        @media (max-width: 640px) {
+            h1 { font-size: 3rem !important; }
+            .pink-glass { border-radius: 2rem; padding: 1.5rem !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b border-rose-50 sticky top-0 z-50 h-20 flex items-center px-4 md:px-6">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-baby-carriage text-2xl text-rose-500"></i>
+                <span class="text-xl md:text-2xl font-black tracking-tighter italic uppercase">DUE<span class="text-rose-500">DATE</span></span>
+            </div>
+            <div class="hidden md:flex space-x-6 text-[10px] font-black uppercase tracking-widest text-rose-300">
+                <span>General Suite</span>
+                <span class="text-slate-200">|</span>
+                <a href="#guide" class="hover:text-rose-500">How it works</a>
+            </div>
+            <a href="/index.html" class="text-[10px] font-black uppercase tracking-widest text-rose-400 bg-rose-50 px-4 py-2 rounded-full border border-rose-100">Exit Suite</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-16">
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+                <div class="inline-block px-4 py-1.5 bg-rose-50 text-rose-600 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest">Pregnancy Tracker Engine</div>
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 italic uppercase leading-[0.85]">Baby <br><span class="text-rose-500">Arrival.</span></h1>
+                <p class="text-slate-500 text-lg font-bold italic">Calculate your expected due date and follow your baby's growth journey with clinical accuracy.</p>
+            </div>
+            <div class="rounded-[3rem] overflow-hidden shadow-2xl h-[300px] md:h-[450px] bg-rose-100">
+                <img src="/images/pregnancy-hero.png" alt="Pregnancy Journey" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <section id="analyzer" class="grid lg:grid-cols-12 gap-8 md:gap-10 mb-24">
+            <div class="lg:col-span-7 pink-glass p-8 md:p-16">
+                <h3 class="text-[10px] font-black uppercase tracking-[0.4em] text-rose-500 mb-10 flex items-center">
+                    <span class="w-8 h-[2px] bg-rose-200 mr-4"></span> Cycle Parameters
+                </h3>
+
+                <div class="space-y-8">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">First Day of Last Period (LMP)</label>
+                        <input type="date" id="lmpDate" class="input-soft p-6 text-xl font-bold text-rose-600">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <button onclick="calculateDueDate()" class="btn-grad text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl">Calculate</button>
+                        <button onclick="resetTracker()" class="bg-rose-50 text-rose-400 py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-rose-100 transition">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5">
+                <div id="result-pane" class="bg-slate-900 rounded-[2.5rem] p-10 text-white min-h-[450px] flex flex-col justify-center border border-white/5 shadow-2xl shadow-rose-200/50 relative overflow-hidden">
+                    
+                    <div id="waiting-ui" class="text-center">
+                        <i class="fas fa-calendar-heart text-4xl text-rose-500 mb-6 opacity-20"></i>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 italic">Enter LMP to start tracking...</p>
+                    </div>
+
+                    <div id="results-ui" class="hidden space-y-8 animate-in fade-in zoom-in duration-500">
+                        <div class="text-center">
+                            <span class="text-rose-500 text-[10px] font-black uppercase tracking-[0.4em]">Estimated Due Date</span>
+                            <div id="due-date-text" class="text-4xl md:text-5xl font-black my-4 italic text-white uppercase tracking-tighter">-- -- --</div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/5 p-5 rounded-2xl border border-white/5">
+                                <span class="text-[9px] text-slate-500 font-black uppercase block mb-1">Current Week</span>
+                                <span id="week-val" class="text-2xl font-black text-rose-400">0</span>
+                            </div>
+                            <div class="bg-white/5 p-5 rounded-2xl border border-white/5">
+                                <span class="text-[9px] text-slate-500 font-black uppercase block mb-1">Days to Go</span>
+                                <span id="days-val" class="text-2xl font-black text-rose-400">0</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-white/10">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-[10px] font-black uppercase text-slate-500 tracking-widest">Trimester Progress</span>
+                                <span id="tri-val" class="text-[10px] font-black text-rose-500 uppercase italic">Calculating...</span>
+                            </div>
+                            <div class="w-full bg-white/5 h-3 rounded-full overflow-hidden">
+                                <div id="progress-bar" class="bg-rose-500 h-full transition-all duration-1000" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guide" class="grid lg:grid-cols-2 gap-12 mb-24">
+            <div class="pink-glass p-8 md:p-12">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-8 border-l-4 border-rose-500 pl-4">Operation Guide</h4>
+                <div class="space-y-6 text-sm font-bold text-slate-500 leading-relaxed">
+                    <p>To use the Due Date Calculator, simply select the first day of your last menstrual period (LMP). Our engine uses Naegele's Rule to estimate your arrival date.</p>
+                    <div class="bg-rose-50 p-6 rounded-2xl border border-rose-100">
+                        <span class="block text-[9px] font-black uppercase text-rose-400 mb-2">Pro Tip</span>
+                        <p class="italic">Standard pregnancy lasts approximately 280 days (40 weeks) from the first day of your last period.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pink-glass p-8 md:p-12 bg-rose-900 text-white border-none">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-6 text-rose-300">Tracking Logic</h4>
+                <div class="space-y-4">
+                    <div class="flex justify-between border-b border-white/10 pb-3 text-[10px] font-black uppercase tracking-widest">
+                        <span class="text-rose-400">Trimester 1:</span> <span>Week 1 - Week 12</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/10 pb-3 text-[10px] font-black uppercase tracking-widest">
+                        <span class="text-rose-400">Trimester 2:</span> <span>Week 13 - Week 26</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/10 pb-3 text-[10px] font-black uppercase tracking-widest">
+                        <span class="text-rose-400">Trimester 3:</span> <span>Week 27 - Birth</span>
+                    </div>
+                </div>
+                <img src="/images/pregnancy-steps.png" alt="Trimester Breakdown" class="mt-8 rounded-2xl opacity-80 hover:opacity-100 transition cursor-help">
+            </div>
+        </section>
+
+    </main>
+ 
+
+     <!-- Professional Footer -->
+  <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-16 mb-24">
+            
+            <div class="lg:col-span-4">
+                <div class="flex items-center space-x-2 text-white mb-8">
+                   
+                   <span class="text-2xl font-black tracking-tighter italic uppercase">DUE<span class="text-rose-500">DATE</span></span>
+    
+                </div>
+                <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                    The gold standard for high-fidelity calculations. Verified for 2026 compliance across international standards.
+                </p>
+                <div class="flex space-x-5">
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Financials</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/mortgage-calculator/index.html" class="hover:text-white transition">Mortgage Calc</a></li>
+                    <li><a href="/calculators/emi-calculator/index.html" class="hover:text-white transition">Loan Repayment</a></li>
+                    <li><a href="/calculators/tax-calculator/index.html" class="hover:text-white transition">Tax Estimator</a></li>
+                    <li><a href="/calculators/investment-return-planner/index.html" class="hover:text-white transition">ROI Engine</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Health & Math</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/health/index.html" class="hover:text-white transition">BMI & Weight</a></li>
+                    <li><a href="/calculators/Body-Composition/index.html" class="hover:text-white transition">Body Fat</a></li>
+                    <li><a href="/matrix-calculator.html" class="hover:text-white transition">Matrix Ops</a></li>
+                    <li><a href="/unit-converter.html" class="hover:text-white transition">Unit Conv.</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-4">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Compliance</h5>
+                <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                    <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <a href="/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <a href="/cookie-policy.html" class="hover:text-white">Cookie Policy</a>
+                    <a href="/contact.html" class="hover:text-white">Contact Us</a>
+                </div>
+                <div class="flex space-x-6 text-2xl opacity-30">
+                    <i class="fab fa-google"></i>
+                    <i class="fab fa-aws"></i>
+                    <i class="fab fa-stripe"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+            <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster. Engineered with Precision.</p>
+            <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Version 4.2.0-Stable</p>
+        </div>
+    </div>
+</footer>
+    <script>
+        function calculateDueDate() {
+            const lmpInput = document.getElementById('lmpDate').value;
+            if (!lmpInput) { alert("Please select a valid date."); return; }
+
+            const lmp = new Date(lmpInput);
+            const dueDate = new Date(lmp);
+            dueDate.setDate(lmp.getDate() + 280);
+
+            const today = new Date();
+            const diffTime = Math.abs(today - lmp);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const currentWeek = Math.floor(diffDays / 7);
+            
+            const remainingTime = dueDate - today;
+            const remainingDays = Math.max(0, Math.ceil(remainingTime / (1000 * 60 * 60 * 24)));
+
+            // Update UI
+            document.getElementById('waiting-ui').classList.add('hidden');
+            document.getElementById('results-ui').classList.remove('hidden');
+
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            document.getElementById('due-date-text').innerText = dueDate.toLocaleDateString('en-US', options);
+            document.getElementById('week-val').innerText = currentWeek;
+            document.getElementById('days-val').innerText = remainingDays;
+
+            // Progress Logic
+            let tri = "";
+            let progress = (diffDays / 280) * 100;
+            if (currentWeek <= 12) tri = "1st Trimester";
+            else if (currentWeek <= 26) tri = "2nd Trimester";
+            else tri = "3rd Trimester";
+
+            document.getElementById('tri-val').innerText = tri;
+            document.getElementById('progress-bar').style.width = Math.min(100, progress) + "%";
+
+            if (window.innerWidth < 768) {
+                document.getElementById('result-pane').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function resetTracker() {
+            document.getElementById('lmpDate').value = '';
+            document.getElementById('waiting-ui').classList.remove('hidden');
+            document.getElementById('results-ui').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

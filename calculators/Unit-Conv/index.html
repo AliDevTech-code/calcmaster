@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Unit Converter Pro | Length & Weight Metric Solver 2026</title>
+    <meta name="description" content="Professional unit converter for Length and Weight. Convert meters to feet, kg to lbs, and more with high precision and real-time metric analysis.">
+    <meta name="keywords" content="unit converter, length converter, weight converter, kg to lbs, meters to feet, metric conversion tool">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; scroll-behavior: smooth; overflow-x: hidden; }
+        .conv-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2.5rem; transition: all 0.3s ease; }
+        .conv-card:hover { border-color: #f59e0b; box-shadow: 0 20px 40px -20px rgba(245, 158, 11, 0.1); }
+        .input-conv { background: #fffbeb; border: 2px solid transparent; border-radius: 1.5rem; transition: all 0.3s ease; width: 100%; }
+        .input-conv:focus { background: white; border-color: #f59e0b; box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1); outline: none; }
+        .tab-btn { transition: all 0.3s ease; border-radius: 1rem; }
+        .active-tab { background: #f59e0b; color: white; }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50 h-20 flex items-center px-4 md:px-6">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-ruler-combined text-2xl text-amber-500"></i>
+                <span class="text-xl md:text-2xl font-black tracking-tighter italic uppercase">UNIT<span class="text-amber-500">CONV</span></span>
+            </div>
+            <a href="/index.html" class="text-[10px] font-black uppercase tracking-widest text-amber-600 bg-amber-50 px-4 py-2 rounded-full border border-amber-100">General Suite</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-12">
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+                <div class="inline-block px-4 py-1.5 bg-amber-50 text-amber-600 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest italic">Metric Precision Engine</div>
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 italic uppercase leading-[0.85]">Length <br>& <span class="text-amber-500">Weight.</span></h1>
+                <p class="text-slate-500 text-lg font-bold italic">Universal conversion utility. Switch between metric and imperial units with absolute clinical accuracy.</p>
+            </div>
+            <div class="rounded-[3rem] overflow-hidden shadow-2xl h-[250px] md:h-[400px] bg-amber-100">
+                <img src="/images/unit-hero.png" alt="Metric Conversion" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <section class="grid lg:grid-cols-2 gap-8 mb-24">
+            
+            <div class="conv-card p-8 md:p-12">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                        <i class="fas fa-ruler"></i>
+                    </div>
+                    <h3 class="text-sm font-black uppercase tracking-widest">Length Solver</h3>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-2 block ml-2">From</label>
+                            <input type="number" id="lenFromVal" placeholder="0.00" class="input-conv p-5 font-bold text-xl" oninput="convertLength()">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-2 block ml-2">Unit</label>
+                            <select id="lenFromUnit" class="input-conv p-5 font-black uppercase text-[10px] tracking-widest cursor-pointer" onchange="convertLength()">
+                                <option value="m">Meters (m)</option>
+                                <option value="km">Kilometers (km)</option>
+                                <option value="ft">Feet (ft)</option>
+                                <option value="in">Inches (in)</option>
+                                <option value="mi">Miles (mi)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center py-2">
+                        <i class="fas fa-arrows-rotate text-amber-200 text-xl"></i>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-2 block ml-2">To</label>
+                            <input type="number" id="lenToVal" class="input-conv p-5 font-bold text-xl bg-slate-50" readonly>
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-2 block ml-2">Unit</label>
+                            <select id="lenToUnit" class="input-conv p-5 font-black uppercase text-[10px] tracking-widest cursor-pointer" onchange="convertLength()">
+                                <option value="ft">Feet (ft)</option>
+                                <option value="m">Meters (m)</option>
+                                <option value="km">Kilometers (km)</option>
+                                <option value="in">Inches (in)</option>
+                                <option value="mi">Miles (mi)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conv-card p-8 md:p-12">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-slate-200">
+                        <i class="fas fa-weight-hanging"></i>
+                    </div>
+                    <h3 class="text-sm font-black uppercase tracking-widest">Weight Solver</h3>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-2 block ml-2">From</label>
+                            <input type="number" id="weightFromVal" placeholder="0.00" class="input-conv p-5 font-bold text-xl !bg-slate-50" oninput="convertWeight()">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-2 block ml-2">Unit</label>
+                            <select id="weightFromUnit" class="input-conv p-5 font-black uppercase text-[10px] tracking-widest cursor-pointer !bg-slate-100" onchange="convertWeight()">
+                                <option value="kg">Kilogram (kg)</option>
+                                <option value="g">Gram (g)</option>
+                                <option value="lb">Pound (lb)</option>
+                                <option value="oz">Ounce (oz)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center py-2">
+                        <i class="fas fa-arrows-rotate text-slate-200 text-xl"></i>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-2 block ml-2">To</label>
+                            <input type="number" id="weightToVal" class="input-conv p-5 font-bold text-xl bg-slate-100" readonly>
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-2 block ml-2">Unit</label>
+                            <select id="weightToUnit" class="input-conv p-5 font-black uppercase text-[10px] tracking-widest cursor-pointer !bg-slate-100" onchange="convertWeight()">
+                                <option value="lb">Pound (lb)</option>
+                                <option value="kg">Kilogram (kg)</option>
+                                <option value="g">Gram (g)</option>
+                                <option value="oz">Ounce (oz)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid lg:grid-cols-2 gap-12 mb-24">
+            <div class="conv-card p-10 md:p-12">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-8 border-l-4 border-amber-500 pl-4">Conversion Logic</h4>
+                <p class="text-slate-500 text-sm font-bold leading-relaxed mb-6">Our tool uses the International System of Units (SI) as the base reference. For Length, the meter is the primary standard, and for Weight, we use the kilogram as the anchor point.</p>
+                <img src="/images/conv-logic.png" alt="Conversion Scale" class="rounded-3xl border border-amber-50 shadow-sm">
+            </div>
+            <div class="conv-card p-10 md:p-12 bg-slate-950 text-white border-none">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-8 text-amber-500">Quick Reference</h4>
+                <div class="space-y-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span>1 Meter:</span> <span class="text-white">3.2808 Feet</span></div>
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span>1 Kilogram:</span> <span class="text-white">2.2046 Pounds</span></div>
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span>1 Kilometer:</span> <span class="text-white">0.6213 Miles</span></div>
+                    <div class="flex justify-between"><span>1 Ounce:</span> <span class="text-white">28.3495 Grams</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+  
+
+    <!-- Professional Footer -->
+  <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-16 mb-24">
+            
+            <div class="lg:col-span-4">
+                <div class="flex items-center space-x-2 text-white mb-8">
+                     <i class="fas fa-ruler-combined text-2xl text-amber-500"></i>
+                <span class="text-2xl font-black tracking-tighter italic uppercase">UNIT<span class="text-amber-500">CONV</span></span>
+                </div>
+                <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                    The gold standard for high-fidelity calculations. Verified for 2026 compliance across international standards.
+                </p>
+                <div class="flex space-x-5">
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Financials</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/mortgage-calculator/index.html" class="hover:text-white transition">Mortgage Calc</a></li>
+                    <li><a href="/calculators/emi-calculator/index.html" class="hover:text-white transition">Loan Repayment</a></li>
+                    <li><a href="/calculators/tax-calculator/index.html" class="hover:text-white transition">Tax Estimator</a></li>
+                    <li><a href="/calculators/investment-return-planner/index.html" class="hover:text-white transition">ROI Engine</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Health & Math</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/health/index.html" class="hover:text-white transition">BMI & Weight</a></li>
+                    <li><a href="/calculators/Body-Composition/index.html" class="hover:text-white transition">Body Fat</a></li>
+                    <li><a href="/matrix-calculator.html" class="hover:text-white transition">Matrix Ops</a></li>
+                    <li><a href="/unit-converter.html" class="hover:text-white transition">Unit Conv.</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-4">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Compliance</h5>
+                <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                    <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <a href="/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <a href="/cookie-policy.html" class="hover:text-white">Cookie Policy</a>
+                    <a href="/contact.html" class="hover:text-white">Contact Us</a>
+                </div>
+                <div class="flex space-x-6 text-2xl opacity-30">
+                    <i class="fab fa-google"></i>
+                    <i class="fab fa-aws"></i>
+                    <i class="fab fa-stripe"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+            <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster. Engineered with Precision.</p>
+            <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Version 4.2.0-Stable</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Length Conversion Logic
+        const lenFactors = {
+            m: 1, km: 1000, ft: 0.3048, in: 0.0254, mi: 1609.34
+        };
+
+        function convertLength() {
+            const val = parseFloat(document.getElementById('lenFromVal').value);
+            const from = document.getElementById('lenFromUnit').value;
+            const to = document.getElementById('lenToUnit').value;
+            
+            if (isNaN(val)) { document.getElementById('lenToVal').value = ''; return; }
+
+            const meters = val * lenFactors[from];
+            const result = meters / lenFactors[to];
+            document.getElementById('lenToVal').value = result.toFixed(4);
+        }
+
+        // Weight Conversion Logic
+        const weightFactors = {
+            kg: 1, g: 0.001, lb: 0.453592, oz: 0.0283495
+        };
+
+        function convertWeight() {
+            const val = parseFloat(document.getElementById('weightFromVal').value);
+            const from = document.getElementById('weightFromUnit').value;
+            const to = document.getElementById('weightToUnit').value;
+
+            if (isNaN(val)) { document.getElementById('weightToVal').value = ''; return; }
+
+            const kgs = val * weightFactors[from];
+            const result = kgs / weightFactors[to];
+            document.getElementById('weightToVal').value = result.toFixed(4);
+        }
+    </script>
+</body>
+</html>

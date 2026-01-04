@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Standard Deviation & Variance Calculator | Precise Statistics Solver 2026</title>
+    <meta name="description" content="Professional-grade calculator for Standard Deviation and Variance. Supports both Sample and Population datasets with step-by-step statistical analysis.">
+    <meta name="keywords" content="Standard Deviation Calculator, Variance Solver, Stats Engine, Population Deviation, Sample Variance, Data Analytics Tool">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        .glass-panel { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2.5rem; }
+        .input-field { background: #f1f5f9; border: 2px solid transparent; border-radius: 1.5rem; transition: all 0.3s ease; width: 100%; box-sizing: border-box; }
+        .input-field:focus { background: white; border-color: #2563eb; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); outline: none; }
+        .primary-btn { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px -10px rgba(37, 99, 235, 0.5); }
+        
+        /* Mobile Specific Fixes */
+        @media (max-width: 640px) {
+            h1 { font-size: 3.5rem !important; }
+            .glass-panel { border-radius: 1.5rem; padding: 1.5rem !important; }
+            .main-content { padding-left: 1rem !important; padding-right: 1rem !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50 h-20 flex items-center px-4 md:px-6">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-square-root-variable text-2xl text-blue-600"></i>
+                <span class="text-xl md:text-2xl font-black tracking-tighter italic uppercase">DATA<span class="text-blue-600">VAR</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <a href="#analyzer" class="hover:text-blue-600">Analyzer</a>
+                <a href="#guide" class="hover:text-blue-600">Documentation</a>
+            </div>
+            <a href="/index.html" class="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 px-4 py-2 rounded-full border">Exit Tool</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12 main-content">
+        
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-16 md:mb-20">
+            <div class="order-2 lg:order-1">
+                <div class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest italic">Institutional Grade Statistics</div>
+                <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-6 italic uppercase leading-[0.85]">Standard <br><span class="text-blue-600">Deviation.</span></h1>
+                <p class="text-slate-500 text-lg font-bold italic">Deep dive into your data spread. Calculate Variance and Deviation for Sample or Population sets with absolute precision.</p>
+            </div>
+            <div class="order-1 lg:order-2 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl h-[250px] md:h-[400px] bg-slate-200">
+                <img src="/images/standard-deviation-hero.png" alt="Standard Deviation Graph" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <section id="analyzer" class="grid lg:grid-cols-12 gap-6 md:gap-10 mb-20 md:mb-24">
+            <div class="lg:col-span-8 glass-panel p-6 md:p-16">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                    <h3 class="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 flex items-center">
+                        <span class="w-8 h-[2px] bg-blue-100 mr-4"></span> Input Dataset
+                    </h3>
+                    <select id="data-type" class="w-full md:w-auto bg-slate-100 text-[10px] font-black uppercase p-3 rounded-xl border-none outline-none cursor-pointer">
+                        <option value="sample">Sample Data (n-1)</option>
+                        <option value="population">Population Data (N)</option>
+                    </select>
+                </div>
+
+                <textarea id="dataInput" placeholder="Enter numbers e.g. 5, 10, 15, 20" rows="5" class="input-field p-6 md:p-8 font-bold text-xl mb-8"></textarea>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button onclick="calculateSD()" class="primary-btn text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl w-full">Analyze Data</button>
+                    <button onclick="resetTool()" class="bg-slate-100 text-slate-500 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-200 transition w-full">Clear Data</button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 space-y-6">
+                <div id="result-pane" class="bg-slate-950 rounded-[2rem] md:rounded-[3rem] p-8 md:p-10 text-white min-h-[350px] md:min-h-[450px] flex flex-col justify-center border border-white/5 relative">
+                    <div id="waiting" class="text-center">
+                        <i class="fas fa-microchip text-4xl text-blue-500 mb-6 opacity-20 animate-pulse"></i>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 leading-loose">Ready for analysis...</p>
+                    </div>
+
+                    <div id="results" class="hidden space-y-8 animate-in fade-in zoom-in duration-500">
+                        <div class="text-center">
+                            <span class="text-blue-500 text-[10px] font-black uppercase tracking-[0.4em]">Standard Deviation (σ)</span>
+                            <div id="sd-val" class="text-5xl md:text-6xl font-black my-4 italic text-blue-400">0.00</div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 pt-8 border-t border-white/10">
+                            <div class="bg-white/5 p-4 rounded-2xl">
+                                <span class="text-[9px] text-slate-500 font-black uppercase block mb-1">Variance</span>
+                                <span id="var-val" class="text-lg md:text-xl font-bold italic">0.00</span>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-2xl">
+                                <span class="text-[9px] text-slate-500 font-black uppercase block mb-1">Mean (x̄)</span>
+                                <span id="mean-val" class="text-lg md:text-xl font-bold italic">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 flex items-center justify-center h-32 bg-white">
+                    <img src="/images/sd-formula.png" alt="Standard Deviation Formula" class="max-h-full">
+                </div>
+            </div>
+        </section>
+
+        <section id="guide" class="grid lg:grid-cols-2 gap-8 md:gap-12 mb-20 md:mb-24">
+            <div class="glass-panel p-8 md:p-12">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-8 border-l-4 border-blue-600 pl-4">Operation Guide</h4>
+                <div class="space-y-8">
+                    <div class="flex gap-5">
+                        <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-black shrink-0 text-xs">01</div>
+                        <div>
+                            <h5 class="font-black text-xs uppercase mb-1">Data Entry</h5>
+                            <p class="text-slate-500 text-sm font-bold leading-relaxed">Input your numeric values into the primary terminal. You may use **commas** or **spaces** as delimiters.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-black shrink-0 text-xs">02</div>
+                        <div>
+                            <h5 class="font-black text-xs uppercase mb-1">Logic Selection</h5>
+                            <p class="text-slate-500 text-sm font-bold leading-relaxed">Select **Sample (n-1)** if your data is a subset, or **Population (N)** if you are analyzing the entire group.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-black shrink-0 text-xs">03</div>
+                        <div>
+                            <h5 class="font-black text-xs uppercase mb-1">Analysis</h5>
+                            <p class="text-slate-500 text-sm font-bold leading-relaxed">Click **"Analyze Data"** to execute the statistical engine. Results are calculated with 4-decimal precision.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 md:p-12 bg-slate-950 text-white border-none shadow-2xl shadow-blue-900/20">
+                <h4 class="text-2xl font-black uppercase italic tracking-tighter mb-6 text-blue-500">Example Case</h4>
+                <p class="text-slate-500 text-[10px] font-black mb-8 uppercase tracking-widest">Scenario: Analyzing Test Scores</p>
+                
+                <div class="bg-white/5 p-6 rounded-2xl mb-8 border border-white/10">
+                    <span class="block text-[9px] text-slate-500 font-black uppercase mb-3">Input Data</span>
+                    <code class="text-blue-300 text-xl md:text-2xl font-black tracking-tighter italic">85, 90, 75, 95, 80</code>
+                </div>
+
+                <div class="space-y-5">
+                    <div class="flex justify-between border-b border-white/5 pb-3">
+                        <span class="text-[10px] font-black uppercase text-slate-500">Arithmetic Mean:</span>
+                        <span class="font-bold">85.00</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 pb-3">
+                        <span class="text-[10px] font-black uppercase text-slate-500">Variance (Sample):</span>
+                        <span class="font-bold text-blue-100">62.50</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10px] font-black uppercase text-slate-500">Standard Deviation:</span>
+                        <div class="text-right">
+                            <span class="block font-black text-2xl md:text-3xl text-blue-500 italic">7.9057</span>
+                            <span class="text-[8px] text-slate-600 font-black uppercase">Result σ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-600 pt-16 md:pt-24 pb-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="grid lg:grid-cols-12 gap-10 md:gap-16 mb-16 md:mb-20">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-divide text-3xl text-blue-600"></i>
+                        <span class="text-2xl md:text-3xl font-black tracking-tighter italic uppercase">DATAVAR<span class="text-blue-600">.</span></span>
+                    </div>
+                    <p class="text-sm font-bold leading-relaxed text-slate-500 mb-8 italic">World-class mathematical engine providing 100% precision for global educational standards.</p>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer"><i class="fab fa-github"></i></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-6 border-l-2 border-blue-600 pl-3">Math Suite</h4>
+                        <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                            <li class="hover:text-white transition cursor-pointer">Matrix Ops</li>
+                            <li class="hover:text-white transition cursor-pointer">Algebra Pro</li>
+                            <li class="hover:text-white transition cursor-pointer">Unit Conv</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-6 border-l-2 border-blue-600 pl-3">Legal</h4>
+                        <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                            <li class="hover:text-white transition cursor-pointer">Privacy</li>
+                            <li class="hover:text-white transition cursor-pointer">Terms</li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-6 border-l-2 border-blue-600 pl-3">Tech Infrastructure</h4>
+                        <div class="flex gap-6 text-2xl opacity-10">
+                            <i class="fab fa-aws"></i><i class="fab fa-google-cloud"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-black uppercase tracking-[0.5em] gap-4 text-center md:text-left">
+                <p>© 2026 DATAVAR | Engineered by ALi Developer</p>
+                <p class="text-slate-800">Deployment v5.2.0-Production</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function calculateSD() {
+            const input = document.getElementById('dataInput').value;
+            const type = document.getElementById('data-type').value;
+            const nums = input.split(/[,\s]+/).map(n => parseFloat(n)).filter(n => !isNaN(n));
+
+            if (nums.length < 2) {
+                alert("Critical Error: Dataset must contain at least 2 valid numeric entries.");
+                return;
+            }
+
+            const n = nums.length;
+            const mean = nums.reduce((a, b) => a + b, 0) / n;
+            const squareDiffs = nums.map(x => Math.pow(x - mean, 2));
+            const sumSquareDiffs = squareDiffs.reduce((a, b) => a + b, 0);
+            
+            const variance = type === 'sample' ? sumSquareDiffs / (n - 1) : sumSquareDiffs / n;
+            const stdDev = Math.sqrt(variance);
+
+            document.getElementById('waiting').classList.add('hidden');
+            document.getElementById('results').classList.remove('hidden');
+            
+            document.getElementById('sd-val').innerText = stdDev.toFixed(4);
+            document.getElementById('var-val').innerText = variance.toFixed(4);
+            document.getElementById('mean-val').innerText = mean.toFixed(2);
+
+            if (window.innerWidth < 768) {
+                document.getElementById('result-pane').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function resetTool() {
+            document.getElementById('dataInput').value = '';
+            document.getElementById('waiting').classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+        }
+    </script>
+</body>
+
+</html>

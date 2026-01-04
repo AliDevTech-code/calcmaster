@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <title>Ohm's Law Calculator | Voltage, Current & Resistance Solver 2026</title>
+    <meta name="description" content="Calculate Voltage (V), Current (I), Resistance (R), and Power (P) using Ohm's Law. Professional electrical engineering tool with high precision for students and electricians.">
+    <meta name="keywords" content="Ohm's Law Calculator, Voltage Solver, Current Calculator, Resistance Tool, Electrical Power Calc, Physics Circuit Solver, V=IR Calculator">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc;
+            color: #0f172a;
+            scroll-behavior: smooth;
+        }
+        .circuit-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 2rem;
+        }
+        .solve-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .solve-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(245, 158, 11, 0.5);
+        }
+        .variable-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 1.5rem;
+        }
+        .nav-link { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        /* Mobile menu jab open ho toh ye class use hogi */
+#nav-links.active {
+    display: flex !important;
+}
+
+/* Navbar links styling for better look */
+.nav-link a {
+    font-weight: 600;
+}
+    </style>
+</head>
+<body class="antialiased">
+
+   <nav class="p-6 max-w-7xl mx-auto flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+        <i class="fas fa-bolt text-2xl text-amber-500"></i>
+        <span class="text-2xl font-black tracking-tighter italic uppercase">CALC<span class="text-amber-500">MASTER</span></span>
+    </div>
+
+    <button id="menu-btn" class="md:hidden text-slate-500 z-50">
+        <i class="fas fa-bars text-2xl"></i>
+    </button>
+
+    <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-30"></div>
+
+    <div id="nav-links" class="fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-40 transform translate-x-full transition-transform duration-300 ease-in-out p-10 flex flex-col space-y-8 md:relative md:translate-x-0 md:h-auto md:w-auto md:bg-transparent md:shadow-none md:p-0 md:flex-row md:space-y-0 md:space-x-8 text-slate-500">
+        <a href="#calculator" class="hover:text-amber-600 font-bold transition">Ohm Solver</a>
+        <a href="#formulas" class="hover:text-amber-600 font-bold transition">Formulas</a>
+        <a href="/index.html" class="hover:text-amber-600 font-bold transition">Exit</a>
+    </div>
+</nav>
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Hero Section -->
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight">
+                    Ohm's Law <span class="text-amber-500 italic">&</span> Power
+                </h1>
+                <p class="text-slate-500 text-lg font-medium leading-relaxed">
+                    Precision Circuit Analytics. Calculate Voltage, Current, Resistance, and Power dissipation with industry-standard accuracy.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <span class="px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-xs font-bold uppercase tracking-widest">EE Standards 2026</span>
+                    <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-xs font-bold uppercase tracking-widest">V = I × R</span>
+                </div>
+            </div>
+            
+            <div class="image-placeholder h-64 md:h-96">
+               
+                 <img src="/images/Golden-Circuit-Flux.png" alt="Golden.Circuit.Flux">
+                
+            </div>
+        </div>
+
+        <!-- Ohm's Solver -->
+        <section id="calculator" class="mb-24">
+            <div class="mb-10 flex items-center space-x-4">
+                <div class="h-10 w-2 bg-amber-500 rounded-full"></div>
+                <h2 class="text-3xl font-black uppercase tracking-tighter">I. The Circuit Solver</h2>
+            </div>
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-8 circuit-card p-8 md:p-12">
+                    <div class="grid md:grid-cols-2 gap-8 mb-10">
+                        <!-- Voltage -->
+                        <div class="space-y-3">
+                            <label class="variable-label">Voltage (V)</label>
+                            <div class="flex">
+                                <input type="number" id="v-val" placeholder="Volts..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-amber-500 outline-none font-bold text-lg transition-all">
+                                <div class="flex items-center px-4 font-black text-slate-300">V</div>
+                            </div>
+                        </div>
+                        <!-- Current -->
+                        <div class="space-y-3">
+                            <label class="variable-label">Current (I)</label>
+                            <div class="flex">
+                                <input type="number" id="i-val" placeholder="Amperes..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-amber-500 outline-none font-bold text-lg transition-all">
+                                <div class="flex items-center px-4 font-black text-slate-300">A</div>
+                            </div>
+                        </div>
+                        <!-- Resistance -->
+                        <div class="space-y-3">
+                            <label class="variable-label">Resistance (R)</label>
+                            <div class="flex">
+                                <input type="number" id="r-val" placeholder="Ohms..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-amber-500 outline-none font-bold text-lg transition-all">
+                                <div class="flex items-center px-4 font-black text-slate-300">Ω</div>
+                            </div>
+                        </div>
+                        <!-- Power -->
+                        <div class="space-y-3">
+                            <label class="variable-label">Power (P)</label>
+                            <div class="flex">
+                                <input type="number" id="p-val" placeholder="Watts..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-amber-500 outline-none font-bold text-lg transition-all">
+                                <div class="flex items-center px-4 font-black text-slate-300">W</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="calculateOhms()" class="w-full solve-btn text-white py-6 rounded-2xl font-black text-xl uppercase tracking-widest shadow-xl">Analyze Circuit</button>
+                    <div class="flex justify-between items-center mt-6">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Enter any two values to solve</p>
+                        <button onclick="resetFields()" class="text-[10px] text-rose-500 font-bold uppercase tracking-widest hover:underline">Clear All</button>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-4 bg-slate-950 rounded-[2rem] p-10 text-white min-h-[450px] flex flex-col justify-between border-b-8 border-amber-500">
+                    <div>
+                        <span id="res-title" class="text-amber-500 text-xs font-black uppercase tracking-[0.2em]">Live Analysis</span>
+                        <div id="res-primary" class="text-5xl font-black my-6 tracking-tighter">0.00</div>
+                        <p id="res-subtitle" class="text-slate-500 text-sm font-bold uppercase tracking-widest">Awaiting Input Data</p>
+                    </div>
+                    
+                    <div class="pt-8 border-t border-white/10 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-400 font-bold uppercase">Breakdown:</span>
+                            <span id="formula-used" class="text-[10px] bg-slate-800 px-3 py-1 rounded-full text-amber-500 font-bold uppercase tracking-tighter">No Formula</span>
+                        </div>
+                        <div id="breakdown-list" class="space-y-2 text-xs font-bold text-slate-300">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Circuit Theory -->
+        <section id="formulas" class="mb-24">
+            <h2 class="text-3xl font-black mb-12 text-center uppercase tracking-tighter italic">Fundamental Equations</h2>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center">
+                    <div class="text-amber-500 text-2xl font-black mb-2">$V = I \times R$</div>
+                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Voltage Formula</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center">
+                    <div class="text-amber-500 text-2xl font-black mb-2">$I = V / R$</div>
+                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Current Formula</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center">
+                    <div class="text-amber-500 text-2xl font-black mb-2">$R = V / I$</div>
+                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Resistance Formula</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center">
+                    <div class="text-amber-500 text-2xl font-black mb-2">$P = V \times I$</div>
+                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Power Formula</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Professional Footer -->
+    <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-24">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-calculator text-3xl text-amber-500"></i>
+                        <span class="text-3xl font-black tracking-tighter italic uppercase">CALCMASTER<span class="text-amber-500">.</span></span>
+                    </div>
+                    <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                        Universal computational engine for modern sciences. Verified accuracy for engineering and research.
+                    </p>
+                    <div class="flex space-x-5">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-amber-500 pl-4">Science Tools</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="#" class="hover:text-white transition">Molarity Calc</a></li>
+                        <li><a href="#" class="hover:text-white transition">Wave Dynamics</a></li>
+                        <li><a href="#" class="hover:text-white transition">Force Engine</a></li>
+                        <li><a href="#" class="hover:text-white transition">Atomic Mass</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-2">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-amber-500 pl-4">Engineering</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="#" class="hover:text-white transition">RF Budget</a></li>
+                        <li><a href="#" class="hover:text-white transition">Antenna Length</a></li>
+                        <li><a href="#" class="hover:text-white transition">Circuit Solver</a></li>
+                        <li><a href="#" class="hover:text-white transition">Ohm's Law</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-4">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-amber-500 pl-4">Compliance</h5>
+                    <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                        <a href="#" class="hover:text-white">Privacy Policy</a>
+                        <a href="#" class="hover:text-white">Terms of Service</a>
+                        <a href="#" class="hover:text-white">Cookie Policy</a>
+                        <a href="#" class="hover:text-white">Global Nodes</a>
+                    </div>
+                    <div class="flex space-x-6 text-2xl opacity-30">
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-aws"></i>
+                        <i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster Ohm Logic. All Rights Reserved.</p>
+                <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Build 10.1.2-Amber</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('menu-btn');
+const nav = document.getElementById('nav-links');
+const overlay = document.getElementById('overlay');
+
+function toggleMenu() {
+    nav.classList.toggle('translate-x-full');
+    nav.classList.toggle('translate-x-0');
+    overlay.classList.toggle('hidden');
+    
+    // Icon change (Bars to Times)
+    const icon = btn.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
+}
+
+btn.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu); // Overlay click pe bhi band ho jaye
+        function calculateOhms() {
+            let v = parseFloat(document.getElementById('v-val').value);
+            let i = parseFloat(document.getElementById('i-val').value);
+            let r = parseFloat(document.getElementById('r-val').value);
+            let p = parseFloat(document.getElementById('p-val').value);
+
+            const resTitle = document.getElementById('res-title');
+            const resPrimary = document.getElementById('res-primary');
+            const resSubtitle = document.getElementById('res-subtitle');
+            const formulaField = document.getElementById('formula-used');
+            const list = document.getElementById('breakdown-list');
+
+            let solved = false;
+            let formula = "";
+            let solvedVal = 0;
+            let solvedUnit = "";
+
+            // Logic Tree for all Ohm's Law variations
+            if (i && r) { 
+                v = i * r; p = v * i; formula = "V = I × R"; solvedVal = v; solvedUnit = "Volts"; solved = true;
+            } else if (v && r) {
+                i = v / r; p = v * i; formula = "I = V / R"; solvedVal = i; solvedUnit = "Amperes"; solved = true;
+            } else if (v && i) {
+                r = v / i; p = v * i; formula = "R = V / I"; solvedVal = r; solvedUnit = "Ohms"; solved = true;
+            } else if (p && v) {
+                i = p / v; r = v / i; formula = "I = P / V"; solvedVal = i; solvedUnit = "Amperes"; solved = true;
+            } else if (p && i) {
+                v = p / i; r = v / i; formula = "V = P / I"; solvedVal = v; solvedUnit = "Volts"; solved = true;
+            } else if (p && r) {
+                i = Math.sqrt(p / r); v = i * r; formula = "I = √(P/R)"; solvedVal = i; solvedUnit = "Amperes"; solved = true;
+            }
+
+            if (solved) {
+                resTitle.innerText = "Solved Result";
+                resPrimary.innerText = solvedVal.toFixed(3);
+                resSubtitle.innerText = solvedUnit;
+                formulaField.innerText = formula;
+                
+                list.innerHTML = `
+                    <div class="flex justify-between"><span>Voltage:</span><span>${v.toFixed(2)} V</span></div>
+                    <div class="flex justify-between"><span>Current:</span><span>${i.toFixed(2)} A</span></div>
+                    <div class="flex justify-between"><span>Resistance:</span><span>${r.toFixed(2)} Ω</span></div>
+                    <div class="flex justify-between"><span>Power:</span><span>${p.toFixed(2)} W</span></div>
+                `;
+
+                // Update input fields with calculated values
+                document.getElementById('v-val').value = v.toFixed(2);
+                document.getElementById('i-val').value = i.toFixed(2);
+                document.getElementById('r-val').value = r.toFixed(2);
+                document.getElementById('p-val').value = p.toFixed(2);
+            } else {
+                resPrimary.innerText = "Error";
+                resSubtitle.innerText = "Insufficient Data";
+                list.innerHTML = `<p class="text-rose-400 italic">Please provide at least 2 values to start the simulation.</p>`;
+            }
+        }
+
+        function resetFields() {
+            ['v-val', 'i-val', 'r-val', 'p-val'].forEach(id => document.getElementById(id).value = '');
+            document.getElementById('res-primary').innerText = "0.00";
+            document.getElementById('res-subtitle').innerText = "Awaiting Input Data";
+            document.getElementById('formula-used').innerText = "No Formula";
+            document.getElementById('breakdown-list').innerHTML = "";
+        }
+    </script>
+</body>
+</html>

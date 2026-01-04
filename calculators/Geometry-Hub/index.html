@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometry Hub | Area & Perimeter Calculator Pro</title>
+    <meta name="description" content="Calculate the area and perimeter of any shape instantly. Geometry Hub provides professional formulas for Circle, Rectangle, Triangle, and Square.">
+    <meta name="keywords" content="geometry hub, area calculator, perimeter calculator, calculate shapes, math geometry tool">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfdfd; }
+        .shape-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; border: 2px solid transparent; }
+        .shape-card:hover { border-color: #3b82f6; transform: translateY(-5px); }
+        .shape-card.active { border-color: #3b82f6; background: #eff6ff; }
+        .glass-panel { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(226, 232, 240, 0.8); }
+    </style>
+</head>
+<body class="p-0 m-0">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-draw-polygon text-2xl text-blue-600"></i>
+                <span class="text-2xl font-black tracking-tighter italic uppercase">GEOMETRY<span class="text-blue-600">HUB</span></span>
+            </div>
+            <a href="/" class="px-6 py-2 bg-slate-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-red-600 transition-all">Exit</a>
+        </div>
+    </nav>
+
+    <main class="mt-32 max-w-7xl mx-auto px-6 mb-24">
+        
+        <div class="grid lg:grid-cols-12 gap-12 items-center mb-16">
+            <div class="lg:col-span-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter uppercase italic leading-[0.9] mb-6">
+                    Master Your <br><span class="text-blue-600">Shapes.</span>
+                </h1>
+                <p class="text-slate-500 font-bold text-lg max-w-lg">Advanced geometry engine for instant Area, Perimeter, and Circumference calculations.</p>
+            </div>
+            <div class="lg:col-span-6">
+                <div class="rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200">
+                    <img src="/images/geometry-engine.png" alt="Geometry Visualization" class="w-full h-[300px] object-cover">
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-4 grid grid-cols-2 gap-4">
+                <div onclick="selectShape('circle')" id="btn-circle" class="shape-card active glass-panel p-6 rounded-3xl text-center">
+                    <i class="far fa-circle text-3xl text-blue-600 mb-3"></i>
+                    <p class="font-black text-xs uppercase tracking-widest">Circle</p>
+                </div>
+                <div onclick="selectShape('rectangle')" id="btn-rectangle" class="shape-card glass-panel p-6 rounded-3xl text-center">
+                    <i class="far fa-square text-3xl text-blue-600 mb-3 rotate-45"></i>
+                    <p class="font-black text-xs uppercase tracking-widest">Rectangle</p>
+                </div>
+                <div onclick="selectShape('triangle')" id="btn-triangle" class="shape-card glass-panel p-6 rounded-3xl text-center">
+                    <i class="fas fa-caret-up text-4xl text-blue-600 mb-2"></i>
+                    <p class="font-black text-xs uppercase tracking-widest">Triangle</p>
+                </div>
+                <div onclick="selectShape('square')" id="btn-square" class="shape-card glass-panel p-6 rounded-3xl text-center">
+                    <i class="far fa-square text-3xl text-blue-600 mb-3"></i>
+                    <p class="font-black text-xs uppercase tracking-widest">Square</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8">
+                <div class="glass-panel border border-slate-200 rounded-[3rem] p-8 md:p-12 shadow-xl">
+                    <div id="input-fields" class="grid md:grid-cols-2 gap-8 mb-10">
+                        </div>
+
+                    <button onclick="calculateGeometry()" class="w-full py-6 bg-blue-600 hover:bg-blue-700 text-white font-black uppercase tracking-[0.3em] rounded-2xl transition-all shadow-xl shadow-blue-200 active:scale-95 text-lg mb-10">
+                        Solve Geometry <i class="fas fa-expand ml-2"></i>
+                    </button>
+
+                    <div id="geoResult" class="hidden bg-slate-950 rounded-[2.5rem] p-10 text-white">
+                        <div class="grid md:grid-cols-2 gap-8 text-center">
+                            <div>
+                                <span class="text-blue-500 font-black uppercase tracking-widest text-[10px]">Total Area</span>
+                                <div id="resArea" class="text-5xl font-black italic mt-2 text-white">0</div>
+                            </div>
+                            <div>
+                                <span class="text-blue-500 font-black uppercase tracking-widest text-[10px]">Perimeter / Circum.</span>
+                                <div id="resPeri" class="text-5xl font-black italic mt-2 text-white">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="mt-20 bg-white p-8 md:p-12 rounded-[2.5rem] border border-slate-100 shadow-sm">
+            <div class="flex items-center space-x-4 mb-10">
+                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-book-open text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold tracking-tighter uppercase italic text-slate-800">
+                    How to Use <span class="text-blue-600">Geometry Hub</span>
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="relative group">
+                    <div class="text-6xl font-black text-slate-50 absolute -top-8 -left-2 group-hover:text-blue-50 transition-colors">01</div>
+                    <div class="relative">
+                        <h3 class="font-black uppercase italic text-sm tracking-widest text-blue-600 mb-3">Choose Your Shape</h3>
+                        <p class="text-slate-500 text-sm font-bold leading-relaxed">Select the geometric figure you want to analyze from the shape selector panel.</p>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <div class="text-6xl font-black text-slate-50 absolute -top-8 -left-2 group-hover:text-blue-50 transition-colors">02</div>
+                    <div class="relative">
+                        <h3 class="font-black uppercase italic text-sm tracking-widest text-blue-600 mb-3">Input Dimensions</h3>
+                        <p class="text-slate-500 text-sm font-bold leading-relaxed">Enter the required values like Radius, Length, or Base into the dynamic fields.</p>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <div class="text-6xl font-black text-slate-50 absolute -top-8 -left-2 group-hover:text-blue-50 transition-colors">03</div>
+                    <div class="relative">
+                        <h3 class="font-black uppercase italic text-sm tracking-widest text-blue-600 mb-3">Generate Results</h3>
+                        <p class="text-slate-500 text-sm font-bold leading-relaxed">Click "SOLVE GEOMETRY" to instantly get Area and Perimeter via verified algorithms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer" class="bg-slate-950 text-slate-600 pt-24 pb-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-20">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-draw-polygon text-3xl text-blue-600"></i>
+                        <span class="text-3xl font-black tracking-tighter italic uppercase">GEOMETRY<span class="text-blue-600">HUB</span></span>
+                    </div>
+                    <p class="text-sm font-bold leading-relaxed text-slate-500 mb-8">
+                        High-fidelity geometric analysis engine. Providing precision calculations for global educational standards.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-lg"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-lg"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Geometry Suite</h4>
+                        <ul class="space-y-4 text-xs font-bold uppercase tracking-widest">
+                            <li><a href="#" class="hover:text-white transition">Circle Solver</a></li>
+                            <li><a href="#" class="hover:text-white transition">Triangle Calc</a></li>
+                            <li><a href="#" class="hover:text-white transition">Polygon Engine</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Resources</h4>
+                        <ul class="space-y-4 text-xs font-bold uppercase tracking-widest">
+                            <li><a href="#" class="hover:text-white transition">Formulas</a></li>
+                            <li><a href="#" class="hover:text-white transition">Privacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Infrastructure</h4>
+                        <p class="text-[10px] font-bold text-blue-600 mb-4 uppercase">99.9% Accuracy Verified</p>
+                        <div class="flex gap-6 text-2xl opacity-10">
+                            <i class="fab fa-aws"></i>
+                            <i class="fab fa-google-cloud"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-black uppercase tracking-[0.5em]">
+                <p>© 2026 Geometry Hub | Engineered by ALi Developer</p>
+                <p class="text-slate-800 tracking-widest font-bold">Build v6.4.0-Stable</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentShape = 'circle';
+
+        function selectShape(shape) {
+            currentShape = shape;
+            document.querySelectorAll('.shape-card').forEach(el => el.classList.remove('active'));
+            document.getElementById(`btn-${shape}`).classList.add('active');
+            renderInputs(shape);
+            document.getElementById('geoResult').classList.add('hidden');
+        }
+
+        function renderInputs(shape) {
+            const container = document.getElementById('input-fields');
+            let html = '';
+            if (shape === 'circle') {
+                html = `<div class="bg-slate-50 p-6 rounded-2xl">
+                    <label class="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-400">Radius (r)</label>
+                    <input type="number" id="val1" placeholder="Enter radius" class="w-full bg-transparent text-2xl font-black focus:outline-none">
+                </div>`;
+            } else if (shape === 'rectangle') {
+                html = `<div class="bg-slate-50 p-6 rounded-2xl">
+                    <label class="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-400">Length</label>
+                    <input type="number" id="val1" placeholder="0.00" class="w-full bg-transparent text-2xl font-black focus:outline-none">
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl">
+                    <label class="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-400">Width</label>
+                    <input type="number" id="val2" placeholder="0.00" class="w-full bg-transparent text-2xl font-black focus:outline-none">
+                </div>`;
+            } else if (shape === 'triangle') {
+                html = `<div class="bg-slate-50 p-6 rounded-2xl">
+                    <label class="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-400">Base</label>
+                    <input type="number" id="val1" placeholder="0.00" class="w-full bg-transparent text-2xl font-black focus:outline-none">
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl">
+                    <label class="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-400">Height</label>
+                    <input type="number" id="val2" placeholder="0.00" class="w-full bg-transparent text-2xl font-black focus:outline-none">
+                </div>`;
+            } else if (shape === 'square') {
+                html = `<div class="bg-slate-50 p-6 rounded-2xl">
+                    <label class="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-400">Side</label>
+                    <input type="number" id="val1" placeholder="0.00" class="w-full bg-transparent text-2xl font-black focus:outline-none">
+                </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function calculateGeometry() {
+            let v1 = parseFloat(document.getElementById('val1').value);
+            let v2 = document.getElementById('val2') ? parseFloat(document.getElementById('val2').value) : 0;
+            let area = 0; let peri = 0;
+
+            if (isNaN(v1) || v1 <= 0) { alert("Please input valid positive values."); return; }
+
+            if (currentShape === 'circle') {
+                area = Math.PI * v1 * v1;
+                peri = 2 * Math.PI * v1;
+            } else if (currentShape === 'rectangle') {
+                if (v2 <= 0) { alert("Please input width."); return; }
+                area = v1 * v2;
+                peri = 2 * (v1 + v2);
+            } else if (currentShape === 'triangle') {
+                if (v2 <= 0) { alert("Please input height."); return; }
+                area = 0.5 * v1 * v2;
+                peri = "N/A (Requires all sides)";
+            } else if (currentShape === 'square') {
+                area = v1 * v1;
+                peri = 4 * v1;
+            }
+
+            document.getElementById('resArea').innerText = typeof area === 'number' ? area.toFixed(2) : area;
+            document.getElementById('resPeri').innerText = typeof peri === 'number' ? peri.toFixed(2) : peri;
+            document.getElementById('geoResult').classList.remove('hidden');
+        }
+
+        // Initialize default view
+        renderInputs('circle');
+    </script>
+</body>
+</html>

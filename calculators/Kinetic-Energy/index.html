@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- SEO Meta Tags -->
+    <title>Kinetic Energy Calculator | Physics Motion & Mass Solver 2026</title>
+    <meta name="description"
+        content="Calculate Kinetic Energy (KE), Mass (m), and Velocity (v) using the standard physics formula KE = 1/2mv². Professional tool for students and aerospace engineers.">
+    <meta name="keywords"
+        content="Kinetic Energy Calculator, Motion Energy Solver, Physics Calculator, Mass Velocity Tool, Joule Calculator, Engineering Dynamics Solver">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+            border-radius: 2rem;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(37, 99, 235, 0.5);
+        }
+
+        .variable-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Header / Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-wind text-2xl text-blue-600"></i>
+                <span class="text-2xl font-black tracking-tighter italic uppercase">CALC<span
+                        class="text-blue-600">MASTER</span></span>
+            </div>
+
+            <div class="hidden md:flex space-x-8 text-[11px] font-black uppercase tracking-widest text-slate-500">
+                <a href="#calculator" class="hover:text-blue-600 transition">KE Solver</a>
+                <a href="#footer" class="hover:text-blue-600 transition">Contact</a>
+                <a href="/index.html" class="hover:text-blue-600 transition">Exit</a>
+            </div>
+
+            <button onclick="toggleMenu()" class="md:hidden text-slate-900 text-2xl focus:outline-none z-50">
+                <i id="menu-icon" class="fas fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu"
+        class="fixed inset-y-0 right-0 w-[80%] bg-white z-40 md:hidden flex flex-col justify-center items-center space-y-8 p-6 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
+        <a href="#calculator" onclick="toggleMenu()" class="text-3xl font-black uppercase italic hover:text-blue-600">KE
+            Solver</a>
+        <a href="#footer" onclick="toggleMenu()"
+            class="text-3xl font-black uppercase italic text-slate-400 hover:text-blue-600">Support</a>
+        <a href="/index.html" onclick="toggleMenu()"
+            class="text-3xl font-black uppercase italic text-slate-400 hover:text-blue-600">Exit</a>
+
+    </div>
+
+    <div id="menu-bg" onclick="toggleMenu()" class="fixed inset-0 bg-black/20 backdrop-blur-sm hidden z-30 md:hidden">
+    </div>
+    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20">
+
+        <!-- Hero -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+            <div class="space-y-8">
+                <div
+                    class="inline-block px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-xs font-black uppercase tracking-widest">
+                    Physics Dynamics 2026</div>
+                <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-tight">
+                    Motion <span class="text-blue-600 italic">to</span> Energy.
+                </h1>
+                <p class="text-slate-500 text-xl font-medium leading-relaxed max-w-lg">
+                    Calculate the energy of an object in motion. Analyze mass impact and velocity square ratios
+                    instantly.
+                </p>
+            </div>
+
+            <div
+                class="relative bg-slate-900 rounded-[2.5rem] overflow-hidden aspect-square flex items-center justify-center group">
+                <!-- AI Placeholder for Motion Graphics -->
+                <img src="/images/Motion Graphics.png" alt="Kinetic Energy Visualization"
+                    class="absolute inset-0 w-full h-full object-cover opacity-40" />
+            </div>
+        </div>
+
+        <!-- Calculator Section -->
+        <section id="calculator" class="mb-32 scroll-mt-24">
+            <div class="mb-12 flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="h-12 w-2 bg-blue-600 rounded-full"></div>
+                    <h2 class="text-4xl font-black uppercase tracking-tighter italic">Kinetic Solver</h2>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-8 glass-card p-8 md:p-14">
+                    <div class="grid md:grid-cols-2 gap-10 mb-12">
+                        <!-- Mass Input -->
+                        <div class="space-y-4">
+                            <label class="variable-label flex justify-between"><span>Mass (m)</span> <span
+                                    class="text-blue-500">KG</span></label>
+                            <input type="number" id="mass" placeholder="e.g. 70"
+                                class="w-full p-5 bg-slate-50 rounded-2xl border border-slate-200 focus:bg-white focus:border-blue-500 outline-none font-bold text-xl transition-all">
+                        </div>
+                        <!-- Velocity Input -->
+                        <div class="space-y-4">
+                            <label class="variable-label flex justify-between"><span>Velocity (v)</span> <span
+                                    class="text-blue-500">M/S</span></label>
+                            <input type="number" id="velocity" placeholder="e.g. 15"
+                                class="w-full p-5 bg-slate-50 rounded-2xl border border-slate-200 focus:bg-white focus:border-blue-500 outline-none font-bold text-xl transition-all">
+                        </div>
+                        <!-- Energy Input (for solving others) -->
+                        <div class="space-y-4 md:col-span-2">
+                            <label class="variable-label flex justify-between"><span>Kinetic Energy (KE)</span> <span
+                                    class="text-blue-500">JOULES</span></label>
+                            <input type="number" id="ke" placeholder="Calculate or enter Joules..."
+                                class="w-full p-5 bg-slate-50 rounded-2xl border border-slate-200 focus:bg-white focus:border-blue-500 outline-none font-bold text-xl transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <button onclick="calculateKE()"
+                            class="action-btn text-white py-4 rounded-2xl font-black text-base uppercase tracking-widest shadow-xl">
+                            Calculate
+                        </button>
+
+                        <button onclick="resetAll()"
+                            class="bg-slate-100 text-slate-500 py-4 rounded-2xl font-black text-[12px] uppercase tracking-widest hover:bg-slate-200 transition">
+                            Reset
+                        </button>
+                    </div>
+                    <p class="mt-8 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center italic">
+                        Provide any two parameters to solve for the third.</p>
+                </div>
+
+                <!-- Result Sidebar -->
+                <div
+                    class="lg:col-span-4 bg-blue-600 rounded-[2.5rem] p-10 text-white flex flex-col justify-between shadow-2xl shadow-blue-200">
+                    <div>
+                        <span class="text-white/60 text-xs font-black uppercase tracking-widest">Dynamic Output</span>
+                        <div id="output-val" class="text-6xl font-black my-8 tracking-tighter">0.00</div>
+                        <p id="output-unit" class="text-blue-100 text-sm font-bold uppercase tracking-widest">Waiting
+                            for Motion Data</p>
+                    </div>
+
+                    <div class="pt-8 border-t border-white/20 space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-blue-200 font-bold uppercase">Work Factor:</span>
+                            <span id="formula-tag"
+                                class="text-[10px] bg-white/20 px-3 py-1 rounded-full font-bold uppercase tracking-tighter italic">N/A</span>
+                        </div>
+                        <div id="details" class="space-y-3 text-xs font-bold text-blue-50">
+                            <!-- JS Inject -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Professional Footer -->
+    <footer id="footer" class="bg-slate-950 text-slate-500 pt-32 pb-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-24">
+
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-calculator text-3xl text-blue-600"></i>
+                        <span class="text-3xl font-black tracking-tighter italic uppercase">CALCMASTER<span
+                                class="text-blue-600">.</span></span>
+                    </div>
+                    <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                        The gold standard for high-fidelity calculations. Verified for 2026 compliance across
+                        international standards.
+                    </p>
+                    <div class="flex space-x-5">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i
+                                class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <h5
+                        class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">
+                        Financials</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="/calculators/mortgage-calculator/index.html"
+                                class="hover:text-white transition">Mortgage Calc</a></li>
+                        <li><a href="/calculators/emi-calculator/index.html" class="hover:text-white transition">Loan
+                                Repayment</a></li>
+                        <li><a href="/calculators/tax-calculator/index.html" class="hover:text-white transition">Tax
+                                Estimator</a></li>
+                        <li><a href="/calculators/investment-return-planner/index.html"
+                                class="hover:text-white transition">ROI Engine</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <h5
+                        class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">
+                        Health & Math</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="/calculators/health/index.html" class="hover:text-white transition">BMI &
+                                Weight</a></li>
+                        <li><a href="/calculators/Body-Composition/index.html" class="hover:text-white transition">Body
+                                Fat</a></li>
+                        <li><a href="/matrix-calculator.html" class="hover:text-white transition">Matrix Ops</a></li>
+                        <li><a href="/unit-converter.html" class="hover:text-white transition">Unit Conv.</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-4">
+                    <h5
+                        class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">
+                        Compliance</h5>
+                    <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                        <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                        <a href="/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                        <a href="/cookie-policy.html" class="hover:text-white">Cookie Policy</a>
+                        <a href="/contact.html" class="hover:text-white">Contact Us</a>
+                    </div>
+                    <div class="flex space-x-6 text-2xl opacity-30">
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-aws"></i>
+                        <i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster. Engineered with
+                    Precision.</p>
+                <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Version 4.2.0-Stable</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('active');
+            icon.classList.toggle('fa-bars-staggered');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        function calculateKE() {
+            let m = parseFloat(document.getElementById('mass').value);
+            let v = parseFloat(document.getElementById('velocity').value);
+            let ke = parseFloat(document.getElementById('ke').value);
+
+            const outputVal = document.getElementById('output-val');
+            const outputUnit = document.getElementById('output-unit');
+            const formulaTag = document.getElementById('formula-tag');
+            const details = document.getElementById('details');
+
+            if (m && v) {
+                // Solve for KE: 1/2 * m * v^2
+                ke = 0.5 * m * (v * v);
+                updateResult(ke, "Joules", "½mv²", m, v, ke);
+                document.getElementById('ke').value = ke.toFixed(2);
+            } else if (ke && m) {
+                // Solve for v: sqrt(2 * ke / m)
+                v = Math.sqrt((2 * ke) / m);
+                updateResult(v, "m/s", "√(2KE/m)", m, v, ke);
+                document.getElementById('velocity').value = v.toFixed(2);
+            } else if (ke && v) {
+                // Solve for m: (2 * ke) / v^2
+                m = (2 * ke) / (v * v);
+                updateResult(m, "Kilograms", "2KE/v²", m, v, ke);
+                document.getElementById('mass').value = m.toFixed(2);
+            } else {
+                outputVal.innerText = "Error";
+                outputUnit.innerText = "Input 2 values";
+                details.innerHTML = `<p class="text-blue-200">Please provide mass, velocity or energy to begin.</p>`;
+            }
+        }
+
+        function updateResult(val, unit, formula, m, v, ke) {
+            document.getElementById('output-val').innerText = val > 1000 ? val.toExponential(2) : val.toFixed(2);
+            document.getElementById('output-unit').innerText = unit;
+            document.getElementById('formula-tag').innerText = formula;
+
+            document.getElementById('details').innerHTML = `
+                <div class="flex justify-between"><span>Mass (m):</span><span>${m ? m.toFixed(2) : '?'} kg</span></div>
+                <div class="flex justify-between"><span>Velocity (v):</span><span>${v ? v.toFixed(2) : '?'} m/s</span></div>
+                <div class="flex justify-between border-t border-white/20 pt-2 mt-2"><span>Total Energy:</span><span>${ke.toFixed(2)} J</span></div>
+            `;
+        }
+
+        function resetAll() {
+            ['mass', 'velocity', 'ke'].forEach(id => document.getElementById(id).value = '');
+            document.getElementById('output-val').innerText = "0.00";
+            document.getElementById('output-unit').innerText = "Waiting for Motion Data";
+            document.getElementById('formula-tag').innerText = "N/A";
+            document.getElementById('details').innerHTML = "";
+        }
+    </script>
+</body>
+
+</html>

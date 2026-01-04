@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Macro Calculator 2026 | Precision Nutrition Tool | CalcMaster</title>
+    <meta name="description"
+        content="Calculate your optimal macro-nutrient ratios for weight loss, muscle gain, or maintenance. Professional grade nutrition tracking tool by CalcMaster.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .main-wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .glass-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .input-box {
+            background: #f1f5f9;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .input-box:focus-within {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-toggle.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+        }
+
+        .macro-bar {
+            height: 10px;
+            border-radius: 5px;
+            transition: width 0.5s ease-out;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Responsive UI Fixes */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem !important; line-height: 1.1; }
+            .hero-img-box { height: 250px !important; }
+            .glass-card { padding: 1.5rem !important; border-radius: 20px; }
+            #total-calories { font-size: 3.5rem !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 md:px-6 py-4">
+        <div class="main-wrapper flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg"><i
+                        class="fas fa-apple-alt"></i></div>
+                <span class="text-xl font-extrabold tracking-tighter uppercase italic">Calc<span
+                        class="text-blue-600">Master.</span></span>
+            </div>
+            <a href="/" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Exit Tool</a>
+        </div>
+    </nav>
+
+    <main class="main-wrapper px-4 md:px-6 py-8 md:py-16">
+
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+            <div>
+                <div class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest">
+                    Precision Health 2026
+                </div>
+                <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 uppercase italic">Master Your <span
+                        class="text-blue-600">Nutrition.</span></h1>
+                <p class="text-slate-500 text-lg leading-relaxed font-medium">High-fidelity macro tracking based on scientific
+                    metabolic rates. Don't just eat—fuel your ambition with precise data points.</p>
+            </div>
+            <div class="hero-img-box image-container glass-card h-64 md:h-[400px] relative">
+                <img src="/images/hero-fitness.png" alt="Healthy Lifestyle Nutrition" loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 md:gap-10">
+            <div class="lg:col-span-7 space-y-8">
+                <div class="glass-card p-6 md:p-10">
+                    <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8 border-b border-slate-100 pb-4 flex items-center">
+                        <span class="w-8 h-[2px] bg-blue-100 mr-4"></span> Biometric Parameters
+                    </h3>
+
+                    <div class="flex p-1 bg-slate-100 rounded-xl w-full md:w-fit mb-8">
+                        <button onclick="setGender('male')" id="m-btn"
+                            class="btn-toggle active flex-1 md:flex-none px-8 py-3 rounded-lg text-xs font-bold transition-all uppercase tracking-widest">Male</button>
+                        <button onclick="setGender('female')" id="f-btn"
+                            class="btn-toggle flex-1 md:flex-none px-8 py-3 rounded-lg text-xs font-bold transition-all uppercase tracking-widest">Female</button>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+                        <div class="input-box"><label class="text-[9px] font-black uppercase text-slate-400 mb-1 block tracking-widest">Weight (kg)</label>
+                            <input type="number" id="weight" value="75" class="w-full bg-transparent text-xl font-bold outline-none" oninput="calculate()">
+                        </div>
+                        <div class="input-box"><label class="text-[9px] font-black uppercase text-slate-400 mb-1 block tracking-widest">Height (cm)</label>
+                            <input type="number" id="height" value="175" class="w-full bg-transparent text-xl font-bold outline-none" oninput="calculate()">
+                        </div>
+                        <div class="input-box"><label class="text-[9px] font-black uppercase text-slate-400 mb-1 block tracking-widest">Age (years)</label>
+                            <input type="number" id="age" value="28" class="w-full bg-transparent text-xl font-bold outline-none" oninput="calculate()">
+                        </div>
+                        <div class="input-box">
+                            <label class="text-[9px] font-black uppercase text-slate-400 mb-1 block tracking-widest">Exercise Intensity</label>
+                            <select id="activity" class="w-full bg-transparent text-lg font-bold outline-none cursor-pointer" onchange="calculate()">
+                                <option value="1.2">Sedentary</option>
+                                <option value="1.375" selected>Lightly Active</option>
+                                <option value="1.55">Moderately Active</option>
+                                <option value="1.725">Very Active</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <label class="text-[9px] font-black uppercase text-slate-400 mb-4 block tracking-widest">Primary Fitness Goal</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <button onclick="setGoal('lose')" id="goal-lose" class="btn-toggle px-4 py-4 border-2 border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Lose Fat</button>
+                            <button onclick="setGoal('maintain')" id="goal-maintain" class="btn-toggle active px-4 py-4 border-2 border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Maintain</button>
+                            <button onclick="setGoal('gain')" id="goal-gain" class="btn-toggle px-4 py-4 border-2 border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Bulk Up</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card grid md:grid-cols-2 overflow-hidden items-center">
+                    <div class="p-8 md:p-10">
+                        <h4 class="font-black text-2xl mb-4 italic uppercase tracking-tighter">Quality Over Quantity</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed italic font-bold">Protein provides the structure, Carbs provide the energy, and Fats regulate the engine.</p>
+                    </div>
+                    <div class="h-48 md:h-full bg-slate-200 image-container">
+                        <img src="/images/macro-food.png" alt="Nutritious Macro Bowl" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5">
+                <div class="glass-card p-8 md:p-12 bg-slate-900 text-white lg:sticky lg:top-28 shadow-2xl shadow-blue-900/20">
+                    <div class="text-center mb-10 border-b border-white/10 pb-10">
+                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400 mb-4">Daily Caloric Target</p>
+                        <h2 id="total-calories" class="text-6xl md:text-8xl font-black italic tracking-tighter leading-none">2,450</h2>
+                        <div class="mt-6">
+                            <span class="px-4 py-1.5 rounded-full bg-blue-600/20 text-blue-400 text-[9px] font-black uppercase tracking-widest border border-blue-600/30">Science-Backed 2026 Engine</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-10">
+                        <div>
+                            <div class="flex justify-between items-end mb-3">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Protein (4kcal/g)</span>
+                                <span id="protein-val" class="text-3xl font-black text-blue-500 italic">184g</span>
+                            </div>
+                            <div class="w-full bg-white/5 rounded-full h-3 overflow-hidden">
+                                <div id="protein-bar" class="macro-bar bg-blue-500 h-full" style="width: 30%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-end mb-3">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Fats (9kcal/g)</span>
+                                <span id="fats-val" class="text-3xl font-black text-yellow-500 italic">68g</span>
+                            </div>
+                            <div class="w-full bg-white/5 rounded-full h-3 overflow-hidden">
+                                <div id="fats-bar" class="macro-bar bg-yellow-500 h-full" style="width: 25%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-end mb-3">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Carbs (4kcal/g)</span>
+                                <span id="carbs-val" class="text-3xl font-black text-emerald-500 italic">275g</span>
+                            </div>
+                            <div class="w-full bg-white/5 rounded-full h-3 overflow-hidden">
+                                <div id="carbs-bar" class="macro-bar bg-emerald-500 h-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-white/5">
+                        <div class="rounded-2xl overflow-hidden h-32 mb-6 image-container border border-white/10 shadow-lg">
+                            <img src="/images/tracking-app.png" alt="Digital Health Dashboard" loading="lazy">
+                        </div>
+                        <p class="text-[9px] text-center text-slate-500 font-black uppercase tracking-widest leading-loose">
+                            Track daily in your CalcMaster dashboard for 100% adherence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+        <!-- Professional Footer -->
+  <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-16 mb-24">
+            
+            <div class="lg:col-span-4">
+                <div class="flex items-center space-x-2 text-white mb-8">
+                    <i class="fas fa-calculator text-3xl text-blue-600"></i>
+                    <span class="text-3xl font-black tracking-tighter italic uppercase">CALCMASTER<span class="text-blue-600">.</span></span>
+                </div>
+                <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                    The gold standard for high-fidelity calculations. Verified for 2026 compliance across international standards.
+                </p>
+                <div class="flex space-x-5">
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Financials</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/mortgage-calculator/index.html" class="hover:text-white transition">Mortgage Calc</a></li>
+                    <li><a href="/calculators/emi-calculator/index.html" class="hover:text-white transition">Loan Repayment</a></li>
+                    <li><a href="/calculators/tax-calculator/index.html" class="hover:text-white transition">Tax Estimator</a></li>
+                    <li><a href="/calculators/investment-return-planner/index.html" class="hover:text-white transition">ROI Engine</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Health & Math</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/health/index.html" class="hover:text-white transition">BMI & Weight</a></li>
+                    <li><a href="/calculators/Body-Composition/index.html" class="hover:text-white transition">Body Fat</a></li>
+                    <li><a href="/matrix-calculator.html" class="hover:text-white transition">Matrix Ops</a></li>
+                    <li><a href="/unit-converter.html" class="hover:text-white transition">Unit Conv.</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-4">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Compliance</h5>
+                <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                    <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <a href="/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <a href="/cookie-policy.html" class="hover:text-white">Cookie Policy</a>
+                    <a href="/contact.html" class="hover:text-white">Contact Us</a>
+                </div>
+                <div class="flex space-x-6 text-2xl opacity-30">
+                    <i class="fab fa-google"></i>
+                    <i class="fab fa-aws"></i>
+                    <i class="fab fa-stripe"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+            <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster. Engineered with Precision.</p>
+            <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Version 4.2.0-Stable</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let gender = 'male';
+        let goal = 'maintain';
+
+        function setGender(g) {
+            gender = g;
+            document.getElementById('m-btn').classList.toggle('active', g === 'male');
+            document.getElementById('f-btn').classList.toggle('active', g === 'female');
+            calculate();
+        }
+
+        function setGoal(g) {
+            goal = g;
+            ['lose', 'maintain', 'gain'].forEach(item => {
+                document.getElementById('goal-' + item).classList.toggle('active', item === g);
+            });
+            calculate();
+        }
+
+        function calculate() {
+            const weight = parseFloat(document.getElementById('weight').value) || 75;
+            const height = parseFloat(document.getElementById('height').value) || 175;
+            const age = parseFloat(document.getElementById('age').value) || 28;
+            const activity = parseFloat(document.getElementById('activity').value) || 1.375;
+
+            let bmr = (gender === 'male')
+                ? (10 * weight) + (6.25 * height) - (5 * age) + 5
+                : (10 * weight) + (6.25 * height) - (5 * age) - 161;
+
+            let tdee = bmr * activity;
+            if (goal === 'lose') tdee -= 500;
+            if (goal === 'gain') tdee += 500;
+
+            document.getElementById('total-calories').innerText = Math.round(tdee).toLocaleString();
+
+            let p_ratio, f_ratio, c_ratio;
+            if (goal === 'lose') { p_ratio = 0.40; f_ratio = 0.25; c_ratio = 0.35; }
+            else if (goal === 'gain') { p_ratio = 0.30; f_ratio = 0.25; c_ratio = 0.45; }
+            else { p_ratio = 0.30; f_ratio = 0.25; c_ratio = 0.45; }
+
+            const p_grams = (tdee * p_ratio) / 4;
+            const f_grams = (tdee * f_ratio) / 9;
+            const c_grams = (tdee * c_ratio) / 4;
+
+            document.getElementById('protein-val').innerText = Math.round(p_grams) + 'g';
+            document.getElementById('fats-val').innerText = Math.round(f_grams) + 'g';
+            document.getElementById('carbs-val').innerText = Math.round(c_grams) + 'g';
+
+            document.getElementById('protein-bar').style.width = (p_ratio * 100) + '%';
+            document.getElementById('fats-bar').style.width = (f_ratio * 100) + '%';
+            document.getElementById('carbs-bar').style.width = (c_ratio * 100) + '%';
+        }
+        calculate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- SEO & Viral Meta Tags -->
+    <title>BMI & Ideal Weight Calculator 2025 | CalcMaster Precision</title>
+    <meta name="description"
+        content="Calculate your Body Mass Index (BMI) and discover your Ideal Body Weight based on medical-grade formulas. Verified for 2025 health standards in North America.">
+    <meta name="keywords"
+        content="BMI Calculator, Ideal Weight, Health Tracker, Body Mass Index USA, Weight Management Tool">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-blue: #2563eb;
+            --brand-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfcfc;
+            color: #1e293b;
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 1);
+            border: 1px solid #e2e8f0;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.03);
+        }
+
+        .input-group {
+            background: #f8fafc;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group:focus-within {
+            border-color: var(--brand-blue);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.05);
+        }
+
+        .bmi-gauge {
+            height: 12px;
+            border-radius: 999px;
+            background: linear-gradient(to right, #60a5fa 0%, #34d399 25%, #fbbf24 50%, #f87171 75%, #ef4444 100%);
+            position: relative;
+        }
+
+        .gauge-marker {
+            width: 4px;
+            height: 24px;
+            background: #000;
+            position: absolute;
+            top: -6px;
+            transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 2px;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: var(--brand-blue);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mobile par Exit button ko prominent karne ke liye */
+        @media (max-width: 767px) {
+            nav {
+                padding: 1rem 0.5rem;
+            }
+
+            .hidden.md\:flex {
+                display: flex !important;
+                /* SEO navigation accessibility */
+                order: 2;
+            }
+
+            nav a[href="/index.html"] {
+                background: #fbbf24;
+                /* Amber color for visibility */
+                color: #000 !important;
+                padding: 5px 12px;
+                border-radius: 8px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navbar -->
+    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-calculator text-2xl text-blue-600"></i>
+            <span class="text-2xl font-black tracking-tighter italic uppercase">CALCMASTER<span
+                    class="text-blue-600">.</span></span>
+        </div>
+        <div class="hidden md:block">
+            <span
+                class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-widest">Medical
+                Precision v4.0</span>
+
+        </div>
+        <a href="/index.html" class="text-xs font-black text-slate-400 hover:text-blue-600 uppercase tracking-widest">
+            <i class="fas fa-arrow-left mr-2"></i> Exit
+        </a>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 pb-24">
+
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter mb-6">Know Your <span
+                    class="text-blue-600">Vitals.</span></h1>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">The Body Mass Index (BMI) is a starting
+                point. Our tool calculates your score and your medical-ideal weight range in seconds.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-10">
+
+            <!-- Left: Inputs -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="glass-container p-8">
+
+                    <!-- Unit Toggler -->
+                    <div class="flex p-1 bg-slate-100 rounded-2xl mb-8">
+                        <button onclick="setUnits('us')" id="btn-us"
+                            class="tab-btn active flex-1 py-3 rounded-xl text-sm font-bold transition-all">Imperial
+                            (US)</button>
+                        <button onclick="setUnits('metric')" id="btn-metric"
+                            class="tab-btn flex-1 py-3 rounded-xl text-sm font-bold transition-all">Metric</button>
+                    </div>
+
+                    <div class="grid gap-6">
+                        <!-- Gender Toggle -->
+                        <div class="flex gap-4 mb-2">
+                            <button onclick="setGender('male')" id="gen-male"
+                                class="flex-1 py-4 border-2 border-blue-100 rounded-2xl flex items-center justify-center gap-2 font-bold hover:bg-blue-50 transition-all">
+                                <i class="fas fa-mars text-blue-500"></i> Male
+                            </button>
+                            <button onclick="setGender('female')" id="gen-female"
+                                class="flex-1 py-4 border-2 border-slate-100 rounded-2xl flex items-center justify-center gap-2 font-bold hover:bg-slate-50 transition-all">
+                                <i class="fas fa-venus text-pink-500"></i> Female
+                            </button>
+                        </div>
+
+                        <!-- Height Input -->
+                        <div id="us-height" class="grid grid-cols-2 gap-4">
+                            <div class="input-group">
+                                <label class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Height
+                                    (ft)</label>
+                                <input type="number" id="h-ft" value="5"
+                                    class="w-full bg-transparent text-xl font-bold outline-none"
+                                    oninput="calculateBMI()">
+                            </div>
+                            <div class="input-group">
+                                <label class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Height
+                                    (in)</label>
+                                <input type="number" id="h-in" value="9"
+                                    class="w-full bg-transparent text-xl font-bold outline-none"
+                                    oninput="calculateBMI()">
+                            </div>
+                        </div>
+
+                        <div id="metric-height" class="hidden">
+                            <div class="input-group">
+                                <label class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Height
+                                    (cm)</label>
+                                <input type="number" id="h-cm" value="175"
+                                    class="w-full bg-transparent text-xl font-bold outline-none"
+                                    oninput="calculateBMI()">
+                            </div>
+                        </div>
+
+                        <!-- Weight Input -->
+                        <div class="input-group">
+                            <label id="weight-label"
+                                class="text-[10px] font-black uppercase text-slate-400 mb-1 block">Weight (lbs)</label>
+                            <input type="number" id="weight" value="160"
+                                class="w-full bg-transparent text-xl font-bold outline-none" oninput="calculateBMI()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-6 bg-white border border-slate-200 rounded-3xl">
+                        <h4 class="font-bold text-slate-900 mb-2">The Formula</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">We use the standard WHO formula: $BMI = weight
+                            / height^2$. For US units, we apply a factor of $703$.</p>
+                    </div>
+                    <div class="p-6 bg-blue-600 text-white rounded-3xl">
+                        <h4 class="font-bold mb-2">Ideal Weight</h4>
+                        <p class="text-xs opacity-80 leading-relaxed">Calculated using the Robinson Formula (1983), the
+                            gold standard for clinical ideal weight estimates.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Results -->
+            <div class="lg:col-span-5">
+                <div class="glass-container p-8 h-full flex flex-col justify-between border-t-8 border-t-blue-600">
+                    <div>
+                        <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-4 text-center">Your
+                            Personal Health Index</p>
+
+                        <div class="text-center mb-10">
+                            <div class="text-7xl font-black tracking-tighter mb-2" id="bmi-val">23.6</div>
+                            <div id="bmi-status"
+                                class="inline-block px-4 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-black uppercase tracking-widest">
+                                Normal Weight</div>
+                        </div>
+
+                        <!-- Gauge -->
+                        <div class="mb-12">
+                            <div class="bmi-gauge">
+                                <div id="marker" class="gauge-marker" style="left: 40%"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-bold text-slate-400 mt-4 uppercase">
+                                <span>Under</span>
+                                <span>Ideal</span>
+                                <span>Over</span>
+                                <span>Obese</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6 pt-6 border-t border-slate-100">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-slate-500">Ideal Body Weight</span>
+                                <span id="ideal-weight" class="text-xl font-black text-slate-900">158 lbs</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-slate-500">Ponderal Index</span>
+                                <span id="ponderal" class="text-sm font-bold">12.8 kg/m³</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="mt-10 rounded-2xl bg-slate-50 p-4 flex items-center gap-4 border border-slate-100">
+                        <div
+                            class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-blue-600 shadow-sm">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black uppercase text-slate-400">Recommendation</p>
+                            <p id="recommendation" class="text-xs font-bold">Maintain your current activity level.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Image Section -->
+        <div class="mt-20 rounded-[40px] overflow-hidden relative h-80 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200"
+                class="w-full h-full object-cover grayscale-[20%] brightness-75" alt="Health & Fitness">
+            <div
+                class="absolute inset-0 flex flex-col justify-center px-12 bg-gradient-to-r from-slate-950/80 to-transparent">
+                <h2 class="text-white text-4xl font-black mb-4">Precision Metrics <br>for 2025.</h2>
+                <p class="text-slate-300 max-w-sm">Built for North American health standards using updated datasets from
+                    NIH and CDC.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 7️⃣ Footer -->
+    <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-20 mb-24">
+                <div class="lg:col-span-6">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-calculator text-4xl text-blue-600"></i>
+                        <span class="text-4xl font-black tracking-tighter italic uppercase">CALCMASTER<span
+                                class="text-blue-600">.</span></span>
+                    </div>
+                    <p class="text-xl font-bold leading-relaxed mb-10 text-slate-400 max-w-lg">The gold standard for
+                        high-fidelity calculations. Verified for 2025 compliance across North America.</p>
+                    <!-- SEO / Ad Links -->
+                    <div class="flex space-x-6 mt-4">
+                        <a href="#" class="text-slate-400 hover:text-white text-sm transition">Privacy Policy</a>
+                        <a href="#" class="text-slate-400 hover:text-white text-sm transition">Terms of Service</a>
+                        <a href="#" class="text-slate-400 hover:text-white text-sm transition">Cookie Policy</a>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 text-right">
+                    <h5
+                        class="text-white font-black mb-10 text-xs uppercase tracking-widest italic border-r-4 border-blue-600 pr-4">
+                        Global Network</h5>
+                    <div class="flex justify-end space-x-8 text-3xl opacity-50 hover:opacity-100 transition">
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-aws"></i>
+                        <i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-16 border-t border-white/5 text-center">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2025 CalcMaster. Engineered in Austin,
+                    Texas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let units = 'us';
+        let gender = 'male';
+
+        function setUnits(u) {
+            units = u;
+            document.getElementById('btn-us').classList.toggle('active', u === 'us');
+            document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
+
+            document.getElementById('us-height').classList.toggle('hidden', u === 'metric');
+            document.getElementById('metric-height').classList.toggle('hidden', u === 'us');
+
+            document.getElementById('weight-label').innerText = u === 'us' ? 'Weight (lbs)' : 'Weight (kg)';
+            document.getElementById('weight').value = u === 'us' ? 160 : 70;
+
+            calculateBMI();
+        }
+
+        function setGender(g) {
+            gender = g;
+            document.getElementById('gen-male').classList.toggle('border-blue-100', g === 'male');
+            document.getElementById('gen-male').classList.toggle('bg-blue-50', g === 'male');
+            document.getElementById('gen-male').classList.toggle('border-slate-100', g !== 'male');
+
+            document.getElementById('gen-female').classList.toggle('border-pink-100', g === 'female');
+            document.getElementById('gen-female').classList.toggle('bg-pink-50', g === 'female');
+            document.getElementById('gen-female').classList.toggle('border-slate-100', g !== 'female');
+
+            calculateBMI();
+        }
+
+        function calculateBMI() {
+            let h_m, w_kg;
+
+            if (units === 'us') {
+                const ft = parseFloat(document.getElementById('h-ft').value) || 0;
+                const inches = parseFloat(document.getElementById('h-in').value) || 0;
+                const totalInches = (ft * 12) + inches;
+                h_m = totalInches * 0.0254;
+                w_kg = (parseFloat(document.getElementById('weight').value) || 0) * 0.453592;
+            } else {
+                h_m = (parseFloat(document.getElementById('h-cm').value) || 0) / 100;
+                w_kg = parseFloat(document.getElementById('weight').value) || 0;
+            }
+
+            if (h_m > 0 && w_kg > 0) {
+                const bmi = w_kg / (h_m * h_m);
+                // Fix: Passing w_kg to updateUI function
+                updateUI(bmi, h_m, w_kg);
+            }
+        }
+
+        function updateUI(bmi, h_m, w_kg) {
+            document.getElementById('bmi-val').innerText = bmi.toFixed(1);
+
+            // Marker Position (Range 15 to 40)
+            let pos = ((bmi - 15) / (40 - 15)) * 100;
+            pos = Math.max(5, Math.min(95, pos));
+            document.getElementById('marker').style.left = pos + '%';
+
+            // Status & Recommendation
+            const status = document.getElementById('bmi-status');
+            const rec = document.getElementById('recommendation');
+
+            if (bmi < 18.5) {
+                status.innerText = "Underweight";
+                status.className = "inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-black uppercase tracking-widest";
+                rec.innerText = "Consider increasing nutrient-dense caloric intake.";
+            } else if (bmi < 25) {
+                status.innerText = "Normal Weight";
+                status.className = "inline-block px-4 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-black uppercase tracking-widest";
+                rec.innerText = "Maintain your current lifestyle and activity level.";
+            } else if (bmi < 30) {
+                status.innerText = "Overweight";
+                status.className = "inline-block px-4 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-black uppercase tracking-widest";
+                rec.innerText = "A mix of cardio and healthy dieting is suggested.";
+            } else {
+                status.innerText = "Obese";
+                status.className = "inline-block px-4 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-black uppercase tracking-widest";
+                rec.innerText = "Consult with a healthcare provider for a plan.";
+            }
+
+            // Ideal Weight (Robinson Formula)
+            // Male: 52 kg + 1.9 kg per inch over 5 feet
+            // Female: 49 kg + 1.7 kg per inch over 5 feet
+            const heightInInches = h_m / 0.0254;
+            const inchesOver5 = Math.max(0, heightInInches - 60);
+            let ibw;
+            if (gender === 'male') {
+                ibw = 52 + (1.9 * inchesOver5);
+            } else {
+                ibw = 49 + (1.7 * inchesOver5);
+            }
+
+            const idealDisplay = units === 'us' ? Math.round(ibw * 2.20462) + " lbs" : Math.round(ibw) + " kg";
+            document.getElementById('ideal-weight').innerText = idealDisplay;
+
+            // Ponderal Index
+            const pi = w_kg / (h_m * h_m * h_m);
+            document.getElementById('ponderal').innerText = pi.toFixed(1) + " kg/m³";
+        }
+
+        // Init
+        calculateBMI();
+    </script>
+</body>
+
+</html>

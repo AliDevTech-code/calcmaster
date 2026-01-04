@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>https://yourdomain.com/</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>1.00</priority>
+   </url>
+   <url>
+      <loc>https://yourdomain.com/about.html</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://yourdomain.com/contact.html</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://yourdomain.com/privacy-policy.html</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.50</priority>
+   </url>
+   <url>
+      <loc>https://yourdomain.com/terms-of-service.html</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.50</priority>
+   </url>
+   <url>
+      <loc>https://yourdomain.com/cookie-policy.html</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.50</priority>
+   </url>
+</urlset>

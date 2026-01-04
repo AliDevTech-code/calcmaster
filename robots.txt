@@ -1,0 +1,6 @@
+# Robots.txt for CalcMaster
+User-agent: *
+Allow: /
+
+# Sitemap Link
+Sitemap: https://yourdomain.com/sitemap.xml

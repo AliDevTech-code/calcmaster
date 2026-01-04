@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Ideal Gas Law Solver (PV=nRT) | Precise Chemistry Calculator 2026</title>
+    <meta name="description"
+        content="Solve for Pressure, Volume, Temperature, or Moles using the Ideal Gas Law (PV=nRT). Professional-grade calculator with instant unit conversions for students and engineers.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .main-wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .science-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 2rem;
+        }
+
+        .solve-btn {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .solve-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(37, 99, 235, 0.5);
+        }
+
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 1.5rem;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem !important; }
+            .science-card { padding: 1.5rem !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="p-6 main-wrapper flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-flask text-2xl text-blue-600"></i>
+            <span class="text-2xl font-black tracking-tighter italic uppercase">CALC<span class="text-blue-600">MASTER</span></span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-slate-500">
+            <a href="#solver" class="hover:text-blue-600">Solver</a>
+            <a href="#theory" class="hover:text-blue-600">The Theory</a>
+            <a href="/index.html" class="hover:text-blue-600">Exit</a>
+        </div>
+    </nav>
+
+    <main class="main-wrapper px-6 py-12">
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight">
+                    PV = <span class="text-blue-600 italic">n</span>RT
+                </h1>
+                <p class="text-slate-500 text-lg font-medium leading-relaxed italic">
+                    The ultimate thermodynamic engine. Solve for Pressure, Volume, Temperature, or Moles with professional precision.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <span class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-[10px] font-black uppercase tracking-widest">2026 Standard</span>
+                </div>
+            </div>
+
+            <div class="image-placeholder h-64 md:h-96">
+                <img src="/images/Hero Image of Gas Dynamics.png" alt="Gas Dynamics">
+            </div>
+        </div>
+
+        <section id="solver" class="grid lg:grid-cols-12 gap-8 items-start mb-24">
+
+            <div class="lg:col-span-8 science-card p-8 md:p-12">
+                <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8 border-b pb-4">Variable Parameters</h3>
+                <div class="grid md:grid-cols-2 gap-8 mb-10">
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Pressure (P)</label>
+                        <div class="flex bg-slate-50 rounded-xl overflow-hidden border border-slate-200">
+                            <input type="number" id="val-p" placeholder="Solving for..." class="w-full p-4 bg-transparent outline-none font-bold text-lg">
+                            <select id="unit-p" class="bg-slate-100 px-4 font-bold text-xs uppercase cursor-pointer">
+                                <option value="atm">atm</option>
+                                <option value="kpa">kPa</option>
+                                <option value="bar">bar</option>
+                                <option value="mmhg">mmHg</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Volume (V)</label>
+                        <div class="flex bg-slate-50 rounded-xl overflow-hidden border border-slate-200">
+                            <input type="number" id="val-v" placeholder="Solving for..." class="w-full p-4 bg-transparent outline-none font-bold text-lg">
+                            <select id="unit-v" class="bg-slate-100 px-4 font-bold text-xs uppercase cursor-pointer">
+                                <option value="l">Liters</option>
+                                <option value="ml">mL</option>
+                                <option value="m3">m³</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Amount (n)</label>
+                        <div class="flex bg-slate-50 rounded-xl overflow-hidden border border-slate-200">
+                            <input type="number" id="val-n" placeholder="Solving for..." class="w-full p-4 bg-transparent outline-none font-bold text-lg">
+                            <div class="bg-slate-100 px-6 flex items-center font-bold text-[10px] text-slate-400 uppercase">Moles</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Temperature (T)</label>
+                        <div class="flex bg-slate-50 rounded-xl overflow-hidden border border-slate-200">
+                            <input type="number" id="val-t" placeholder="Solving for..." class="w-full p-4 bg-transparent outline-none font-bold text-lg">
+                            <select id="unit-t" class="bg-slate-100 px-4 font-bold text-xs uppercase cursor-pointer">
+                                <option value="k">Kelvin</option>
+                                <option value="c">°C</option>
+                                <option value="f">°F</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="calculateGasLaw()" class="w-full solve-btn text-white py-6 rounded-2xl font-black text-xl uppercase tracking-widest shadow-xl">
+                    Solve Missing Value
+                </button>
+            </div>
+
+            <div class="lg:col-span-4 space-y-6">
+                <div id="result-pane" class="bg-slate-950 rounded-[2rem] p-10 text-white min-h-[420px] flex flex-col justify-center text-center relative overflow-hidden">
+                    <div id="waiting-state">
+                        <img src="/images/molecular bond.png" alt="Bond" class="w-24 mx-auto mb-6 opacity-50">
+                        <h2 class="text-xl font-bold italic uppercase">Awaiting Data</h2>
+                        <p class="text-slate-500 text-xs mt-2 uppercase tracking-widest">Leave 1 field empty</p>
+                    </div>
+
+                    <div id="result-state" class="hidden">
+                        <span class="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em]">Result</span>
+                        <div id="res-value" class="text-6xl font-black my-6 italic">0</div>
+                        <div id="res-unit" class="text-slate-400 font-bold uppercase tracking-widest text-sm mb-8">Units</div>
+                        <code id="res-formula" class="text-blue-300 font-mono text-xs block bg-white/5 p-3 rounded-xl">P = nRT / V</code>
+                    </div>
+                </div>
+
+                <div class="image-placeholder h-44">
+                    <img src="/images/Gas Behavior Diagram.png" alt="Behavior">
+                </div>
+            </div>
+        </section>
+
+        <section id="theory" class="mb-24">
+            <h2 class="text-3xl font-black mb-12 text-center uppercase italic tracking-tighter">Theory & Fundamentals</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="science-card p-8">
+                    <h4 class="text-xl font-bold mb-4 italic uppercase">Origin</h4>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Derived by Clapeyron in 1834, combining work from Boyle and Charles.</p>
+                    <div class="image-placeholder h-32"><img src="/images/History of Science.png" alt="History"></div>
+                </div>
+                <div class="science-card p-8">
+                    <h4 class="text-xl font-bold mb-4 italic uppercase">Assumptions</h4>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Assumes particles occupy no volume and have no intermolecular forces.</p>
+                    <div class="image-placeholder h-32"><img src="/images/Ideal vs Real Gas.png" alt="Comparison"></div>
+                </div>
+                <div class="science-card p-8">
+                    <h4 class="text-xl font-bold mb-4 italic uppercase">Engineering</h4>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Used in aerospace for engine combustion and medical oxygen tanks.</p>
+                    <div class="image-placeholder h-32"><img src="/images/oxygen.png" alt="Oxygen"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+        <div class="main-wrapper px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-24">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-calculator text-3xl text-blue-600"></i>
+                        <span class="text-3xl font-black italic uppercase">CALCMASTER<span class="text-blue-600">.</span></span>
+                    </div>
+                    <p class="text-lg font-bold text-slate-400">The gold standard for high-fidelity calculations. Verified for 2026.</p>
+                </div>
+                <div class="lg:col-span-4 grid grid-cols-2 gap-8">
+                    <div>
+                        <h5 class="text-white font-black mb-6 text-xs uppercase tracking-widest border-l-4 border-blue-600 pl-4">Tools</h5>
+                        <ul class="space-y-3 text-sm font-bold">
+                            <li>Mortgage Calc</li>
+                            <li>BMI & Weight</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-white font-black mb-6 text-xs uppercase tracking-widest border-l-4 border-blue-600 pl-4">Legal</h5>
+                        <ul class="space-y-3 text-sm font-bold">
+                            <li>Privacy Policy</li>
+                            <li>Terms</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 text-right">
+                    <div class="flex justify-end space-x-6 text-2xl opacity-30 mb-8">
+                        <i class="fab fa-google"></i><i class="fab fa-aws"></i><i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-16 border-t border-white/5 flex justify-between items-center">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster. Precision Engineering.</p>
+                <p class="text-[10px] font-bold text-slate-700 uppercase">v4.2.0-Stable</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const R = 0.082057; 
+
+        function calculateGasLaw() {
+            let P = document.getElementById('val-p').value;
+            let V = document.getElementById('val-v').value;
+            let n = document.getElementById('val-n').value;
+            let T = document.getElementById('val-t').value;
+            const unitP = document.getElementById('unit-p').value;
+            const unitV = document.getElementById('unit-v').value;
+            const unitT = document.getElementById('unit-t').value;
+
+            const inputs = [P, V, n, T];
+            const emptyFields = inputs.filter(x => x === "").length;
+
+            if (emptyFields !== 1) {
+                alert("Please leave exactly 1 field empty to solve.");
+                return;
+            }
+
+            let P_std = P !== "" ? convertPressureToAtm(parseFloat(P), unitP) : null;
+            let V_std = V !== "" ? convertVolumeToLiters(parseFloat(V), unitV) : null;
+            let n_std = n !== "" ? parseFloat(n) : null;
+            let T_std = T !== "" ? convertTempToKelvin(parseFloat(T), unitT) : null;
+
+            let result, resUnit, formula;
+
+            if (P_std === null) {
+                result = (n_std * R * T_std) / V_std;
+                resUnit = unitP; formula = "P = (nRT) / V";
+                result = convertPressureFromAtm(result, unitP);
+            } else if (V_std === null) {
+                result = (n_std * R * T_std) / P_std;
+                resUnit = unitV; formula = "V = (nRT) / P";
+                result = convertVolumeFromLiters(result, unitV);
+            } else if (n_std === null) {
+                result = (P_std * V_std) / (R * T_std);
+                resUnit = "moles"; formula = "n = (PV) / (RT)";
+            } else if (T_std === null) {
+                result = (P_std * V_std) / (n_std * R);
+                resUnit = unitT; formula = "T = (PV) / (nR)";
+                result = convertTempFromKelvin(result, unitT);
+            }
+            displayResult(result, resUnit, formula);
+        }
+
+        function convertPressureToAtm(val, unit) {
+            const map = { 'atm': 1, 'kpa': 101.325, 'bar': 1.01325, 'mmhg': 760 };
+            return val / map[unit];
+        }
+        function convertPressureFromAtm(val, unit) {
+            const map = { 'atm': 1, 'kpa': 101.325, 'bar': 1.01325, 'mmhg': 760 };
+            return val * map[unit];
+        }
+        function convertVolumeToLiters(val, unit) {
+            const map = { 'l': 1, 'ml': 1000, 'm3': 0.001 };
+            return val / map[unit];
+        }
+        function convertVolumeFromLiters(val, unit) {
+            const map = { 'l': 1, 'ml': 1000, 'm3': 0.001 };
+            return val * map[unit];
+        }
+        function convertTempToKelvin(val, unit) {
+            if (unit === 'k') return val;
+            if (unit === 'c') return val + 273.15;
+            if (unit === 'f') return (val - 32) * (5/9) + 273.15;
+            return val;
+        }
+        function convertTempFromKelvin(val, unit) {
+            if (unit === 'k') return val;
+            if (unit === 'c') return val - 273.15;
+            if (unit === 'f') return (val - 273.15) * (9/5) + 32;
+            return val;
+        }
+
+        function displayResult(val, unit, formula) {
+            document.getElementById('waiting-state').classList.add('hidden');
+            document.getElementById('result-state').classList.remove('hidden');
+            document.getElementById('res-value').innerText = val.toLocaleString(undefined, { maximumFractionDigits: 3 });
+            document.getElementById('res-unit').innerText = unit.toUpperCase();
+            document.getElementById('res-formula').innerText = formula;
+            if (window.innerWidth < 768) document.getElementById('result-pane').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Forecast 2025 | Compound Interest Engine</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #fafafa;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .input-card {
+            background: #ffffff;
+            border-radius: 35px;
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .wealth-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+        }
+
+        input[type=range] {
+            height: 6px;
+            -webkit-appearance: none;
+            width: 100%;
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+            border: 3px solid white;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade {
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 25px;
+            margin-bottom: 1.5rem;
+            background: #f8fafc;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .wealth-gradient {
+                background: #0f172a !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+
+        /* 📱 Enhanced Mobile Tweaks */
+        @media (max-width: 640px) {
+            .input-card {
+                border-radius: 25px;
+                padding: 1.5rem !important;
+            }
+
+            .wealth-gradient {
+                border-radius: 30px;
+                padding: 1.5rem !important;
+            }
+
+            .hero-img {
+                height: 140px;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+            }
+
+            /* Future value text size */
+        }
+        /* Universal Mobile Fix by ALi Developer */
+@media (max-width: 1024px) {
+    /* 1. Pure container ko mobile par center aur barabar padding dena */
+    main {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 2. Grid ko stack karna taake side-by-side ki jagah upar-niche aaye */
+    .grid {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        align-items: center !important;
+        gap: 2rem !important;
+    }
+
+    /* 3. Har column (Calculator aur Guide) ko 100% width dena */
+    .lg\:col-span-8, .lg\:col-span-4, .lg\:col-span-6 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* 4. Calculator card ki corners thodi choti karna mobile ke liye */
+    .glass-panel, .glass-card {
+        border-radius: 1.5rem !important;
+        padding: 1.5rem !important;
+    }
+
+    /* 5. Heading text size mobile par control karna */
+    h1 {
+        font-size: 2.5rem !important; /* Mobile par heading bohat badi na ho */
+        text-align: center !important;
+    }
+    
+    p {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+    </style>
+
+</head>
+
+<body class="antialiased">
+
+    <nav class="py-4 md:py-5 border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-lg z-50 no-print">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <div
+                    class="w-8 h-8 md:w-10 md:h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-200">
+                    <i class="fas fa-chart-line text-sm md:text-base"></i>
+                </div>
+                <span class="text-lg md:text-xl font-bold tracking-tight">Wealth<span
+                        class="text-emerald-500">Flow</span></span>
+            </div>
+            <a href="/index.html"
+                class="bg-slate-100 px-3 py-2 md:px-4 md:py-2 rounded-xl text-slate-600 hover:text-red-500 transition-all font-bold text-[10px] md:text-xs flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> EXIT
+            </a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-6 md:gap-8 items-start">
+
+            <div class="lg:col-span-5 space-y-6 animate-fade">
+                <div class="input-card p-6 md:p-8 shadow-sm">
+                    <img src="/images/wealth_growth_hero.png" alt="[Wealth Growth Illustration]" class="hero-img">
+                    <h2 class="text-xl md:text-2xl font-extrabold mb-6 md:mb-8 tracking-tight">Investment <span
+                            class="text-emerald-500">DNA</span></h2>
+
+                    <div class="space-y-6 md:space-y-8 no-print">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <label
+                                    class="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-slate-400">Initial
+                                    Deposit ($)</label>
+                                <span class="text-base md:text-lg font-bold text-slate-800"
+                                    id="initialValDisplay">$10,000</span>
+                            </div>
+                            <input type="range" id="initialDeposit" min="1000" max="100000" step="1000" value="10000">
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <label
+                                    class="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-slate-400">Monthly
+                                    Contribution ($)</label>
+                                <span class="text-base md:text-lg font-bold text-slate-800"
+                                    id="monthlyValDisplay">$500</span>
+                            </div>
+                            <input type="range" id="monthlyContribution" min="0" max="10000" step="100" value="500">
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <label
+                                    class="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-slate-400">Time
+                                    Horizon (Years)</label>
+                                <span class="text-base md:text-lg font-bold text-slate-800" id="yearsValDisplay">10
+                                    Years</span>
+                            </div>
+                            <input type="range" id="years" min="1" max="40" step="1" value="10">
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <label
+                                    class="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-slate-400">Annual
+                                    Return (%)</label>
+                                <span class="text-base md:text-lg font-bold text-emerald-600"
+                                    id="rateValDisplay">8%</span>
+                            </div>
+                            <input type="range" id="rate" min="1" max="25" step="0.5" value="8">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-5 md:p-6 bg-slate-900 rounded-[30px] text-white flex items-center gap-4 no-print">
+                    <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl overflow-hidden shrink-0 bg-slate-800">
+                        <img src="/images/success_shield.png" alt="[Success Icon]" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <p class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            Compounding Power</p>
+                        <p class="text-[11px] md:text-xs text-slate-300">By investing a small amount every month, your
+                            money grows exponentially. 💰</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6 animate-fade" style="animation-delay: 0.1s;">
+                <div class="wealth-gradient p-6 md:p-12 text-white shadow-2xl relative overflow-hidden">
+                    <img src="/images/wealth_bg_pattern.png" alt=""
+                        class="absolute inset-0 opacity-20 w-full h-full object-cover pointer-events-none">
+
+                    <div class="relative z-10">
+                        <div class="grid md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
+                            <div>
+                                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">Future
+                                    Value</p>
+                                <h1 class="text-4xl md:text-6xl font-black italic tracking-tighter">$<span
+                                        id="futureValue">0</span></h1>
+                            </div>
+                            <div class="flex flex-col md:justify-end">
+                                <div
+                                    class="bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-xl inline-block w-fit">
+                                    <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Total
+                                        Interest</p>
+                                    <p class="text-lg md:text-xl font-black" id="totalInterest">$0</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card p-3 md:p-6 mb-6 md:mb-8 h-[250px] md:h-[300px]">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 md:gap-4">
+                            <div class="stat-card p-4 md:p-5">
+                                <p
+                                    class="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
+                                    Your Principal</p>
+                                <p class="text-base md:text-lg font-black" id="totalPrincipal">$0</p>
+                            </div>
+                            <div class="stat-card p-4 md:p-5 border-emerald-500/20 bg-emerald-500/5">
+                                <p
+                                    class="text-[9px] md:text-[10px] font-bold text-emerald-500 uppercase tracking-widest mb-1">
+                                    Growth Factor</p>
+                                <p class="text-base md:text-lg font-black italic" id="growthFactor">0x</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="window.print()"
+                    class="w-full bg-emerald-500 py-5 md:py-6 rounded-[25px] md:rounded-[30px] font-extrabold text-white hover:bg-emerald-600 transition-all flex items-center justify-center gap-3 shadow-xl shadow-emerald-200 no-print text-sm md:text-base">
+                    <i class="fas fa-file-pdf text-lg"></i>
+                    <span>DOWNLOAD WEALTH REPORT (PDF)</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-500 pt-20 pb-10 md:pt-32 md:pb-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-10 md:gap-20 mb-16 md:mb-24">
+                <div class="lg:col-span-6">
+                    <div class="flex items-center space-x-2 text-white mb-6 md:mb-8">
+                        <i class="fas fa-calculator text-3xl md:text-4xl text-blue-600"></i>
+                        <span class="text-2xl md:text-4xl font-black tracking-tighter italic">CALCMASTER<span
+                                class="text-blue-600">.</span></span>
+                    </div>
+                    <p class="text-lg md:text-xl font-bold leading-relaxed mb-8 md:text-slate-400 max-w-lg">The gold
+                        standard for high-fidelity calculations. Verified for 2025 compliance.</p>
+                    <div class="flex flex-wrap gap-4 md:gap-6 mt-4">
+                        <a href="/privacy-policy.html" class="text-slate-400 hover:text-white text-xs">Privacy
+                            Policy</a>
+                        <a href="/terms-of-service.html" class="text-slate-400 hover:text-white text-xs">Terms of
+                            Service</a>
+                        <a href="/cookie-policy.html" class="text-slate-400 hover:text-white text-xs">Cookie Policy</a>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 lg:text-right">
+                    <h5
+                        class="text-white font-black mb-6 md:mb-10 text-xs uppercase tracking-widest italic border-l-4 lg:border-l-0 lg:border-r-4 border-blue-600 pl-4 lg:pr-4">
+                        Global Network</h5>
+                    <div class="flex lg:justify-end space-x-8 text-2xl md:text-3xl opacity-50">
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-aws"></i>
+                        <i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-10 border-t border-white/5 text-center">
+                <p class="text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.5em]">© 2025
+                    CalcMaster. Engineered in Austin, Texas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let growthChart;
+        const inputs = ['initialDeposit', 'monthlyContribution', 'years', 'rate'];
+
+        function initChart() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Wealth Accumulation',
+                        data: [],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 4,
+                        pointRadius: 0,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            titleFont: { size: 12, weight: 'bold' },
+                            bodyFont: { size: 14 },
+                            padding: 12,
+                            displayColors: false,
+                            callbacks: {
+                                label: (context) => '$' + context.parsed.y.toLocaleString()
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#94a3b8', font: { size: 10 }, callback: value => '$' + (value / 1000) + 'k' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#94a3b8', font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function calculateWealth() {
+            const P = parseFloat(document.getElementById('initialDeposit').value);
+            const PMT = parseFloat(document.getElementById('monthlyContribution').value);
+            const r = (parseFloat(document.getElementById('rate').value) / 100) / 12;
+            const t = parseInt(document.getElementById('years').value);
+            const n = t * 12;
+
+            document.getElementById('initialValDisplay').innerText = '$' + P.toLocaleString();
+            document.getElementById('monthlyValDisplay').innerText = '$' + PMT.toLocaleString();
+            document.getElementById('yearsValDisplay').innerText = t + ' Years';
+            document.getElementById('rateValDisplay').innerText = (r * 12 * 100).toFixed(1) + '%';
+
+            let dataPoints = [];
+            let labels = [];
+            let currentValue = P;
+            let totalPrincipal = P;
+
+            for (let i = 0; i <= n; i++) {
+                if (i > 0) {
+                    currentValue = (currentValue + PMT) * (1 + r);
+                    totalPrincipal += PMT;
+                }
+                if (i % 12 === 0 || i === n) {
+                    dataPoints.push(Math.round(currentValue));
+                    labels.push('Y' + (i / 12));
+                }
+            }
+
+            const totalInterest = currentValue - totalPrincipal;
+            const factor = (currentValue / totalPrincipal).toFixed(1);
+
+            animateValue("futureValue", currentValue);
+            document.getElementById('totalInterest').innerText = '$' + Math.round(totalInterest).toLocaleString();
+            document.getElementById('totalPrincipal').innerText = '$' + Math.round(totalPrincipal).toLocaleString();
+            document.getElementById('growthFactor').innerText = factor + 'x';
+
+            growthChart.data.labels = labels;
+            growthChart.data.datasets[0].data = dataPoints;
+            growthChart.update('none');
+        }
+
+        function animateValue(id, end) {
+            const obj = document.getElementById(id);
+            const start = parseInt(obj.innerText.replace(/,/g, '')) || 0;
+            const duration = 500;
+            let startTime = null;
+
+            function step(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const current = Math.floor(progress * (end - start) + start);
+                obj.innerText = current.toLocaleString();
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateWealth);
+        });
+
+        window.onload = () => {
+            initChart();
+            calculateWealth();
+        };
+    </script>
+</body>
+
+</html>

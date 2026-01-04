@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <title>Wave Frequency & Wavelength Calculator | Hertz & Lambda Solver 2026</title>
+    <meta name="description" content="Calculate Wave Frequency (f), Wavelength (λ), and Wave Speed (v). Professional tool for physics, radio engineering, and acoustics with high precision.">
+    <meta name="keywords" content="Wave Frequency Calculator, Wavelength Solver, Lambda Calculator, Hertz to Meter, Physics Wave Tool, Radio Frequency Calc">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc;
+            color: #0f172a;
+            scroll-behavior: smooth;
+        }
+        .physics-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 2rem;
+        }
+        .solve-btn {
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .solve-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(79, 70, 229, 0.5);
+        }
+        .variable-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 1.5rem;
+        }
+        .nav-link { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        select { appearance: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <nav class="p-6 max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-wave-square text-2xl text-indigo-600"></i>
+            <span class="text-2xl font-black tracking-tighter italic uppercase">CALC<span class="text-indigo-600">MASTER</span></span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-slate-500 nav-link">
+            <a href="#calculator" class="hover:text-indigo-600">Wave Solver</a>
+            <a href="#theory" class="hover:text-indigo-600">Wave Theory</a>
+            <a href="/index.html" class="hover:text-indigo-600">Exit</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Hero Section -->
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight">
+                    Hertz <span class="text-indigo-600 italic">&</span> Lambda
+                </h1>
+                <p class="text-slate-500 text-lg font-medium leading-relaxed">
+                    Professional Wave Dynamics Engine. Analyze electromagnetic waves, sound frequencies, and mechanical vibrations with scientific rigor.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <span class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold uppercase tracking-widest">Physics Core v3</span>
+                    <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-xs font-bold uppercase tracking-widest">v = f × λ</span>
+                </div>
+            </div>
+            
+            <div class="image-placeholder h-64 md:h-96">
+               
+                 <img src="/images/Neon-Wave-Propagation.png" alt="Neon Wave Propagation">
+            </div>
+        </div>
+
+        <!-- Wave Solver -->
+        <section id="calculator" class="mb-24">
+            <div class="mb-10 flex items-center space-x-4">
+                <div class="h-10 w-2 bg-indigo-600 rounded-full"></div>
+                <h2 class="text-3xl font-black uppercase tracking-tighter">I. Wave Equation Solver</h2>
+            </div>
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-8 physics-card p-8 md:p-12">
+                    <div class="grid md:grid-cols-2 gap-8 mb-10">
+                        <div class="space-y-3">
+                            <label class="variable-label">Wave Speed (v)</label>
+                            <div class="flex">
+                                <input type="number" id="wave-v" placeholder="Speed..." class="w-full p-4 bg-slate-50 rounded-l-xl border-y border-l border-slate-200 focus:bg-white outline-none font-bold text-lg">
+                                <select id="speed-preset" onchange="applyPreset()" class="bg-indigo-600 text-white border-none rounded-r-xl px-4 font-bold text-[10px] uppercase cursor-pointer">
+                                    <option value="">Custom</option>
+                                    <option value="299792458">Light (Vacuum)</option>
+                                    <option value="343">Sound (Air)</option>
+                                    <option value="1481">Sound (Water)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="variable-label">Frequency (f)</label>
+                            <div class="flex">
+                                <input type="number" id="wave-f" placeholder="Hertz..." class="w-full p-4 bg-slate-50 rounded-l-xl border-y border-l border-slate-200 focus:bg-white outline-none font-bold text-lg">
+                                <select id="unit-f" class="bg-slate-100 border border-slate-200 rounded-r-xl px-4 font-bold text-[10px] uppercase cursor-pointer">
+                                    <option value="1">Hz</option>
+                                    <option value="1000">kHz</option>
+                                    <option value="1000000">MHz</option>
+                                    <option value="1000000000">GHz</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-3 md:col-span-2">
+                            <label class="variable-label">Wavelength (λ)</label>
+                            <input type="number" id="wave-l" placeholder="Meters..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white outline-none font-bold text-lg">
+                        </div>
+                    </div>
+                    <button onclick="calculateWave()" class="w-full solve-btn text-white py-6 rounded-2xl font-black text-xl uppercase tracking-widest shadow-xl">Process Wave Data</button>
+                    <p class="mt-4 text-[10px] text-slate-400 font-bold uppercase text-center tracking-widest">Leave one field empty to solve for it</p>
+                </div>
+                
+                <div class="lg:col-span-4 bg-slate-950 rounded-[2rem] p-10 text-white min-h-[350px] flex flex-col justify-center text-center">
+                    <div id="res-box">
+                        <span id="res-label" class="text-indigo-400 text-xs font-black uppercase tracking-[0.2em]">Result</span>
+                        <div id="res-val" class="text-5xl font-black my-6 tracking-tighter">0.00</div>
+                        <p id="res-unit" class="text-slate-500 text-sm font-bold uppercase tracking-widest">Enter values to solve</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wave Theory & Visuals -->
+        <section id="theory" class="mb-24">
+            <h2 class="text-3xl font-black mb-12 text-center uppercase tracking-tighter italic">Propagation Dynamics</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="physics-card p-8">
+                    <div class="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center mb-6 text-indigo-600">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Electromagnetic</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Radio, light, and X-rays travel at $299,792,458$ m/s. Their frequency determines energy levels.</p>
+                    <div class="image-placeholder h-32">
+                        
+                         <img src="/images/EM-Spectrum.png" alt="EM Spectrum">
+                        
+                    </div>
+                </div>
+                
+                <div class="physics-card p-8">
+                    <div class="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center mb-6 text-indigo-600">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Acoustics</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Sound waves require a medium. In air at $20^\circ\text{C}$, speed is roughly $343$ m/s.</p>
+                    <div class="image-placeholder h-32">
+                         <img src="/images/Sound-Vibration.png" alt="Sound Vibration">
+                    </div>
+                </div>
+
+                <div class="physics-card p-8">
+                    <div class="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center mb-6 text-indigo-600">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">The Lambda Rule</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Wavelength and frequency are inversely proportional. Higher frequency means shorter wavelength.</p>
+                    <div class="image-placeholder h-32">
+                        
+                         <img src="/images/Lambda-Inversion.png" alt="Lambda Inversion">
+                       
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Professional Footer -->
+    <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-24">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-calculator text-3xl text-indigo-600"></i>
+                        <span class="text-3xl font-black tracking-tighter italic uppercase">CALCMASTER<span class="text-indigo-600">.</span></span>
+                    </div>
+                    <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                        Universal computational engine for modern sciences. Verified accuracy for engineering and research.
+                    </p>
+                    <div class="flex space-x-5">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-indigo-600 pl-4">Science Tools</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="#" class="hover:text-white transition">Molarity Calc</a></li>
+                        <li><a href="#" class="hover:text-white transition">Wave Dynamics</a></li>
+                        <li><a href="#" class="hover:text-white transition">Force Engine</a></li>
+                        <li><a href="#" class="hover:text-white transition">Atomic Mass</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-2">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-indigo-600 pl-4">Engineering</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="#" class="hover:text-white transition">RF Budget</a></li>
+                        <li><a href="#" class="hover:text-white transition">Antenna Length</a></li>
+                        <li><a href="#" class="hover:text-white transition">Circuit Solver</a></li>
+                        <li><a href="#" class="hover:text-white transition">Ohm's Law</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-4">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-indigo-600 pl-4">Compliance</h5>
+                    <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                        <a href="#" class="hover:text-white">Privacy Policy</a>
+                        <a href="#" class="hover:text-white">Terms of Service</a>
+                        <a href="#" class="hover:text-white">Cookie Policy</a>
+                        <a href="#" class="hover:text-white">Global Nodes</a>
+                    </div>
+                    <div class="flex space-x-6 text-2xl opacity-30">
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-aws"></i>
+                        <i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster Wave Logic. All Rights Reserved.</p>
+                <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Build 9.4.1-Indigo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function applyPreset() {
+            const val = document.getElementById('speed-preset').value;
+            if (val) document.getElementById('wave-v').value = val;
+        }
+
+        function calculateWave() {
+            let v = document.getElementById('wave-v').value;
+            let f = document.getElementById('wave-f').value;
+            let fUnit = document.getElementById('unit-f').value;
+            let l = document.getElementById('wave-l').value;
+
+            // Adjust frequency for units
+            let trueF = f ? f * fUnit : null;
+
+            const resVal = document.getElementById('res-val');
+            const resUnit = document.getElementById('res-unit');
+            const resLabel = document.getElementById('res-label');
+
+            // Solve for v
+            if (!v && f && l) {
+                let result = trueF * l;
+                resLabel.innerText = "Wave Speed (v)";
+                resVal.innerText = formatNum(result);
+                resUnit.innerText = "Meters / Second";
+            } 
+            // Solve for f
+            else if (!f && v && l) {
+                let result = v / l;
+                resLabel.innerText = "Frequency (f)";
+                resVal.innerText = formatNum(result);
+                resUnit.innerText = "Hertz (Hz)";
+            }
+            // Solve for l
+            else if (!l && v && f) {
+                let result = v / trueF;
+                resLabel.innerText = "Wavelength (λ)";
+                resVal.innerText = formatNum(result);
+                resUnit.innerText = "Meters";
+            } else {
+                resVal.innerText = "---";
+                resUnit.innerText = "Fill any 2 fields";
+            }
+        }
+
+        function formatNum(num) {
+            if (num > 1000000 || (num < 0.001 && num !== 0)) {
+                return num.toExponential(4);
+            }
+            return parseFloat(num).toLocaleString(undefined, {maximumFractionDigits: 6});
+        }
+    </script>
+</body>
+</html>

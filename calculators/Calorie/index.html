@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>BMI & Ideal Weight Calculator 2025 | CalcMaster Precision</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-blue: #2563eb;
+            --brand-dark: #0f172a;
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .img-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            background: #e2e8f0;
+        }
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <!-- Top Navigation -->
+    <nav class="glass-nav sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <i class="fas fa-heartbeat text-blue-600 text-2xl"></i>
+            <span class="font-extrabold text-xl tracking-tight">Calc<span class="text-blue-600">Master</span></span>
+        </div>
+       <button onclick="window.location.reload()" class="p-2 hover:bg-slate-200 rounded-full transition-colors">
+               
+            </button>
+            <a href="/index.html" class="hover:text-blue-600 transition">Exit</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-6 mt-8">
+        
+        <!-- Section 1: Hero Asset -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between mb-3 px-2">
+                <span class="text-slate-400 text-sm font-bold uppercase tracking-widest">Main Header Image</span>
+            </div>
+            
+            
+            <div class="img-container h-80 shadow-xl border border-slate-200">
+                <img src="/images/hero_fitness.png" alt="[Hero Fitness Image]" onerror="this.src='https://via.placeholder.com/1000x500?text=hero_fitness.png+Missing'">
+            </div>
+            
+            <h1 class="text-4xl font-extrabold mt-8 text-slate-900 tracking-tight text-center italic">Precision Health Analytics 2025</h1>
+        </div>
+
+        <!-- Calculator Card -->
+        <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-blue-100 p-8 border border-blue-50/50 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Inputs Section -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-black uppercase text-slate-400 mb-3 tracking-widest">Select Gender</label>
+                        <div class="flex gap-4">
+                            <button id="male" onclick="setGender('male')" class="flex-1 py-4 rounded-2xl border-2 border-blue-600 bg-blue-50 text-blue-600 font-bold flex items-center justify-center gap-2 transition-all">
+                                <i class="fas fa-mars"></i> Male
+                            </button>
+                            <button id="female" onclick="setGender('female')" class="flex-1 py-4 rounded-2xl border-2 border-slate-100 bg-slate-50 text-slate-400 font-bold flex items-center justify-center gap-2 transition-all">
+                                <i class="fas fa-venus"></i> Female
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black uppercase text-slate-400 tracking-widest px-1">Weight (kg)</label>
+                            <input type="number" id="weight" placeholder="70" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 focus:border-blue-500 outline-none transition-all font-bold">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black uppercase text-slate-400 tracking-widest px-1">Height (cm)</label>
+                            <input type="number" id="height" placeholder="175" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 focus:border-blue-500 outline-none transition-all font-bold">
+                        </div>
+                    </div>
+
+                    <button onclick="calculate()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-black text-lg shadow-xl shadow-blue-200 transition-all transform active:scale-95">
+                        RUN CALCULATION
+                    </button>
+                </div>
+
+                <!-- Display Section -->
+                <div id="result-display" class="hidden space-y-6">
+                    <div class="bg-blue-600 rounded-3xl p-8 text-white">
+                        <p class="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Current BMI</p>
+                        <h2 id="bmi-val" class="text-6xl font-black">--</h2>
+                        <div id="bmi-status" class="mt-4 inline-block px-4 py-1 rounded-full bg-blue-500/30 text-xs font-black uppercase tracking-widest">--</div>
+                    </div>
+                    
+                    <div class="bg-slate-900 rounded-3xl p-8 text-white relative">
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Ideal Weight Target</p>
+                        <h2 id="ideal-weight" class="text-4xl font-black text-blue-400">--</h2>
+                        <p id="recommendation" class="text-slate-400 text-sm mt-2 italic">Waiting for input...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Secondary Content Assets -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <!-- Asset: Diet Plan -->
+            <div class="space-y-3">
+                <div class="flex justify-between items-center px-1">
+                    <span class="text-xs font-bold text-slate-400 uppercase">Nutritional Guide</span>
+                  
+                </div>
+                <div class="img-container h-52 border border-slate-200 shadow-lg">
+                    <img src="/images/diet_plan.png" alt="[Diet Plan Image]" onerror="this.src='https://via.placeholder.com/600x400?text=diet_plan.png'">
+                </div>
+            </div>
+
+            <!-- Asset: Training -->
+            <div class="space-y-3">
+                <div class="flex justify-between items-center px-1">
+                    <span class="text-xs font-bold text-slate-400 uppercase">Training Routine</span>
+           
+                </div>
+                
+                <div class="img-container h-52 border border-slate-200 shadow-lg">
+                    <img src="/images/training.png.png" alt="[Training Routine Image]" onerror="this.src='https://via.placeholder.com/600x400?text=training.png'">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+   <!-- Professional Footer -->
+  <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-16 mb-24">
+            
+            <div class="lg:col-span-4">
+                <div class="flex items-center space-x-2 text-white mb-8">
+                    <i class="fas fa-calculator text-3xl text-blue-600"></i>
+                    <span class="text-3xl font-black tracking-tighter italic uppercase">CALCMASTER<span class="text-blue-600">.</span></span>
+                </div>
+                <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                    The gold standard for high-fidelity calculations. Verified for 2026 compliance across international standards.
+                </p>
+                <div class="flex space-x-5">
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Financials</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/mortgage-calculator/index.html" class="hover:text-white transition">Mortgage Calc</a></li>
+                    <li><a href="/calculators/emi-calculator/index.html" class="hover:text-white transition">Loan Repayment</a></li>
+                    <li><a href="/calculators/tax-calculator/index.html" class="hover:text-white transition">Tax Estimator</a></li>
+                    <li><a href="/calculators/investment-return-planner/index.html" class="hover:text-white transition">ROI Engine</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Health & Math</h5>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="/calculators/health/index.html" class="hover:text-white transition">BMI & Weight</a></li>
+                    <li><a href="/calculators/Body-Composition/index.html" class="hover:text-white transition">Body Fat</a></li>
+                    <li><a href="/matrix-calculator.html" class="hover:text-white transition">Matrix Ops</a></li>
+                    <li><a href="/unit-converter.html" class="hover:text-white transition">Unit Conv.</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-4">
+                <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-blue-600 pl-4">Compliance</h5>
+                <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                    <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <a href="/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <a href="/cookie-policy.html" class="hover:text-white">Cookie Policy</a>
+                    <a href="/contact.html" class="hover:text-white">Contact Us</a>
+                </div>
+                <div class="flex space-x-6 text-2xl opacity-30">
+                    <i class="fab fa-google"></i>
+                    <i class="fab fa-aws"></i>
+                    <i class="fab fa-stripe"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+            <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster. Engineered with Precision.</p>
+            <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Version 4.2.0-Stable</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let gender = 'male';
+
+        function setGender(val) {
+            gender = val;
+            const m = document.getElementById('male');
+            const f = document.getElementById('female');
+            
+            if(val === 'male') {
+                m.className = "flex-1 py-4 rounded-2xl border-2 border-blue-600 bg-blue-50 text-blue-600 font-bold flex items-center justify-center gap-2 transition-all";
+                f.className = "flex-1 py-4 rounded-2xl border-2 border-slate-100 bg-slate-50 text-slate-400 font-bold flex items-center justify-center gap-2 transition-all";
+            } else {
+                f.className = "flex-1 py-4 rounded-2xl border-2 border-pink-600 bg-pink-50 text-pink-600 font-bold flex items-center justify-center gap-2 transition-all";
+                m.className = "flex-1 py-4 rounded-2xl border-2 border-slate-100 bg-slate-50 text-slate-400 font-bold flex items-center justify-center gap-2 transition-all";
+            }
+        }
+
+        function calculate() {
+            const w = parseFloat(document.getElementById('weight').value);
+            const h = parseFloat(document.getElementById('height').value);
+
+            if(!w || !h) return;
+
+            const bmi = w / ((h/100) * (h/100));
+            document.getElementById('bmi-val').innerText = bmi.toFixed(1);
+            
+            const status = document.getElementById('bmi-status');
+            const rec = document.getElementById('recommendation');
+            
+            if(bmi < 18.5) {
+                status.innerText = "Underweight";
+                rec.innerText = "Nutrient-dense diet with strength training is recommended.";
+            } else if(bmi < 25) {
+                status.innerText = "Healthy Range";
+                rec.innerText = "Keep up the balanced lifestyle!";
+            } else {
+                status.innerText = "Above Average";
+                rec.innerText = "Consider more cardio and portion control.";
+            }
+
+            const h_in = h / 2.54;
+            let ideal = (gender === 'male') ? 50 + 2.3 * (h_in - 60) : 45.5 + 2.3 * (h_in - 60);
+            document.getElementById('ideal-weight').innerText = Math.round(ideal) + " kg";
+            document.getElementById('result-display').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Salary Calculator 2025 | Hourly to Annual Paycheck Converter</title>
+    <meta name="description"
+        content="Convert hourly wage to annual salary and vice-versa. Professional-grade paycheck calculator with 2025 tax-ready benchmarks for USA employees.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfcfc;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0 !important;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+        }
+
+        .slider-custom::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            background: #2563eb;
+            border: 4px solid white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            background: #e2e8f0;
+            height: 6px;
+            border-radius: 10px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Mobile Responsive Overrides */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3.5rem !important; }
+            .card-padding { padding: 2rem !important; }
+            .mobile-grid-gap { gap: 1.5rem !important; }
+            .footer-padding { padding-top: 5rem !important; }
+        }
+
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #10b981;
+            color: #fff;
+            text-align: center;
+            border-radius: 12px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            font-weight: bold;
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
+        @keyframes fadeout { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+    </style>
+</head>
+
+<body class="text-slate-900">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-200">
+                    <i class="fas fa-wallet text-white"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight">Calc<span class="text-blue-600">Master</span></span>
+            </a>
+            <div class="flex space-x-4 md:space-x-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <a href="/index.html" class="hover:text-blue-600 transition flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i> <span class="hidden sm:inline">Exit</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-16 pb-24 md:pt-20 md:pb-32 bg-slate-50 relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center animate-fade-up">
+            <div class="max-w-4xl mx-auto mb-10 md:mb-12 shadow-2xl rounded-[30px] md:rounded-[40px] overflow-hidden border-[6px] md:border-[12px] border-white rotate-1">
+                <img src="/images/hero-salary.png" alt="Office Setting" class="w-full h-[250px] md:h-[400px] object-cover bg-slate-200">
+            </div>
+
+            <span class="px-5 py-2 bg-blue-100 text-blue-700 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] mb-6 inline-block">2025 Compensation Engine</span>
+            <h1 class="text-5xl md:text-8xl font-black tracking-tighter italic uppercase leading-none mb-6 gradient-text hero-title">
+                Salary <span class="text-blue-600">Blueprint.</span>
+            </h1>
+            <p class="text-slate-500 max-w-2xl mx-auto text-base md:text-lg font-medium px-4">Transition seamlessly between hourly rates and annual benchmarks with institutional accuracy.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 -mt-16 md:-mt-20 relative z-10 pb-20 md:pb-32">
+        <div class="grid lg:grid-cols-12 gap-8 md:gap-12">
+
+            <div class="lg:col-span-7 space-y-6 md:space-y-8 animate-fade-up">
+                <div class="glass-card p-6 md:p-12 rounded-[30px] md:rounded-[50px] shadow-2xl shadow-slate-200">
+                    <h2 class="text-[10px] md:text-sm font-black uppercase tracking-[0.3em] text-slate-400 mb-8 md:mb-12 border-b border-slate-100 pb-4 italic">
+                        Earnings Configuration</h2>
+
+                    <div class="space-y-10 md:space-y-16">
+                        <div class="space-y-4">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                                <label class="font-black text-[10px] uppercase tracking-widest text-slate-500">Gross Annual Salary ($)</label>
+                                <div class="relative w-full md:w-48">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">$</span>
+                                    <input type="number" id="annualSalaryText" value="75000" class="w-full pl-10 pr-4 py-3 md:py-4 rounded-2xl bg-slate-50 font-black text-xl md:text-2xl outline-none">
+                                </div>
+                            </div>
+                            <input type="range" id="annualSalaryRange" min="10000" max="500000" step="1000" value="75000" class="w-full slider-custom">
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                                <label class="font-black text-[10px] uppercase tracking-widest text-slate-500">Hourly Pay Rate ($)</label>
+                                <div class="relative w-full md:w-48">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">$</span>
+                                    <input type="number" id="hourlyRateText" value="36.06" step="0.01" class="w-full pl-10 pr-4 py-3 md:py-4 rounded-2xl bg-slate-50 font-black text-xl md:text-2xl outline-none">
+                                </div>
+                            </div>
+                            <input type="range" id="hourlyRateRange" min="7.25" max="250" step="0.5" value="36.06" class="w-full slider-custom">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 pt-8 border-t border-slate-100">
+                            <div class="space-y-3">
+                                <label class="block font-black text-[10px] uppercase tracking-widest text-slate-500">Hours per Week</label>
+                                <input type="number" id="hoursPerWeek" value="40" class="w-full p-4 md:p-6 rounded-2xl md:rounded-3xl bg-slate-50 font-black text-xl md:text-2xl outline-none">
+                            </div>
+                            <div class="space-y-3">
+                                <label class="block font-black text-[10px] uppercase tracking-widest text-slate-500">Weeks per Year</label>
+                                <input type="number" id="weeksPerYear" value="52" class="w-full p-4 md:p-6 rounded-2xl md:rounded-3xl bg-slate-50 font-black text-xl md:text-2xl outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-600 rounded-[30px] md:rounded-[50px] p-8 md:p-12 text-white shadow-3xl shadow-blue-200">
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10 text-center md:text-left">
+                        <div class="w-32 md:w-1/3 rounded-2xl overflow-hidden shadow-2xl flex-shrink-0">
+                            <img src="/images/salary-success.png" alt="Success" class="w-full h-full object-cover bg-blue-700">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl md:text-2xl font-black italic uppercase mb-3">Negotiate Smarter</h4>
+                            <p class="text-blue-100 text-xs md:text-sm font-medium opacity-80 leading-relaxed">USA average work weeks are 40 hours. Understanding your hourly equivalent is key to salary negotiations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 animate-fade-up">
+                <div class="lg:sticky lg:top-28 space-y-6 md:space-y-8">
+                    <div class="bg-slate-900 rounded-[40px] md:rounded-[56px] p-8 md:p-12 text-white shadow-3xl text-center">
+                        <h3 class="text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] mb-8 md:mb-12 opacity-50">Paycheck Breakdown</h3>
+
+                        <div class="space-y-8 md:space-y-10">
+                            <div>
+                                <p class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-blue-500 mb-2">Monthly Income</p>
+                                <div class="text-5xl md:text-7xl font-black italic tracking-tighter">$<span id="monthlyDisplay">6,250</span></div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 md:gap-8 pt-8 md:pt-10 border-t border-white/5">
+                                <div class="text-center md:text-left">
+                                    <p class="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1">Bi-Weekly</p>
+                                    <div class="text-xl md:text-2xl font-black italic">$<span id="biWeeklyDisplay">2,885</span></div>
+                                </div>
+                                <div class="text-center md:text-left">
+                                    <p class="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1">Daily (8h)</p>
+                                    <div class="text-xl md:text-2xl font-black italic">$<span id="dailyDisplay">288</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="downloadReport()" class="w-full mt-10 md:mt-16 bg-blue-600 hover:bg-white hover:text-blue-600 text-white py-4 md:py-6 rounded-2xl md:rounded-3xl font-black text-lg md:text-xl transition-all uppercase italic">
+                            DOWNLOAD REPORT <i class="fas fa-file-pdf ml-2"></i>
+                        </button>
+                    </div>
+
+                    <div class="bg-white p-6 md:p-10 rounded-[30px] md:rounded-[50px] border border-slate-100 text-center shadow-lg">
+                        <div class="h-20 md:h-24 mb-6 rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all">
+                            <img src="/images/market-stats.png" alt="Market Stats" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Institutional Accuracy</h5>
+                        <p class="text-[10px] md:text-[11px] font-bold text-slate-500 italic px-2">Adheres to US Department of Labor standard conversion benchmarks for 2025.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-500 pt-20 md:pt-32 pb-12 w-full border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-12 md:gap-20 mb-16 md:mb-24">
+                <div class="lg:col-span-8 text-center lg:text-left">
+                    <div class="flex items-center justify-center lg:justify-start space-x-2 text-white mb-6">
+                        <div class="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-200">
+    <i class="fas fa-money-check-alt text-white"></i> 
+</div>
+                        <span class="text-3xl md:text-4xl font-black tracking-tighter italic uppercase">CALCMASTER<span class="text-blue-600">.</span></span>
+                    </div>
+                    <p class="text-lg md:text-xl font-bold leading-relaxed mb-8 text-slate-400 max-w-lg mx-auto lg:mx-0">
+                        The gold standard for high-fidelity calculations. Verified for 2025 compliance across North America.
+                    </p>
+                    <div class="flex justify-center lg:justify-start space-x-6 text-xs uppercase tracking-widest font-black">
+                        <a href="#" class="hover:text-white transition">Privacy</a>
+                        <a href="#" class="hover:text-white transition">Terms</a>
+                        <a href="#" class="hover:text-white transition">Cookies</a>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 text-center lg:text-right">
+                    <h5 class="text-white font-black mb-8 text-[10px] uppercase tracking-widest opacity-50 italic">Global Infrastructure</h5>
+                    <div class="flex justify-center lg:justify-end space-x-8 text-2xl md:text-3xl opacity-40">
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-aws"></i>
+                        <i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-10 border-t border-white/5 text-center">
+                <p class="text-[9px] font-black uppercase tracking-[0.5em]">© 2025 CalcMaster | Engineered by ALi Developer</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast">Report downloaded successfully!</div>
+
+    <script>
+        const annualSalaryRange = document.getElementById('annualSalaryRange');
+        const annualSalaryText = document.getElementById('annualSalaryText');
+        const hourlyRateRange = document.getElementById('hourlyRateRange');
+        const hourlyRateText = document.getElementById('hourlyRateText');
+        const hoursPerWeek = document.getElementById('hoursPerWeek');
+        const weeksPerYear = document.getElementById('weeksPerYear');
+
+        const monthlyDisplay = document.getElementById('monthlyDisplay');
+        const biWeeklyDisplay = document.getElementById('biWeeklyDisplay');
+        const dailyDisplay = document.getElementById('dailyDisplay');
+
+        function updateFromAnnual() {
+            const annual = parseFloat(annualSalaryText.value) || 0;
+            const hours = parseFloat(hoursPerWeek.value) || 40;
+            const weeks = parseFloat(weeksPerYear.value) || 52;
+            const hourly = annual / (hours * weeks);
+            hourlyRateText.value = hourly.toFixed(2);
+            hourlyRateRange.value = hourly;
+            annualSalaryRange.value = annual;
+            calculateBreakdown(annual, hours);
+        }
+
+        function updateFromHourly() {
+            const hourly = parseFloat(hourlyRateText.value) || 0;
+            const hours = parseFloat(hoursPerWeek.value) || 40;
+            const weeks = parseFloat(weeksPerYear.value) || 52;
+            const annual = hourly * hours * weeks;
+            annualSalaryText.value = Math.round(annual);
+            annualSalaryRange.value = annual;
+            hourlyRateRange.value = hourly;
+            calculateBreakdown(annual, hours);
+        }
+
+        function calculateBreakdown(annual, hours) {
+            const monthly = annual / 12;
+            const biWeekly = annual / 26;
+            const daily = (annual / 52) / 5;
+            monthlyDisplay.innerText = Math.round(monthly).toLocaleString();
+            biWeeklyDisplay.innerText = Math.round(biWeekly).toLocaleString();
+            dailyDisplay.innerText = Math.round(daily).toLocaleString();
+        }
+
+        function downloadReport() {
+            const reportText = `CALCMASTER SALARY REPORT 2025\nAnnual: $${annualSalaryText.value}\nHourly: $${hourlyRateText.value}\nMonthly: $${monthlyDisplay.innerText}`;
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(reportText));
+            element.setAttribute('download', "Salary_Report.txt");
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            const x = document.getElementById("toast");
+            x.className = "show";
+            setTimeout(() => { x.className = x.className.replace("show", ""); }, 3000);
+        }
+
+        annualSalaryRange.addEventListener('input', () => { annualSalaryText.value = annualSalaryRange.value; updateFromAnnual(); });
+        annualSalaryText.addEventListener('input', updateFromAnnual);
+        hourlyRateRange.addEventListener('input', () => { hourlyRateText.value = hourlyRateRange.value; updateFromHourly(); });
+        hourlyRateText.addEventListener('input', updateFromHourly);
+        [hoursPerWeek, weeksPerYear].forEach(i => i.addEventListener('input', updateFromAnnual));
+        updateFromAnnual();
+    </script>
+</body>
+</html>

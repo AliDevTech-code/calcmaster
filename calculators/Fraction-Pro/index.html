@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fraction Simplifier Pro | Free Online Fraction Calculator 2026</title>
+    <meta name="description"
+        content="Simplify fractions to their simplest form instantly. Use Fraction Pro to reduce, add, or compare fractions with step-by-step logic. Verified 2026 GCD algorithm.">
+    <meta name="keywords"
+        content="fraction simplifier, reduce fractions, math calculator, fraction pro, simplify fractions online, GCD solver">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f8fafc;
+            overflow-x: hidden;
+            color: #0f172a;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Modernized Inputs */
+        .fraction-input-field {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            background: #ffffff;
+            border: 2px solid #f1f5f9;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            outline: none;
+            width: 100%;
+        }
+
+        .fraction-input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            background: white;
+        }
+
+        .divider-line {
+            height: 6px;
+            background: #3b82f6;
+            width: 80px;
+            margin: 1.5rem auto;
+            border-radius: 99px;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -10px rgba(37, 99, 235, 0.5);
+        }
+
+        .hero-img-box {
+            border-radius: 3rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem !important; }
+            .glass-card { padding: 2rem !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-divide text-2xl text-blue-600"></i>
+                <span class="text-2xl font-black tracking-tighter italic uppercase">FRACTION<span class="text-blue-600">PRO</span></span>
+            </div>
+            <a href="/index.html" class="bg-slate-900 hover:bg-red-600 text-white px-5 py-2.5 rounded-xl font-bold transition-all text-[10px] uppercase tracking-widest">
+                Exit <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </nav>
+
+    <main class="mt-32 max-w-7xl mx-auto px-6 mb-24">
+        <div class="grid lg:grid-cols-12 gap-12 items-center mb-20">
+            <div class="lg:col-span-6">
+                <div class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest">
+                    Arithmetic Engine 2026
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter uppercase italic leading-[0.85] mb-6">
+                    Simplify <br><span class="text-blue-600">Fractions.</span>
+                </h1>
+                <p class="text-slate-500 font-bold text-lg max-w-lg italic">
+                    Reduce any fraction to its simplest form instantly using our verified GCD algorithm engine.
+                </p>
+            </div>
+            <div class="lg:col-span-6 hero-img-box h-[300px] md:h-[400px]">
+                <img src="/images/network-energy.png" alt="Mathematical visualization" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-10">
+            <div class="lg:col-span-8">
+                <div class="glass-card rounded-[3rem] p-10 md:p-16 shadow-2xl shadow-blue-100/20">
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div class="space-y-10">
+                            <div class="flex flex-col items-center">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Numerator</label>
+                                <input type="number" id="num" placeholder="0" class="fraction-input-field">
+                                
+                                <div class="divider-line"></div>
+                                
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Denominator</label>
+                                <input type="number" id="den" placeholder="0" class="fraction-input-field">
+                            </div>
+
+                            <button onclick="simplify()" class="w-full action-btn text-white py-5 rounded-2xl font-black text-lg uppercase tracking-widest shadow-xl">
+                                Calculate <i class="fas fa-bolt ml-2"></i>
+                            </button>
+                        </div>
+
+                        <div class="relative min-h-[350px] flex items-center justify-center bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200">
+                            <div id="placeholder" class="text-center p-8">
+                                <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-terminal text-2xl text-slate-300"></i>
+                                </div>
+                                <p class="font-black uppercase tracking-widest text-[10px] text-slate-400 leading-loose">Waiting for numeric parameters...</p>
+                            </div>
+
+                            <div id="resultBox" class="hidden w-full h-full bg-slate-950 rounded-[2.5rem] p-10 text-white flex flex-col items-center justify-center space-y-8 animate-in fade-in zoom-in duration-500">
+                                <span class="text-blue-500 font-black uppercase tracking-widest text-[9px] bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">Result Verified</span>
+                                <div class="text-center">
+                                    <div id="resNum" class="text-7xl font-black italic">1</div>
+                                    <div class="h-1.5 bg-blue-600 w-24 mx-auto my-6 rounded-full shadow-lg shadow-blue-600/50"></div>
+                                    <div id="resDen" class="text-7xl font-black italic">2</div>
+                                </div>
+                                <p id="explanation" class="text-slate-500 text-[10px] font-black uppercase tracking-widest italic text-center"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="lg:col-span-4">
+                <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm sticky top-28">
+                    <h3 class="font-black uppercase italic text-xs mb-8 border-l-4 border-blue-600 pl-4">System Guide</h3>
+                    <div class="space-y-10">
+                        <div class="flex gap-4">
+                            <span class="text-blue-600 font-black italic text-2xl">01</span>
+                            <p class="text-slate-500 text-sm font-bold leading-relaxed italic">Input your numerator in the primary field.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-blue-600 font-black italic text-2xl">02</span>
+                            <p class="text-slate-500 text-sm font-bold leading-relaxed italic">Define the denominator base to establish ratio.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-blue-600 font-black italic text-2xl">03</span>
+                            <p class="text-slate-500 text-sm font-bold leading-relaxed italic">Execute to divide units by the GCD algorithm.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-600 pt-24 pb-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-20">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-divide text-3xl text-blue-600"></i>
+                        <span class="text-3xl font-black tracking-tighter italic uppercase">FRACTIONPRO<span class="text-blue-600">.</span></span>
+                    </div>
+                    <p class="text-sm font-bold leading-relaxed text-slate-500 mb-8 italic">World-class mathematical engine providing 100% precision for global educational standards.</p>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer"><i class="fab fa-github"></i></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Math Suite</h4>
+                        <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                            <li class="hover:text-white transition cursor-pointer">Matrix Ops</li>
+                            <li class="hover:text-white transition cursor-pointer">Algebra Pro</li>
+                            <li class="hover:text-white transition cursor-pointer">Unit Conv</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Legal</h4>
+                        <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest">
+                            <li class="hover:text-white transition cursor-pointer">Privacy</li>
+                            <li class="hover:text-white transition cursor-pointer">Terms</li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <h4 class="text-white font-black uppercase italic text-[10px] tracking-widest mb-8 border-l-2 border-blue-600 pl-3">Tech Infrastructure</h4>
+                        <div class="flex gap-6 text-2xl opacity-10">
+                            <i class="fab fa-aws"></i><i class="fab fa-google-cloud"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-black uppercase tracking-[0.5em]">
+                <p>© 2026 FractionPro | Engineered by ALi Developer</p>
+                <p class="text-slate-800">Deployment v5.2.0-Production</p>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script>
+        function gcd(a, b) { return b ? gcd(b, a % b) : a; }
+
+        function simplify() {
+            let n = parseInt(document.getElementById('num').value);
+            let d = parseInt(document.getElementById('den').value);
+            if (!n || !d || d === 0) { alert("Invalid Parameters Detected."); return; }
+
+            let common = gcd(Math.abs(n), Math.abs(d));
+            document.getElementById('resNum').innerText = n / common;
+            document.getElementById('resDen').innerText = d / common;
+            document.getElementById('explanation').innerText = `GCD Logic: Division by common factor ${common}`;
+
+            document.getElementById('placeholder').classList.add('hidden');
+            const box = document.getElementById('resultBox');
+            box.classList.remove('hidden');
+            
+            if(window.innerWidth < 768) {
+                box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    </script>
+</body>
+</html>

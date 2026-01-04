@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- SEO & Viral Meta Tags (USA Optimized) -->
+    <title>Zenith Zero-Based Budget Planner | Give Every Dollar a Job</title>
+    <meta name="description"
+        content="Master your finances with the ultimate Zero-Based Budgeting tool. Allocate every dollar of your income, eliminate debt, and build wealth with institutional precision.">
+    <meta name="keywords"
+        content="Zero Based Budget, Personal Finance Tool, Budget Planner USA, Debt Management, Wealth Builder, Dave Ramsey Style Budget">
+    <meta name="author" content="Zenith Finance">
+
+    <!-- Scripts & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --brand: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg-slate: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-slate);
+            color: #1e293b;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .budget-input {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            outline: none;
+            font-weight: 600;
+        }
+
+        .budget-input:focus {
+            border-color: var(--brand);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .sticky-summary {
+            position: sticky;
+            top: 2rem;
+        }
+
+        /* Progress Bar Animation */
+        .progress-fill {
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-padding {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Header / Navbar -->
+    <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center">
+                <i class="fas fa-vault text-white"></i>
+            </div>
+            <span class="text-xl font-extrabold tracking-tight">ZENITH<span
+                    class="text-blue-600 font-normal">BUDGET</span></span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span
+                class="hidden md:inline-flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-widest">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> Security: AES-256
+            </span>
+            <button onclick="window.location.reload()" class="p-2 hover:bg-slate-200 rounded-full transition-colors">
+                <i class="fas fa-rotate-right text-slate-600"></i>
+            </button>
+            <a href="/index.html" class="hover:text-blue-600 transition">Exit</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-8 pb-20">
+
+        <!-- Left: Inputs -->
+        <div class="lg:col-span-8 space-y-8">
+
+            <!-- Hero Section -->
+            <div class="mb-10">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Zero-Based Planner.</h1>
+                <p class="text-slate-500 text-lg max-w-2xl">Income minus outgo equals exactly zero. That's how wealth is
+                    built. Start by entering your monthly income.</p>
+            </div>
+
+            <!-- Income Section -->
+            <section class="glass-card p-8 bg-white">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h2 class="text-xl font-bold">Monthly Income</h2>
+                </div>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                    <input type="number" id="totalIncome" placeholder="5,000"
+                        class="budget-input pl-8 text-2xl h-16 bg-slate-50 border-none" value="5000"
+                        oninput="calculateBudget()">
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <div id="categoriesContainer" class="space-y-6">
+                <!-- Housing -->
+                <section class="glass-card p-8 bg-white">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-house"></i>
+                            </div>
+                            <h2 class="text-xl font-bold">Housing & Utilities</h2>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">Essential</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-2 block">Rent /
+                                Mortgage</label>
+                            <input type="number" class="budget-input category-input" value="1500"
+                                data-category="housing" oninput="calculateBudget()">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-2 block">Electricity &
+                                Water</label>
+                            <input type="number" class="budget-input category-input" value="300" data-category="housing"
+                                oninput="calculateBudget()">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Food & Transport -->
+                <section class="glass-card p-8 bg-white">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h2 class="text-xl font-bold">Living Expenses</h2>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">Lifestyle</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-2 block">Groceries</label>
+                            <input type="number" class="budget-input category-input" value="600" data-category="living"
+                                oninput="calculateBudget()">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-2 block">Transport /
+                                Fuel</label>
+                            <input type="number" class="budget-input category-input" value="400" data-category="living"
+                                oninput="calculateBudget()">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Wealth & Savings -->
+                <section class="glass-card p-8 bg-white border-2 border-emerald-500/20">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h2 class="text-xl font-bold text-emerald-800">Wealth Building</h2>
+                        </div>
+                        <span
+                            class="px-3 py-1 bg-emerald-500 text-white text-[10px] font-black rounded-full uppercase tracking-widest">Future
+                            Value</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[10px] font-bold text-emerald-600 uppercase mb-2 block">Emergency
+                                Fund</label>
+                            <input type="number" class="budget-input category-input border-emerald-200" value="500"
+                                data-category="wealth" oninput="calculateBudget()">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-emerald-600 uppercase mb-2 block">Investments
+                                (401k/IRA)</label>
+                            <input type="number" class="budget-input category-input border-emerald-200" value="1000"
+                                data-category="wealth" oninput="calculateBudget()">
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Image Prompt 1: Financial Serenity -->
+            <div class="rounded-3xl overflow-hidden relative h-64 shadow-2xl">
+                <img src="/images/Financial Planning concept.png" alt="Financial Planning Concept"
+                    class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent flex items-center p-12">
+                    <div class="max-w-xs">
+                        <h3 class="text-white text-2xl font-bold mb-2">Build Your Moat.</h3>
+                        <p class="text-blue-100 text-sm">A zero-based budget is the most effective way to reach your
+                            first million.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Summary (Sticky) -->
+        <div class="lg:col-span-4">
+            <div class="sticky-summary space-y-6">
+
+                <!-- Zero Status Card -->
+                <div id="statusCard" class="glass-card p-8 transition-all duration-500">
+                    <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-2">Remaining to Assign
+                    </p>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-black" id="remainingDisplay">$0</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
+                            <div id="budgetProgress" class="progress-fill h-full bg-blue-600" style="width: 0%"></div>
+                        </div>
+                        <p id="statusMessage" class="text-sm font-medium text-slate-600">Loading your plan...</p>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="glass-card p-6 bg-slate-900 text-white space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Total Income</span>
+                        <span id="statIncome" class="font-bold">$0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Total Expenses</span>
+                        <span id="statExpense" class="font-bold">$0</span>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex justify-between items-center">
+                        <span class="text-xs text-emerald-400 font-bold uppercase">Savings Rate</span>
+                        <span id="savingsRate" class="text-emerald-400 font-black text-xl">0%</span>
+                    </div>
+                </div>
+
+                <!-- Image Prompt 2: Modern Lifestyle -->
+                <div class="rounded-3xl overflow-hidden shadow-lg border border-slate-200">
+                    <img src="/images/tech-dashboard.png" alt="Tech Dashboard Investment"
+                        class="w-full h-40 object-cover">
+                    <div class="p-6 bg-white">
+                        <h4 class="font-bold text-sm mb-1">USA Market Standards</h4>
+                        <p class="text-xs text-slate-500">Based on the 50/30/20 rule of thumb, optimized for total
+                            allocation.</p>
+                    </div>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="flex flex-col gap-3">
+                    <button onclick="window.print()"
+                        class="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fas fa-print"></i> Save as PDF
+                    </button>
+                    <p class="text-[10px] text-center text-slate-400 font-bold uppercase tracking-widest">
+                        Privacy First: No Data Leaves Your Browser
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+
+    </main>
+    <!-- 7️⃣ Footer -->
+    <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-20 mb-24">
+                <div class="lg:col-span-6">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-calculator text-4xl text-blue-600"></i>
+                        <span class="text-4xl font-black tracking-tighter italic">CALCMASTER<span
+                                class="text-blue-600">.</span></span>
+                    </div>
+                    <p class="text-xl font-bold leading-relaxed mb-10 text-slate-400 max-w-lg">The gold standard for
+                        high-fidelity calculations. Verified for 2025 compliance across North America.</p>
+                    <!-- SEO / Ad Links -->
+                    <div class="flex space-x-6 mt-4">
+                        <a href="/privacy-policy.html" class="text-slate-400 hover:text-white text-sm">Privacy
+                            Policy</a>
+                        <a href="/terms-of-service.html" class="text-slate-400 hover:text-white text-sm">Terms of
+                            Service</a>
+                        <a href="/cookie-policy.html" class="text-slate-400 hover:text-white text-sm">Cookie Policy</a>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 text-right">
+                    <h5
+                        class="text-white font-black mb-10 text-xs uppercase tracking-widest italic border-r-4 border-blue-600 pr-4">
+                        Global Network</h5>
+                    <div class="flex justify-end space-x-8 text-3xl opacity-50 hover:opacity-100 transition">
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-aws"></i>
+                        <i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-16 border-t border-white/5 text-center">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2025 CalcMaster. Engineered in Austin,
+                    Texas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function calculateBudget() {
+            const income = parseFloat(document.getElementById('totalIncome').value) || 0;
+            const inputs = document.querySelectorAll('.category-input');
+            let totalExpense = 0;
+            let wealthSavings = 0;
+
+            inputs.forEach(input => {
+                const val = parseFloat(input.value) || 0;
+                totalExpense += val;
+                if (input.dataset.category === 'wealth') {
+                    wealthSavings += val;
+                }
+            });
+
+            const remaining = income - totalExpense;
+            const progress = (totalExpense / income) * 100;
+            const savingsRate = income > 0 ? (wealthSavings / income) * 100 : 0;
+
+            // UI Updates
+            updateRemainingDisplay(remaining);
+            document.getElementById('statIncome').innerText = '$' + income.toLocaleString();
+            document.getElementById('statExpense').innerText = '$' + totalExpense.toLocaleString();
+            document.getElementById('savingsRate').innerText = Math.round(savingsRate) + '%';
+
+            // Progress Bar
+            const bar = document.getElementById('budgetProgress');
+            bar.style.width = Math.min(progress, 100) + '%';
+
+            if (progress > 100) {
+                bar.classList.remove('bg-blue-600', 'bg-emerald-500');
+                bar.classList.add('bg-rose-500');
+            } else if (progress === 100) {
+                bar.classList.remove('bg-blue-600', 'bg-rose-500');
+                bar.classList.add('bg-emerald-500');
+            } else {
+                bar.classList.remove('bg-emerald-500', 'bg-rose-500');
+                bar.classList.add('bg-blue-600');
+            }
+
+            updateStatusMessage(remaining, income);
+        }
+
+        function updateRemainingDisplay(val) {
+            const display = document.getElementById('remainingDisplay');
+            const card = document.getElementById('statusCard');
+
+            display.innerText = (val < 0 ? '-$' : '$') + Math.abs(val).toLocaleString();
+
+            if (val === 0) {
+                card.style.borderColor = '#10b981';
+                display.className = "text-4xl font-black text-emerald-600";
+            } else if (val < 0) {
+                card.style.borderColor = '#f43f5e';
+                display.className = "text-4xl font-black text-rose-600";
+            } else {
+                card.style.borderColor = '#2563eb';
+                display.className = "text-4xl font-black text-blue-600";
+            }
+        }
+
+        function updateStatusMessage(rem, inc) {
+            const msg = document.getElementById('statusMessage');
+            if (inc === 0) {
+                msg.innerText = "Start by entering your income.";
+                msg.className = "text-sm font-medium text-slate-500";
+            } else if (rem > 0) {
+                msg.innerText = "You still have $" + rem.toLocaleString() + " to give a job.";
+                msg.className = "text-sm font-medium text-blue-600";
+            } else if (rem === 0) {
+                msg.innerText = "Perfect! You've achieved a Zero-Based Budget.";
+                msg.className = "text-sm font-medium text-emerald-600";
+            } else {
+                msg.innerText = "Warning: You've over-budgeted by $" + Math.abs(rem).toLocaleString();
+                msg.className = "text-sm font-medium text-rose-600 font-bold";
+            }
+        }
+
+        // Initialize
+        window.onload = calculateBudget;
+    </script>
+
+</body>
+
+</html>

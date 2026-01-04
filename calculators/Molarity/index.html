@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <title>Molarity & Solution Mixture Calculator | Professional Chemistry Tool 2026</title>
+    <meta name="description" content="Calculate Molarity, Solution Mix, and Dilution factors (M1V1=M2V2) with high precision. Professional-grade chemistry tool for labs and students.">
+    <meta name="keywords" content="Molarity Calculator, Solution Mixture Solver, Dilution Calculator, M1V1 M2V2 Solver, Chemistry Lab Tool">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc;
+            color: #0f172a;
+            scroll-behavior: smooth;
+        }
+        .science-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 2rem;
+        }
+        .solve-btn {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .solve-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(5, 150, 105, 0.5);
+        }
+        .variable-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 1.5rem;
+        }
+        .nav-link { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <nav class="p-6 max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-vial text-2xl text-emerald-600"></i>
+            <span class="text-2xl font-black tracking-tighter italic uppercase">CALC<span class="text-emerald-600">MASTER</span></span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-slate-500 nav-link">
+            <a href="#molarity" class="hover:text-emerald-600">Molarity</a>
+            <a href="#dilution" class="hover:text-emerald-600">Solution Mix</a>
+            <a href="#theory" class="hover:text-emerald-600">Chemical Theory</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Hero Section -->
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight">
+                    Molarity <span class="text-emerald-600 italic">&</span> Mix
+                </h1>
+                <p class="text-slate-500 text-lg font-medium leading-relaxed">
+                    Precision-engineered for liquid concentrations. Calculate solute mass, solution molarity, or dilution ratios with scientific-grade accuracy.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <span class="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold uppercase tracking-widest">Lab Standard 2.0</span>
+                    <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-xs font-bold uppercase tracking-widest">M1V1 = M2V2</span>
+                </div>
+            </div>
+            
+            <div class="image-placeholder h-64 md:h-96">
+               
+                 <img src="/images/Chemical-Solution-Swirl.png" alt="Chemical Solution Swirl">
+               
+            </div>
+        </div>
+
+        <!-- Molarity Solver -->
+        <section id="molarity" class="mb-24">
+            <div class="mb-10 flex items-center space-x-4">
+                <div class="h-10 w-2 bg-emerald-600 rounded-full"></div>
+                <h2 class="text-3xl font-black uppercase tracking-tighter">I. Molarity Solver (M = n/V)</h2>
+            </div>
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-8 science-card p-8 md:p-12">
+                    <div class="grid md:grid-cols-2 gap-8 mb-10">
+                        <div class="space-y-3">
+                            <label class="variable-label">Solute Amount (n)</label>
+                            <div class="flex">
+                                <input type="number" id="mol-n" placeholder="Moles..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white outline-none font-bold text-lg">
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="variable-label">Solution Volume (V)</label>
+                            <div class="flex">
+                                <input type="number" id="mol-v" placeholder="Volume..." class="w-full p-4 bg-slate-50 rounded-l-xl border-y border-l border-slate-200 focus:bg-white outline-none font-bold text-lg">
+                                <select id="unit-v" class="bg-slate-100 border border-slate-200 rounded-r-xl px-4 font-bold text-xs uppercase cursor-pointer">
+                                    <option value="l">Liters</option>
+                                    <option value="ml">mL</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="calculateMolarity()" class="w-full solve-btn text-white py-6 rounded-2xl font-black text-xl uppercase tracking-widest shadow-xl">Calculate Concentration</button>
+                </div>
+                <div class="lg:col-span-4 bg-slate-950 rounded-[2rem] p-10 text-white min-h-[300px] flex flex-col justify-center text-center">
+                    <div id="mol-result-box">
+                        <span class="text-emerald-400 text-xs font-black uppercase tracking-[0.2em]">Concentration (M)</span>
+                        <div id="mol-res-val" class="text-6xl font-black my-6 tracking-tighter">0.00</div>
+                        <p class="text-slate-500 text-sm font-bold uppercase tracking-widest">mol / L</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Mixture / Dilution Solver -->
+        <section id="dilution" class="mb-24">
+            <div class="mb-10 flex items-center space-x-4">
+                <div class="h-10 w-2 bg-emerald-600 rounded-full"></div>
+                <h2 class="text-3xl font-black uppercase tracking-tighter">II. Solution Mix / Dilution (M₁V₁ = M₂V₂)</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-8 science-card p-8 md:p-12">
+                    <div class="grid md:grid-cols-2 gap-8 mb-10">
+                        <div class="space-y-3">
+                            <label class="variable-label">Initial Molarity (M₁)</label>
+                            <input type="number" id="dil-m1" placeholder="M1..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 outline-none font-bold">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="variable-label">Initial Volume (V₁)</label>
+                            <input type="number" id="dil-v1" placeholder="V1..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 outline-none font-bold">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="variable-label">Final Molarity (M₂)</label>
+                            <input type="number" id="dil-m2" placeholder="M2..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 outline-none font-bold">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="variable-label">Final Volume (V₂)</label>
+                            <input type="number" id="dil-v2" placeholder="V2..." class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 outline-none font-bold">
+                        </div>
+                    </div>
+                    <button onclick="calculateDilution()" class="w-full solve-btn text-white py-6 rounded-2xl font-black text-xl uppercase tracking-widest shadow-xl">Solve Missing Parameter</button>
+                </div>
+                
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="image-placeholder h-48">
+                     
+                         <img src="/images/Mixture-Graphic.png" alt="Mixture-Graphic">
+                        
+                    </div>
+                    <div class="bg-emerald-950 rounded-[2rem] p-8 text-white text-center">
+                        <h4 id="dil-res-label" class="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">Result</h4>
+                        <div id="dil-res-val" class="text-4xl font-black mb-2">---</div>
+                        <p id="dil-res-formula" class="text-[10px] text-slate-500 font-mono">Formula will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Theory Section -->
+        <section id="theory" class="mb-24">
+            <h2 class="text-3xl font-black mb-12 text-center uppercase tracking-tighter italic">Chemical Principles</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="science-card p-8">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mb-6 text-emerald-600">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Molarity Definition</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Molarity (M) is the number of moles of solute per liter of solution. It is the most common way to express concentration.</p>
+                    <div class="image-placeholder h-32">
+                        
+                        <img src="/images/Dissolution-Image.png" alt="Dissolution-Image">
+                    </div>
+                </div>
+                
+                <div class="science-card p-8">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mb-6 text-emerald-600">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Dilution Law</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">When you dilute a solution, the amount of solute remains constant. Only the volume increases, lowering the concentration.</p>
+                    <div class="image-placeholder h-32">
+                       
+                         <img src="/images/Concentration-Levels.png" alt="Concentration-Levels">
+                   
+                    </div>
+                </div>
+
+                <div class="science-card p-8">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mb-6 text-emerald-600">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Lab Precision</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Accurate mixing is crucial in medicine and industrial chemistry to ensure reactions proceed safely and predictably.</p>
+                    <div class="image-placeholder h-32">
+                        
+                         <img src="/images/Precision-Droplet.png" alt="Precision-Droplet">
+                      
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Professional Footer (Exactly as before) -->
+    <footer class="bg-slate-950 text-slate-500 pt-32 pb-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 mb-24">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center space-x-2 text-white mb-8">
+                        <i class="fas fa-calculator text-3xl text-emerald-600"></i>
+                        <span class="text-3xl font-black tracking-tighter italic uppercase">CALCMASTER<span class="text-emerald-600">.</span></span>
+                    </div>
+                    <p class="text-lg font-bold leading-relaxed mb-8 text-slate-400">
+                        The gold standard for high-fidelity calculations. Verified for 2026 compliance across international standards.
+                    </p>
+                    <div class="flex space-x-5">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-emerald-600 pl-4">Financials</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="#" class="hover:text-white transition">Mortgage Calc</a></li>
+                        <li><a href="#" class="hover:text-white transition">Loan Repayment</a></li>
+                        <li><a href="#" class="hover:text-white transition">Tax Estimator</a></li>
+                        <li><a href="#" class="hover:text-white transition">ROI Engine</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-2">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-emerald-600 pl-4">Health & Math</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="#" class="hover:text-white transition">BMI & Weight</a></li>
+                        <li><a href="#" class="hover:text-white transition">Body Fat</a></li>
+                        <li><a href="#" class="hover:text-white transition">Matrix Ops</a></li>
+                        <li><a href="#" class="hover:text-white transition">Unit Conv.</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-4">
+                    <h5 class="text-white font-black mb-8 text-xs uppercase tracking-widest italic border-l-4 border-emerald-600 pl-4">Compliance</h5>
+                    <div class="grid grid-cols-2 gap-4 text-sm font-bold mb-10">
+                        <a href="#" class="hover:text-white">Privacy Policy</a>
+                        <a href="#" class="hover:text-white">Terms of Service</a>
+                        <a href="#" class="hover:text-white">Cookie Policy</a>
+                        <a href="#" class="hover:text-white">Contact Us</a>
+                    </div>
+                    <div class="flex space-x-6 text-2xl opacity-30">
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-aws"></i>
+                        <i class="fab fa-stripe"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em]">© 2026 CalcMaster. Engineered with Precision.</p>
+                <p class="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Version 4.2.0-Stable</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function calculateMolarity() {
+            let n = document.getElementById('mol-n').value;
+            let v = document.getElementById('mol-v').value;
+            let unitV = document.getElementById('unit-v').value;
+
+            if (!n || !v) return;
+
+            let volumeLiters = unitV === 'ml' ? v / 1000 : v;
+            let molarity = n / volumeLiters;
+
+            document.getElementById('mol-res-val').innerText = molarity.toFixed(4);
+        }
+
+        function calculateDilution() {
+            let m1 = document.getElementById('dil-m1').value;
+            let v1 = document.getElementById('dil-v1').value;
+            let m2 = document.getElementById('dil-m2').value;
+            let v2 = document.getElementById('dil-v2').value;
+
+            const inputs = [m1, v1, m2, v2];
+            const emptyFields = inputs.filter(x => x === "").length;
+
+            if (emptyFields !== 1) {
+                document.getElementById('dil-res-val').innerText = "ERROR";
+                return;
+            }
+
+            let result, formula;
+
+            if (m1 === "") {
+                result = (m2 * v2) / v1;
+                formula = "M₁ = (M₂ × V₂) / V₁";
+                document.getElementById('dil-res-label').innerText = "Initial Molarity (M1)";
+            } else if (v1 === "") {
+                result = (m2 * v2) / m1;
+                formula = "V₁ = (M₂ × V₂) / M₁";
+                document.getElementById('dil-res-label').innerText = "Initial Volume (V1)";
+            } else if (m2 === "") {
+                result = (m1 * v1) / v2;
+                formula = "M₂ = (M₁ × V₁) / V₂";
+                document.getElementById('dil-res-label').innerText = "Final Molarity (M2)";
+            } else if (v2 === "") {
+                result = (m1 * v1) / m2;
+                formula = "V₂ = (M₁ × V₁) / M₂";
+                document.getElementById('dil-res-label').innerText = "Final Volume (V2)";
+            }
+
+            document.getElementById('dil-res-val').innerText = parseFloat(result).toFixed(4);
+            document.getElementById('dil-res-formula').innerText = formula;
+        }
+    </script>
+</body>
+</html>
