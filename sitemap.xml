@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>https://yourdomain.com/</loc>
+      <loc>https://calcmastercom.vercel.app/</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>1.00</priority>
    </url>
    <url>
-      <loc>https://yourdomain.com/about.html</loc>
+      <loc>https://calcmastercom.vercel.app/about.html</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>0.80</priority>
    </url>
    <url>
-      <loc>https://yourdomain.com/contact.html</loc>
+      <loc>https://calcmastercom.vercel.app/contact/index.html</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>0.80</priority>
    </url>
    <url>
-      <loc>https://yourdomain.com/privacy-policy.html</loc>
+      <loc>https://calcmastercom.vercel.app/privacy-policy/index.html</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>0.50</priority>
    </url>
    <url>
-      <loc>https://yourdomain.com/terms-of-service.html</loc>
+      <loc>https://calcmastercom.vercel.app/Terms-of-Service/index.html</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>0.50</priority>
    </url>
    <url>
-      <loc>https://yourdomain.com/cookie-policy.html</loc>
+      <loc>https://calcmastercom.vercel.app/cookie-policy/index.html</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>0.50</priority>
    </url>
