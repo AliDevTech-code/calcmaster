@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap Link
-Sitemap: https://calcmastercom.vercel.app/sitemap.xml
+Sitemap: https://calcmaster-tools.netlify.app/sitemap.xml
