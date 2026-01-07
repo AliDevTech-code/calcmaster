@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap Link
-Sitemap: https://calcmaster-tools.netlify.app/sitemap.xml
+Sitemap: https://alidevtech-code.github.io/calcmaster/sitemap.xml
