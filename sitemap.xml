@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>https://calcmaster-tools.netlify.app/</loc>
+      <loc>https://alidevtech-code.github.io/calcmaster/</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>1.00</priority>
    </url>
    <url>
-      <loc>https://calcmaster-tools.netlify.app/about.html</loc>
+      <loc>https://alidevtech-code.github.io/calcmaster/about.html</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>0.80</priority>
    </url>
    <url>
-      <loc>https://calcmaster-tools.netlify.app/contact/index.html</loc>
+      <loc>https://alidevtech-code.github.io/calcmaster/contact/index.html</loc>
       <lastmod>2026-01-04</lastmod>
       <priority>0.80</priority>
    </url>
