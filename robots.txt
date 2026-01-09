@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap Link
-Sitemap: https://alidevtech-code.github.io/calcmaster/sitemap.xml
+Sitemap: https://calcmastercom.vercel.app/sitemap.xml
