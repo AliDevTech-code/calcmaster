@@ -1,35 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <url>
-      <loc>https://calcmastercom.vercel.app/</loc>
-      <lastmod>2026-01-11</lastmod>
-      <priority>1.00</priority>
-   </url>
-   <url>
-      <loc>https://calcmastercom.vercel.app/about.html</loc>
-      <lastmod>2026-01-11</lastmod>
-      <priority>0.80</priority>
-   </url>
-   <url>
-      <loc>https://calcmastercom.vercel.app/contact/index.html</loc>
-      <lastmod>2026-01-11</lastmod>
-      <priority>0.80</priority>
-   </url>
-   <url>
-      <loc>https://calcmastercom.vercel.app/privacy-policy/index.html</loc>
-      <lastmod>2026-01-11</lastmod>
-      <priority>0.50</priority>
-   </url>
-   <url>
-      <loc>https://calcmastercom.vercel.app/Terms-of-Service/index.html</loc>
-      <lastmod>2026-01-11</lastmod>
-      <priority>0.50</priority>
-   </url>
-   <url>
-      <loc>https://calcmastercom.vercel.app/cookie-policy/index.html</loc>
-      <lastmod>2026-01-11</lastmod>
-      <priority>0.50</priority>
-   </url>
+   <url><loc>https://calcmastercom.vercel.app/</loc><lastmod>2026-01-16</lastmod><priority>1.00</priority></url>
+   <url><loc>https://calcmastercom.vercel.app/about.html</loc><lastmod>2026-01-16</lastmod><priority>0.80</priority></url>
+   <url><loc>https://calcmastercom.vercel.app/contact/index.html</loc><lastmod>2026-01-16</lastmod><priority>0.80</priority></url>
+   <url><loc>https://calcmastercom.vercel.app/privacy-policy/index.html</loc><lastmod>2026-01-16</lastmod><priority>0.50</priority></url>
 
    <url><loc>https://calcmastercom.vercel.app/calculators/mortgage-calculator/index.html</loc><priority>0.90</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/emi-calculator/index.html</loc><priority>0.90</priority></url>
@@ -37,29 +11,17 @@
    <url><loc>https://calcmastercom.vercel.app/calculators/tax-calculator/index.html</loc><priority>0.90</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/Compound/index.html</loc><priority>0.85</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/Retirement/index.html</loc><priority>0.85</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/investment-return-planner/index.html</loc><priority>0.85</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Budget-Planner/index.html</loc><priority>0.85</priority></url>
 
    <url><loc>https://calcmastercom.vercel.app/calculators/Body-Composition/index.html</loc><priority>0.80</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Macro-Nutrients/index.html</loc><priority>0.80</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/Calorie/index.html</loc><priority>0.80</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/BMR-Solver/index.html</loc><priority>0.80</priority></url>
 
    <url><loc>https://calcmastercom.vercel.app/calculators/ideal-gas/index.html</loc><priority>0.75</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Molarity/index.html</loc><priority>0.75</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Wave-Freq/index.html</loc><priority>0.75</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Ohm's-Law/index.html</loc><priority>0.75</priority></url>
+   <url><loc>https://calcmastercom.vercel.app/calculators/Ohm&apos;s-Law/index.html</loc><priority>0.75</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/Kinetic-Energy/index.html</loc><priority>0.75</priority></url>
 
    <url><loc>https://calcmastercom.vercel.app/calculators/matrix-ops/index.html</loc><priority>0.75</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Fraction-Pro/index.html</loc><priority>0.75</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Geometry-Hub/index.html</loc><priority>0.75</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Stat-Mean/index.html</loc><priority>0.75</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Standard-Dev/index.html</loc><priority>0.75</priority></url>
-
-   <url><loc>https://calcmastercom.vercel.app/calculators/Due-Date/index.html</loc><priority>0.70</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/GPA-Calc/index.html</loc><priority>0.70</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/Age-Pro/index.html</loc><priority>0.70</priority></url>
-   <url><loc>https://calcmastercom.vercel.app/calculators/Password-Strength/index.html</loc><priority>0.70</priority></url>
    <url><loc>https://calcmastercom.vercel.app/calculators/Unit-Conv/index.html</loc><priority>0.70</priority></url>
 </urlset>
