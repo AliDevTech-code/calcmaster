@@ -1,243 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CalcMaster | 500+ Free Professional Calculators</title>
-  <meta name="description" content="CalcMaster: Free professional calculators for finance, health, science & math. Mortgage, tax, salary, BMR, age & more. 100% accurate." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-    .bg-mesh {
-      background-color: #0f172a;
-      background-image: radial-gradient(at 0% 0%, rgba(37,99,235,0.15) 0, transparent 50%),
-                        radial-gradient(at 50% 0%, rgba(79,70,229,0.15) 0, transparent 50%);
-    }
-    .nav-bg-dark { background: rgba(15,23,42,0.9); backdrop-filter: blur(12px); }
-    .nav-link-seo { position: relative; color: #94a3b8; transition: color .3s ease; }
-    .nav-link-seo:hover { color: #fff; }
-    .nav-link-seo::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:#3b82f6; transition: width .3s ease; }
-    .nav-link-seo:hover::after { width:100%; }
-    .security-card { background:#fff; border:1px solid #e2e8f0; border-radius:2rem; }
-    .input-auth { background:#f1f5f9; border:2px solid transparent; border-radius:1.2rem; transition:all .3s ease; }
-    .input-auth:focus { background:#fff; border-color:#6366f1; box-shadow:0 0 0 4px rgba(99,102,241,.12); outline:none; }
-    .meter-bar { border-radius:999px; }
-    .shield-icon { transition: all .4s ease; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalcMaster | 500+ Free Professional Calculators</title>
+    <meta name="description" content="CalcMaster: Free professional calculators for finance, health, science & math. Mortgage, tax, salary, BMR, age & more. 100% accurate.">
+    <meta name="keywords" content="CalcMaster, free calculators, online calculators, geometry hub, mortgage calculator, tax calculator, salary calculator, financial calculators, math tools, unit converter, BMR calculator, age calculator, pregnancy due date calculator, compound interest calculator, ROI calculator, matrix calculator, molarity calculator">
+    <link rel="canonical" href="https://calcmastercom.vercel.app/">
+    <meta name="monetag" content="fc9a183616c8760adf6dbf25cca1c9f8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcmastercom.vercel.app/">
+    <meta property="og:title" content="CalcMaster | Free Professional Calculators">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CalcMaster | Free Professional Calculators">
+    <meta name="twitter:description" content="CalcMaster: Free professional calculators for finance, health, science & math. 100% accurate.">
+    <meta name="twitter:image" content="https://calcmastercom.vercel.app/images/financial-dashboard.webp">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6915724155548436" crossorigin="anonymous"></script>
+    <meta property="og:description" content="CalcMaster: Free professional calculators for finance, health, science & math. 100% accurate.">
+    <meta property="og:image" content="https://calcmastercom.vercel.app/images/financial-dashboard.webp">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-animate {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .nav-link {
+            position: relative;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover { color: #2563eb; }
+
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100%);
+        }
+
+        #mobile-menu.active { transform: translateX(0); }
+
+        .bg-mesh {
+            background-color: #0f172a;
+            background-image: radial-gradient(at 0% 0%, rgba(37,99,235,0.15) 0, transparent 50%),
+                radial-gradient(at 50% 0%, rgba(79,70,229,0.15) 0, transparent 50%);
+        }
+
+        .nav-bg-dark {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-link-seo {
+            position: relative;
+            color: #94a3b8;
+            transition: color .3s ease;
+        }
+
+        .nav-link-seo:hover { color: #fff; }
+
+        .nav-link-seo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width .3s ease;
+        }
+
+        .nav-link-seo:hover::after { width: 100%; }
+
+        .security-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 2rem;
+        }
+
+        .input-auth {
+            background: #f1f5f9;
+            border: 2px solid transparent;
+            border-radius: 1.2rem;
+            transition: all .3s ease;
+        }
+
+        .input-auth:focus {
+            background: white;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+            outline: none;
+        }
+
+        .meter-bar { border-radius: 999px; }
+    </style>
 </head>
 <body class="bg-[#f8fafc] text-slate-900 overflow-x-hidden">
-  <header class="nav-bg-dark sticky top-0 z-[100] border-b border-slate-800/50">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="/" class="flex items-center space-x-2 group" title="CalcMaster - Professional Multi-Tool Calculator">
-        <div class="bg-blue-600 p-2.5 rounded-xl group-hover:rotate-[15deg] transition-all duration-500 shadow-lg shadow-blue-500/20">
-          <i class="fas fa-calculator text-white text-xl"></i>
-        </div>
-        <div class="flex flex-col leading-none">
-          <span class="text-2xl font-black tracking-tighter text-white">Calc<span class="text-blue-500">Master</span></span>
-          <span class="text-[8px] font-bold text-slate-500 uppercase tracking-[0.3em]">Precision Tools</span>
-        </div>
-      </a>
-
-      <div class="hidden lg:flex items-center space-x-8">
-        <a href="#hero" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">Home</a>
-        <a href="#featured" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">Financial Hub</a>
-        <a href="#categories" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">All Suites</a>
-        <a href="#seo-content" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">Knowledge</a>
-        <a href="/contact/index.html" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">Help Center</a>
-      </div>
-
-      <div class="hidden md:flex items-center space-x-6">
-        <a href="#featured" class="group relative bg-blue-600 text-white px-8 py-3 rounded-2xl font-black text-[11px] uppercase tracking-widest overflow-hidden transition-all active:scale-95 shadow-xl shadow-blue-500/20">
-          <span class="relative z-10">Get Expert Tools</span>
-        </a>
-      </div>
-    </nav>
-  </header>
-
-  <section id="hero" class="relative overflow-hidden bg-mesh text-white pt-20 pb-32">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="flex flex-col lg:flex-row items-center gap-16">
-        <div class="lg:w-3/5 text-center lg:text-left">
-          <div class="inline-flex items-center space-x-2 px-5 py-2.5 bg-blue-500/10 rounded-full text-blue-400 text-xs font-black mb-8 border border-blue-500/20 uppercase tracking-[0.2em]">
-            <span class="flex h-2 w-2 rounded-full bg-blue-400 animate-ping"></span>
-            <span>Updated for Q1 2025</span>
-          </div>
-          <h1 class="text-2xl md:text-6xl lg:text-6xl font-black mb-6 leading-tight tracking-tighter text-white">
-            Master Your <br>
-            <span class="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent italic">Financial Destiny.</span>
-          </h1>
-          <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed font-medium">
-            The ultimate calculation portal for North America. Institutional accuracy for mortgages, taxes, retirement, and science.
-          </p>
-          <a href="#featured" class="bg-blue-600 hover:bg-white hover:text-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-base transition-all shadow-xl shadow-blue-900/30 inline-flex items-center">
-            Browse 500+ Calculators
-            <i class="fas fa-arrow-right ml-2"></i>
-          </a>
-        </div>
-
-        <div class="lg:w-2/5 relative">
-          <div class="hero-animate relative w-full h-full rounded-[60px] overflow-hidden shadow-[0_25px_50px_rgba(0,0,0,0.5)] aspect-square">
-            <img src="images/calculater.webp" alt="CalcMaster Professional Calculator Visual" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-            <div class="absolute bottom-10 left-10">
-              <p class="text-4xl font-black text-white">$482,900</p>
-              <p class="text-blue-400 font-bold uppercase tracking-widest text-xs mt-1">Investment Projection</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="featured" class="py-32 bg-[#fafafa] overflow-hidden">
-    <div class="container mx-auto px-6 text-center mb-24 relative">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-blue-100/50 rounded-full blur-[120px] -z-10"></div>
-      <div class="text-center px-4">
-        <h1 class="text-5xl md:text-6xl lg:text-6xl font-black mb-8 tracking-tighter uppercase italic leading-[0.9] text-blue-500">
-          Financial <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Command</span> Center
-        </h1>
-        <div class="h-1.5 w-40 bg-blue-600 mx-auto mb-8 rounded-full"></div>
-        <p class="text-xl text-blue-200/80 font-medium max-w-xl mx-auto leading-relaxed">Everything you need to manage your money like a professional.</p>
-      </div>
-    </div>
-
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-
-        <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)] hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)]">
-          <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
-            <div>
-              <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                <i class="fas fa-shield-halved text-xl"></i>
-              </div>
-              <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">Password Strength</h4>
-              <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-6">Entropy, checks, and crack-time score.</p>
-            </div>
-
-            <div class="security-card p-4 mb-4">
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-[9px] font-black uppercase tracking-widest text-slate-500">Security</span>
-                <i id="miniShield" class="fas fa-shield-virus text-indigo-500"></i>
-              </div>
-              <input type="password" id="miniPass" placeholder="Enter password..." class="input-auth w-full p-3 text-sm font-bold text-slate-700 mb-3" oninput="miniAnalyze()" />
-              <div class="grid grid-cols-4 gap-2 h-2 mb-3">
-                <div class="meter-bar bg-slate-200" id="miniBar1"></div>
-                <div class="meter-bar bg-slate-200" id="miniBar2"></div>
-                <div class="meter-bar bg-slate-200" id="miniBar3"></div>
-                <div class="meter-bar bg-slate-200" id="miniBar4"></div>
-              </div>
-              <div class="flex justify-between text-[9px] font-black uppercase tracking-widest text-slate-500">
-                <span id="miniStatus">No Input</span>
-                <span id="miniScore">0%</span>
-              </div>
-            </div>
-
-            <a href="/Password-Strength/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
-              <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
-              <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform">
-                <i class="fas fa-arrow-right text-[8px]"></i>
-              </div>
-              <div class="absolute inset-0 bg-indigo-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+    <header class="nav-bg-dark sticky top-0 z-[100] border-b border-slate-800/50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center space-x-2 group" title="CalcMaster - Professional Multi-Tool Calculator">
+                <div class="bg-blue-600 p-2.5 rounded-xl group-hover:rotate-[15deg] transition-all duration-500 shadow-lg shadow-blue-500/20">
+                    <i class="fas fa-calculator text-white text-xl"></i>
+                </div>
+                <div class="flex flex-col leading-none">
+                    <span class="text-2xl font-black tracking-tighter text-white">Calc<span class="text-blue-500">Master</span></span>
+                    <span class="text-[8px] font-bold text-slate-500 uppercase tracking-[0.3em]">Precision Tools</span>
+                </div>
             </a>
-          </div>
-        </div>
 
-        <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
-          <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
-            <div>
-              <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 ring-1 ring-blue-100 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                <i class="fas fa-home text-xl"></i>
-              </div>
-              <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">Mortgage Calc</h4>
-              <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">FHA, VA, Amortization.</p>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#hero" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">Home</a>
+                <a href="#featured" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">Financial Hub</a>
+                <a href="#categories" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">All Suites</a>
+                <a href="#seo-content" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">Knowledge</a>
+                <a href="/contact/index.html" class="nav-link-seo text-[11px] font-black uppercase tracking-widest">Help Center</a>
             </div>
-            <a href="/mortgage-calculator/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
-              <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
-              <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
-              <div class="absolute inset-0 bg-blue-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
-            </a>
-          </div>
-        </div>
 
-        <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
-          <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
-            <div>
-              <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                <i class="fas fa-clock text-xl"></i>
-              </div>
-              <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">EMI Calc</h4>
-              <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">Loan installments.</p>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#featured" class="group relative bg-blue-600 text-white px-8 py-3 rounded-2xl font-black text-[11px] uppercase tracking-widest overflow-hidden transition-all active:scale-95 shadow-xl shadow-blue-500/20">
+                    <span class="relative z-10">Get Expert Tools</span>
+                </a>
             </div>
-            <a href="/emi-calculator/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
-              <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
-              <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
-              <div class="absolute inset-0 bg-indigo-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
-            </a>
-          </div>
-        </div>
+        </nav>
+    </header>
 
-        <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
-          <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
-            <div>
-              <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100 group-hover:bg-emerald-600 group-hover:text-white transition-all">
-                <i class="fas fa-wallet text-xl"></i>
-              </div>
-              <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">Salary Calc</h4>
-              <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">Annual vs Hourly.</p>
+    <section id="hero" class="relative overflow-hidden bg-mesh text-white pt-20 pb-32">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-3/5 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-5 py-2.5 bg-blue-500/10 rounded-full text-blue-400 text-xs font-black mb-8 border border-blue-500/20 uppercase tracking-[0.2em]">
+                        <span class="flex h-2 w-2 rounded-full bg-blue-400 animate-ping"></span>
+                        <span>Updated for Q1 2025</span>
+                    </div>
+                    <h1 class="text-2xl md:text-6xl lg:text-6xl font-black mb-6 leading-tight tracking-tighter text-white">
+                        Master Your <br>
+                        <span class="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent italic">Financial Destiny.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed font-medium">
+                        The ultimate calculation portal for North America. Institutional accuracy for mortgages, taxes, retirement, and science.
+                    </p>
+                    <a href="#featured" class="bg-blue-600 hover:bg-white hover:text-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-base transition-all shadow-xl shadow-blue-900/30 inline-flex items-center">
+                        Browse 500+ Calculators
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="lg:w-2/5 relative">
+                    <div class="hero-animate relative w-full h-full rounded-[60px] overflow-hidden shadow-[0_25px_50px_rgba(0,0,0,0.5)] aspect-square">
+                        <img src="images/calculater.webp" alt="CalcMaster Professional Calculator Visual" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10">
+                            <p class="text-4xl font-black text-white">$482,900</p>
+                            <p class="text-blue-400 font-bold uppercase tracking-widest text-xs mt-1">Investment Projection</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <a href="/salary-calculator/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
-              <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
-              <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
-              <div class="absolute inset-0 bg-emerald-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
-            </a>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <script>
-    function miniAnalyze() {
-      const pass = document.getElementById('miniPass').value;
-      const checks = {
-        length: pass.length >= 8,
-        upper: /[A-Z]/.test(pass),
-        num: /[0-9]/.test(pass),
-        sym: /[^A-Za-z0-9]/.test(pass)
-      };
+    <section id="featured" class="py-32 bg-[#fafafa] overflow-hidden">
+        <div class="container mx-auto px-6 text-center mb-24 relative">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-blue-100/50 rounded-full blur-[120px] -z-10"></div>
+            <div class="text-center px-4">
+                <h1 class="text-5xl md:text-6xl lg:text-6xl font-black mb-8 tracking-tighter uppercase italic leading-[0.9] text-blue-500">
+                    Financial <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Command</span> Center
+                </h1>
+                <div class="h-1.5 w-40 bg-blue-600 mx-auto mb-8 rounded-full"></div>
+                <p class="text-xl text-blue-200/80 font-medium max-w-xl mx-auto leading-relaxed">Everything you need to manage your money like a professional.</p>
+            </div>
+        </div>
 
-      let score = 0;
-      if (checks.length) score++;
-      if (checks.upper) score++;
-      if (checks.num) score++;
-      if (checks.sym) score++;
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
 
-      const bars = ['miniBar1','miniBar2','miniBar3','miniBar4'];
-      const colors = ['#ef4444','#f59e0b','#3b82f6','#10b981'];
-      const statusText = ['Weak','Fair','Strong','Secure'];
+                <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
+                    <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
+                        <div>
+                            <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                                <i class="fas fa-shield-halved text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">Password Strength</h4>
+                            <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-6">Entropy, checks, and crack-time score.</p>
+                        </div>
 
-      bars.forEach((id, i) => {
-        const el = document.getElementById(id);
-        el.style.backgroundColor = i < score ? colors[score - 1] : '#e2e8f0';
-      });
+                        <div class="security-card p-4 mb-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-[9px] font-black uppercase tracking-widest text-slate-500">Security</span>
+                                <i id="miniShield" class="fas fa-shield-virus text-indigo-500"></i>
+                            </div>
+                            <input type="password" id="miniPass" placeholder="Enter password..." class="input-auth w-full p-3 text-sm font-bold text-slate-700 mb-3" oninput="miniAnalyze()">
+                            <div class="grid grid-cols-4 gap-2 h-2 mb-3">
+                                <div class="meter-bar bg-slate-200" id="miniBar1"></div>
+                                <div class="meter-bar bg-slate-200" id="miniBar2"></div>
+                                <div class="meter-bar bg-slate-200" id="miniBar3"></div>
+                                <div class="meter-bar bg-slate-200" id="miniBar4"></div>
+                            </div>
+                            <div class="flex justify-between text-[9px] font-black uppercase tracking-widest text-slate-500">
+                                <span id="miniStatus">No Input</span>
+                                <span id="miniScore">0%</span>
+                            </div>
+                        </div>
 
-      const status = document.getElementById('miniStatus');
-      const scoreText = document.getElementById('miniScore');
-      const shield = document.getElementById('miniShield');
+                        <a href="/Password-Strength/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
+                            <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
+                            <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform">
+                                <i class="fas fa-arrow-right text-[8px]"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-indigo-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
 
-      if (pass.length === 0) {
-        status.textContent = 'No Input';
-        scoreText.textContent = '0%';
-        shield.className = 'fas fa-shield-virus text-indigo-500';
-      } else {
-        status.textContent = statusText[score - 1] || 'Weak';
-        scoreText.textContent = `${score * 25}%`;
-        const icons = ['fa-shield-virus','fa-shield-heart','fa-shield-halved','fa-shield-check'];
-        shield.className = `fas ${icons[score - 1]} text-indigo-500`;
-      }
-    }
-  </script>
+                <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
+                    <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
+                        <div>
+                            <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 ring-1 ring-blue-100 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i class="fas fa-home text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">Mortgage Calc</h4>
+                            <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">FHA, VA, Amortization.</p>
+                        </div>
+                        <a href="/mortgage-calculator/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
+                            <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
+                            <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
+                            <div class="absolute inset-0 bg-blue-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
+                    <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
+                        <div>
+                            <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                                <i class="fas fa-wallet text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">Salary Calc</h4>
+                            <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">Annual vs Hourly.</p>
+                        </div>
+                        <a href="/salary-calculator/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
+                            <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
+                            <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
+                            <div class="absolute inset-0 bg-emerald-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
+                    <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
+                        <div>
+                            <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 ring-1 ring-amber-100 group-hover:bg-amber-600 group-hover:text-white transition-all">
+                                <i class="fas fa-percent text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">Tax Calc</h4>
+                            <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">IRS 2025 Ready.</p>
+                        </div>
+                        <a href="/tax-calculator/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
+                            <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
+                            <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
+                            <div class="absolute inset-0 bg-amber-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
+                    <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
+                        <div>
+                            <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 ring-1 ring-rose-100 group-hover:bg-rose-600 group-hover:text-white transition-all">
+                                <i class="fas fa-weight text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">BMI & Weight</h4>
+                            <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">Ideal Body Weight.</p>
+                        </div>
+                        <a href="/BMI-Calculator/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
+                            <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
+                            <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
+                            <div class="absolute inset-0 bg-rose-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
+                    <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
+                        <div>
+                            <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 ring-1 ring-cyan-100 group-hover:bg-cyan-600 group-hover:text-white transition-all">
+                                <i class="fas fa-calendar-day text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">Age Pro</h4>
+                            <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">Exact age in years, months, days.</p>
+                        </div>
+                        <a href="/Age-Pro/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
+                            <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
+                            <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
+                            <div class="absolute inset-0 bg-cyan-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
+                    <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
+                        <div>
+                            <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-orange-50 text-orange-600 ring-1 ring-orange-100 group-hover:bg-orange-600 group-hover:text-white transition-all">
+                                <i class="fas fa-seedling text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">BMR Solver</h4>
+                            <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">Basal metabolic rate.</p>
+                        </div>
+                        <a href="/BMR-Solver/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
+                            <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
+                            <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
+                            <div class="absolute inset-0 bg-orange-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white rounded-[40px] p-1 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]">
+                    <div class="h-full w-full bg-white rounded-[38px] p-6 md:p-8 flex flex-col justify-between border border-transparent">
+                        <div>
+                            <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 ring-1 ring-violet-100 group-hover:bg-violet-600 group-hover:text-white transition-all">
+                                <i class="fas fa-chart-line text-xl"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-black text-slate-900 tracking-tight italic uppercase mb-2">ROI Engine</h4>
+                            <p class="text-slate-400 font-bold text-xs md:text-sm leading-relaxed mb-8">Investment return planning.</p>
+                        </div>
+                        <a href="/roi-calculator/index.html" class="relative overflow-hidden group/btn bg-slate-900 text-white py-3.5 px-5 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-95">
+                            <span class="font-black uppercase italic text-[10px] tracking-widest relative z-10">Open Tool</span>
+                            <div class="relative z-10 w-5 h-5 flex items-center justify-center bg-white/20 rounded-lg group-hover/btn:translate-x-1 transition-transform"><i class="fas fa-arrow-right text-[8px]"></i></div>
+                            <div class="absolute inset-0 bg-violet-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="categories" class="py-28 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 mb-3">Global Directory</p>
+                <h2 class="text-4xl md:text-5xl font-black tracking-tighter text-slate-900">More powerful tools by category</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <div class="bg-slate-50 rounded-[30px] p-6 border border-slate-200">
+                    <div class="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-100 text-blue-600"><i class="fas fa-landmark"></i></div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Finance</h3>
+                    <p class="text-slate-600">Mortgage, tax, salary, ROI, EMI, and investment planning tools.</p>
+                </div>
+                <div class="bg-slate-50 rounded-[30px] p-6 border border-slate-200">
+                    <div class="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600"><i class="fas fa-heart-pulse"></i></div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Health</h3>
+                    <p class="text-slate-600">BMR, BMI, calorie, and wellness analysis calculators.</p>
+                </div>
+                <div class="bg-slate-50 rounded-[30px] p-6 border border-slate-200">
+                    <div class="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-violet-100 text-violet-600"><i class="fas fa-flask"></i></div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Science</h3>
+                    <p class="text-slate-600">Molarity, physics, chemistry, and analytical formula tools.</p>
+                </div>
+                <div class="bg-slate-50 rounded-[30px] p-6 border border-slate-200">
+                    <div class="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-amber-100 text-amber-600"><i class="fas fa-square-root-alt"></i></div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Math</h3>
+                    <p class="text-slate-600">Matrix, fractions, GPA, statistics, and conversion helpers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function miniAnalyze() {
+            const pass = document.getElementById('miniPass').value;
+            const checks = {
+                length: pass.length >= 8,
+                upper: /[A-Z]/.test(pass),
+                num: /[0-9]/.test(pass),
+                sym: /[^A-Za-z0-9]/.test(pass)
+            };
+
+            let score = 0;
+            if (checks.length) score++;
+            if (checks.upper) score++;
+            if (checks.num) score++;
+            if (checks.sym) score++;
+
+            const bars = ['miniBar1', 'miniBar2', 'miniBar3', 'miniBar4'];
+            const colors = ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'];
+            const labels = ['Weak', 'Fair', 'Strong', 'Secure'];
+
+            bars.forEach((id, i) => {
+                const el = document.getElementById(id);
+                el.style.backgroundColor = i < score ? colors[score - 1] : '#e2e8f0';
+            });
+
+            const status = document.getElementById('miniStatus');
+            const scoreText = document.getElementById('miniScore');
+            const shield = document.getElementById('miniShield');
+
+            if (!pass.length) {
+                status.textContent = 'No Input';
+                scoreText.textContent = '0%';
+                shield.className = 'fas fa-shield-virus text-indigo-500';
+                return;
+            }
+
+            status.textContent = labels[Math.max(0, Math.min(score - 1, 3))];
+            scoreText.textContent = `${score * 25}%`;
+
+            const icons = ['fa-shield-virus', 'fa-shield-heart', 'fa-shield-halved', 'fa-shield-check'];
+            shield.className = `fas ${icons[Math.max(0, Math.min(score - 1, 3))]} text-indigo-500`;
+        }
+    </script>
 </body>
 </html>
