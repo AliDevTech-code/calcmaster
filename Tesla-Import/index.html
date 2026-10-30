@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesla Import Cost Calculator Pakistan 2026 | CalcMaster</title>
-    <meta name="description" content="Calculate Tesla import cost in Pakistan for Model 3, Y, S, X. Get estimated customs duty, total cost in PKR, and EV charging vs petrol comparison.">
-    <meta name="keywords" content="Tesla import cost Pakistan, Tesla price in Pakistan, Tesla Model 3 import cost, Tesla duty Pakistan, Tesla calculator Pakistan">
+    <title>Tesla Import Cost Calculator Pakistan 2026 - Duty & Total Price | CalcMaster</title>
+    <meta name="description" content="Free Tesla import cost calculator for Pakistan. Calculate customs duty, total cost in PKR for Model 3, Model Y, Model S, Model X. Compare EV charging vs petrol.">
+    <meta name="keywords" content="Tesla import cost Pakistan, Tesla price in Pakistan 2026, Tesla Model 3 import duty Pakistan, Tesla Model Y Pakistan price, Tesla customs duty calculator Pakistan">
     <link rel="canonical" href="https://calcmastercom.vercel.app/Tesla-Import/">
     <meta name="robots" content="index, follow">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,7 +34,7 @@
     <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
         <div class="text-center max-w-3xl mx-auto mb-10">
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight">Tesla Import Cost Calculator Pakistan 2026</h1>
-            <p class="mt-4 text-slate-600">Calculate estimated Tesla import cost for Model 3, Model Y, Model S and Model X. Get customs duty, total cost in PKR and EV charging vs petrol comparison.</p>
+            <p class="mt-4 text-slate-600">Free tool to estimate Tesla import duty, total landed cost in PKR for Model 3, Model Y, Model S & Model X. Includes EV charging vs petrol comparison.</p>
         </div>
 
         <div class="card p-6 sm:p-8">
@@ -42,26 +42,26 @@
                 <div class="space-y-4">
                     <div>
                         <label class="text-sm font-semibold">Tesla Model</label>
-                        <select id="model" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2.5">
-                            <option value="3">Tesla Model 3</option>
-                            <option value="y">Tesla Model Y</option>
-                            <option value="s">Tesla Model S</option>
-                            <option value="x">Tesla Model X</option>
+                        <select id="model" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-100">
+                            <option>Tesla Model 3</option>
+                            <option>Tesla Model Y</option>
+                            <option>Tesla Model S</option>
+                            <option>Tesla Model X</option>
                         </select>
                     </div>
                     <div>
                         <label class="text-sm font-semibold">Car Price in USD ($)</label>
-                        <input id="price" type="number" inputmode="decimal" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2.5" placeholder="e.g. 39990">
+                        <input id="price" type="number" inputmode="decimal" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-100" placeholder="e.g. 39990">
                     </div>
                     <div>
                         <label class="text-sm font-semibold">Shipping Cost (USD)</label>
-                        <input id="ship" type="number" inputmode="decimal" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2.5" placeholder="e.g. 1500">
+                        <input id="ship" type="number" inputmode="decimal" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-100" placeholder="e.g. 1500">
                     </div>
                     <div>
-                        <label class="text-sm font-semibold">Exchange Rate (PKR per USD)</label>
-                        <input id="rate" type="number" inputmode="decimal" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2.5" placeholder="e.g. 280">
+                        <label class="text-sm font-semibold">Exchange Rate (PKR per 1 USD)</label>
+                        <input id="rate" type="number" inputmode="decimal" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-100" placeholder="e.g. 280">
                     </div>
-                    <p class="text-sm text-slate-500">Results are estimates only. Actual customs duty and charges may vary as per Pakistan Customs regulations.</p>
+                    <p class="text-sm text-slate-500">Estimates only. Actual customs duty/taxes depend on Pakistan Customs rules.</p>
                 </div>
                 <div class="space-y-4">
                     <div class="card p-6">
@@ -73,12 +73,12 @@
                         </div>
                     </div>
                     <div class="card p-6">
-                        <h2 class="text-lg font-bold">Monthly Charging Cost vs Petrol</h2>
+                        <h2 class="text-lg font-bold">EV Charging vs Petrol (400 km)</h2>
                         <div class="mt-4 divide-y divide-slate-100">
-                            <div class="flex justify-between py-2.5"><span class="text-slate-600">Monthly Charging (Estimated)</span><span class="font-semibold">PKR 4,000</span></div>
-                            <div class="flex justify-between py-2.5"><span class="text-slate-600">Petrol Equivalent</span><span class="font-semibold">PKR 15,000</span></div>
+                            <div class="flex justify-between py-2.5"><span class="text-slate-600">Home EV Charging (Estimated)</span><span class="font-semibold">PKR 3,750</span></div>
+                            <div class="flex justify-between py-2.5"><span class="text-slate-600">Petrol Equivalent</span><span class="font-semibold">PKR 12,000 - 15,000</span></div>
                         </div>
-                        <p class="mt-3 text-sm text-slate-500">For comparison purposes only.</p>
+                        <p class="mt-3 text-sm text-slate-500">Home charging can be up to 70% cheaper than petrol.</p>
                     </div>
                 </div>
             </div>
@@ -87,8 +87,8 @@
         <section class="mt-10 card p-6 sm:p-8">
             <h2 class="text-2xl font-black">Tesla Import Cost Calculator for Pakistan</h2>
             <div class="mt-4 space-y-3 text-slate-600">
-                <p>Use this free Tesla import calculator to estimate duty and total landed cost before buying from abroad. Works for Tesla Model 3, Model Y, Model S and Model X.</p>
-                <p>Enter car price in USD, shipping cost and exchange rate to get a realistic estimate of customs duty and total cost in PKR.</p>
+                <p>This free calculator helps estimate Tesla import cost in Pakistan for Model 3, Model Y, Model S and Model X. Enter your vehicle price, shipping and exchange rate to get an estimated customs duty and total landed cost in PKR.</p>
+                <p>Perfect for buyers planning to import Tesla vehicles and wanting a quick cost estimate before finalizing.</p>
             </div>
         </section>
     </main>
