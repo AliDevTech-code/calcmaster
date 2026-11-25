@@ -227,23 +227,8 @@
 <body class="bg-[#f8fafc] text-slate-900 overflow-x-hidden">
 
     <!-- Custom Center Notification -->
-    <div id="notification-box"
-        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] w-[90%] max-w-md">
-        <div
-            class="bg-white rounded-[32px] p-8 shadow-[0_30px_100px_rgba(0,0,0,0.25)] border border-slate-100 text-center">
-            <div
-                class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-check text-3xl"></i>
-            </div>
-            <h3 class="text-2xl font-black mb-2 text-slate-900">Subscription Active!</h3>
-            <p class="text-slate-500 mb-8">You are now part of the USA's elite financial community. Tips arrive every
-                Tuesday.</p>
-            <button onclick="closeNotification()"
-                class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">Got
-                it!</button>
-        </div>
-    </div>
-    <div id="overlay" class="fixed inset-0 bg-slate-950/40 backdrop-blur-sm z-[190] hidden"></div>
+    
+    
     <header class="nav-bg-dark sticky top-0 z-[100] border-b border-slate-800/50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
 
@@ -1208,7 +1193,7 @@
                 </div>
                 <h2
                     class="text-4xl md:text-6xl font-black text-slate-900 leading-[0.95] tracking-tighter italic uppercase">
-                    Real-Time <span class="text-blue-600">Market Intelligence.</span>
+                    Practical <span class="text-blue-600">Planning Tools.</span>
                 </h2>
             </div>
 
@@ -1217,23 +1202,19 @@
                     <div
                         class="bg-slate-950 rounded-[30px] md:rounded-[40px] p-6 md:p-8 text-white relative overflow-hidden group">
                         <div class="relative z-10">
-                            <h4 class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-5">Live
-                                Mortgage Rates (USA)</h4>
+                            <h4 class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-5">Mortgage Planning (USA)</h4>
                             <div class="space-y-5">
                                 <div class="flex justify-between items-center border-b border-white/10 pb-3">
                                     <span class="font-bold text-slate-400 text-sm">30-Year Fixed</span>
-                                    <span class="text-xl font-black text-white">6.84% <i
-                                            class="fas fa-caret-up text-red-500 text-xs"></i></span>
+                                    <span class="text-sm font-bold text-white">Enter your lender rate</span>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-white/10 pb-3">
                                     <span class="font-bold text-slate-400 text-sm">15-Year Fixed</span>
-                                    <span class="text-xl font-black text-white">6.21% <i
-                                            class="fas fa-caret-down text-green-500 text-xs"></i></span>
+                                    <span class="text-sm font-bold text-white">Enter your lender rate</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="font-bold text-slate-400 text-sm">5/1 ARM</span>
-                                    <span class="text-xl font-black text-white">6.45% <i
-                                            class="fas fa-minus text-slate-500 text-xs"></i></span>
+                                    <span class="text-sm font-bold text-white">Enter your lender rate</span>
                                 </div>
                             </div>
                         </div>
@@ -1242,15 +1223,7 @@
                     <div class="bg-blue-50 rounded-[30px] p-6 border border-blue-100">
                         <h4 class="text-lg font-black text-slate-900 mb-2 italic uppercase">Debt vs Wealth</h4>
                         <p class="text-slate-500 text-xs font-bold mb-4">Savings growth vs loan interest.</p>
-                        <div class="space-y-3">
-                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                                <div class="h-full bg-blue-600" style="width: 75%"></div>
-                            </div>
-                            <div class="flex justify-between text-[9px] font-black uppercase text-slate-400">
-                                <span>Savings Growth</span>
-                                <span class="text-blue-600">75% Probability</span>
-                            </div>
-                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">Compare your own savings assumptions and loan costs with the relevant calculators. Results depend on the values and time periods you enter.</p>
                     </div>
                 </div>
                 <div class="lg:col-span-8">
@@ -1265,8 +1238,8 @@
                             class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 glass rounded-[20px] md:rounded-[32px] p-5 md:p-6 border border-white/30 shadow-2xl">
                             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                                 <div>
-                                    <h3 class="text-xl md:text-2xl font-black text-slate-900 mb-1 italic">Institutional
-                                        Grade Tech.</h3>
+                                    <h3 class="text-xl md:text-2xl font-black text-slate-900 mb-1 italic">Practical
+                                        Calculation Tools.</h3>
                                     <p class="text-slate-600 font-bold max-w-xs text-[10px] md:text-xs">Tools designed to make common calculations easier to understand and review.</p>
                                 </div>
                                 <a href="/investment-return-planner/index.html"
@@ -1309,15 +1282,8 @@
                 Stay Calculated.
             </h2>
 
-            <form onsubmit="handleSubscribe(event)" class="max-w-xl mx-auto flex flex-col md:flex-row gap-3">
-                <input type="email" required placeholder="Enter your US Email"
-                    class="flex-1 px-6 py-4 rounded-xl bg-white text-slate-900 outline-none focus:ring-4 focus:ring-blue-300 font-bold text-base">
-
-                <button type="submit"
-                    class="bg-slate-950 hover:bg-black text-white px-8 py-4 rounded-xl font-black text-base transition-all shadow-xl uppercase tracking-widest">
-                    Subscribe
-                </button>
-            </form>
+            <p class="text-blue-100 text-base md:text-lg mb-6">Explore practical calculators for finance, health, mathematics and science. No email signup is required.</p>
+            <a href="/#featured" class="inline-flex items-center justify-center bg-slate-950 hover:bg-black text-white px-8 py-4 rounded-xl font-black text-base transition-all shadow-xl uppercase tracking-widest">Explore Calculators <i class="fas fa-arrow-right ml-3"></i></a>
         </div>
     </section>
 
@@ -1373,23 +1339,7 @@
         closeBtn.onclick = () => mobileMenu.classList.remove('active');
         closeOnClick.forEach(item => {
             item.onclick = () => mobileMenu.classList.remove('active');
-        });
-
-        function handleSubscribe(e) {
-            e.preventDefault();
-            document.getElementById('notification-box').style.display = 'block';
-            document.getElementById('overlay').classList.remove('hidden');
-            e.target.reset();
-        }
-
-        function closeNotification() {
-            document.getElementById('notification-box').style.display = 'none';
-            document.getElementById('overlay').classList.add('hidden');
-        }
-
-        document.getElementById('overlay').onclick = closeNotification;
-
-        (function () {
+        });(function () {
             // Step 1: External heavy scripts ko load hone se roko jab tak DOM ready na ho
             window.addEventListener('DOMContentLoaded', () => {
                 const observer = new IntersectionObserver((entries) => {
@@ -1421,4 +1371,4 @@
     
 </body>
 
-</html><script data-cfasync="false" src="https://bauval.org/14/5d72fd2bce394a0e1195ef459bdb0529"></script>
+</html>
