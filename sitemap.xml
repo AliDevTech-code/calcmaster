@@ -15,12 +15,7 @@
     <lastmod>2026-10-31</lastmod>
 
   </url>
-  <url>
-    <loc>https://calcmastercom.vercel.app/Given-Calculator/</loc>
-    <lastmod>2026-10-31</lastmod>
-
-  </url>
-  <url>
+<url>
     <loc>https://calcmastercom.vercel.app/Password-Strength/</loc>
     <lastmod>2026-10-31</lastmod>
 
@@ -134,7 +129,7 @@
 
   </url>
   <url>
-    <loc>https://calcmastercom.vercel.app/Ohm-s-Law/</loc>
+    <loc>https://calcmastercom.vercel.app/Ohm%27s-Law/</loc>
     <lastmod>2026-10-31</lastmod>
 
   </url>
@@ -179,4 +174,8 @@
 
   </url>
 
+  <url>
+    <loc>https://calcmastercom.vercel.app/emi-calculator/</loc>
+    <lastmod>2026-11-25</lastmod>
+  </url>
 </urlset>
